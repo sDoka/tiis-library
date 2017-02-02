@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd">
+	<persistence-unit-metadata>
+		<xml-mapping-metadata-complete/>
+		<persistence-unit-defaults>
+			<access>PROPERTY</access>
+		</persistence-unit-defaults>
+	</persistence-unit-metadata>
+	<mapped-superclass class="ru.tiis.srv.model.impl.BookModelImpl">
+		<attributes>
+			<id name="bookId" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="gDriveId" />
+			<basic name="title" />
+			<basic name="description" />
+			<basic name="googleDriveLink" />
+			<basic name="bookLogo" />
+			<transient name="GDriveId" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="ru.tiis.srv.model.impl.TestModelImpl">
+		<attributes>
+			<id name="testId" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="isBookTest" />
+			<basic name="bookId" />
+			<basic name="content" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="ru.tiis.srv.model.impl.TestAttemptModelImpl">
+		<attributes>
+			<id name="testId" />
+			<basic name="userId" />
+			<basic name="startTime">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="finishTime">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="result" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<entity class="ru.tiis.srv.model.impl.BookImpl" name="Book">
+		<table name="TIISBook" />
+		<attributes />
+	</entity>
+	<entity class="ru.tiis.srv.model.impl.TestImpl" name="Test">
+		<table name="TIISTest" />
+		<attributes />
+	</entity>
+	<entity class="ru.tiis.srv.model.impl.TestAttemptImpl" name="TestAttempt">
+		<table name="TIISTestAttempt" />
+		<attributes />
+	</entity>
+</entity-mappings>

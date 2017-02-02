@@ -1,0 +1,21 @@
+@import url(mdldemo/fonts.css);
+
+html.mdldemo>body {
+   @import url(mdldemo/material.css);
+}
+
+html.mdldemo.normal>body {
+   @import url(mdldemo/style.css);
+}
+
+html.mdldemo.android>body {
+   @import url(android/style.css);
+}
+
+html.mdldemo.dashboard>body {
+   @import url(dashboard/style.css);
+}
+
+@import url(mdldemo/custom.css);
+@import url(android/custom.css);
+@import url(dashboard/custom.css);

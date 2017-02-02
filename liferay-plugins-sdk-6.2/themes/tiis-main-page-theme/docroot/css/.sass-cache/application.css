@@ -1,0 +1,27 @@
+/* ---------- Dragging/sorting indicators ---------- */
+/* ---------- Portal tool tips ---------- */
+/* ---------- Tags ---------- */
+/* ---------- Tag cloud and tag list ---------- */
+.tag-cloud .tag-popularity-1 {
+  /*font-size: $tag-popularity-font-size + ($i * 0.3);*/ }
+.tag-cloud .tag-popularity-2 {
+  /*font-size: $tag-popularity-font-size + ($i * 0.3);*/ }
+.tag-cloud .tag-popularity-3 {
+  /*font-size: $tag-popularity-font-size + ($i * 0.3);*/ }
+.tag-cloud .tag-popularity-4 {
+  /*font-size: $tag-popularity-font-size + ($i * 0.3);*/ }
+.tag-cloud .tag-popularity-5 {
+  /*font-size: $tag-popularity-font-size + ($i * 0.3);*/ }
+.tag-cloud .tag-popularity-6 {
+  /*font-size: $tag-popularity-font-size + ($i * 0.3);*/ }
+
+/* ---------- Underlay ---------- */
+/* ---------- Tabs ---------- */
+/* ---------- Miscellaneous ---------- */
+/* ---------- Menus ---------- */
+/* ---------- Loading mask ---------- */
+/* ---------- Tree view ---------- */
+/* ---------- Page customization ---------- */
+/* ---------- Pagination ---------- */
+/* ---------- Inline editing ---------- */
+

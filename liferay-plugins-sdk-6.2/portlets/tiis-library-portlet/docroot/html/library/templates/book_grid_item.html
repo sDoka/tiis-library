@@ -1,0 +1,72 @@
+{{ for (var index = 0; index < books.length ;) { }}
+	<div class="row-fluid">
+
+	{{ 
+	for (var colNum = 0; index < books.length && colNum < 3; index++, colNum++ ) { 	
+		var book = books[index];
+		var bookCategoryNames = "";
+		var bookLevel = "";
+		for (i = 0; i < book.categoryNames.length-2; i++) {
+			if (book.categoryNames[i].search("Level")!=-1) {
+				bookLevel = book.categoryNames[i];
+				var levelPos = bookLevel.search(" ");
+				bookLevel = bookLevel.substr(levelPos, bookLevel.length-levelPos);
+			}
+			else
+				bookCategoryNames += book.categoryNames[i]+", ";
+		}
+		bookCategoryNames += book.categoryNames[book.categoryNames.length-1];
+
+	}}
+	
+		<div class="span4 book-grid-item" >
+			<div class="book-grid-border">
+			<div class="image">
+				<div class="card" id="{{=index}}">
+<!-- 					<div class="book-author-info-top" id="infoTop{{=index}}">
+						<p style="margin: 10px; color: #FFF; font-size: medium">
+							{{=Liferay.Language.get('author')}}: <br> 
+							{{=book.authorFullName}}
+						</p>
+					</div> -->
+					<div class="front">
+						<img src="{{=book.logoURL}}" bookId="{{=book.bookId}}" logoImg="logoImg">
+					</div>
+				</div>
+			</div>
+			
+			<div class="row-fluid">
+				<div class="book-info">
+					<h4>
+					<a href="{{=book.infoURL}}" 
+								title="{{=Liferay.Language.get('book-info-link')}}">
+							{{=book.title}}
+						</a>
+					</h4>
+				</div>							
+				
+<!-- 		   		<div class="book-tags-block" style="display: inline-block;">
+			   			<div class="book-tags-content">
+					   		<p class="book-tags">
+					   			{{ if (book.categoryNames.length > 0) { }}
+					   				§ {{=bookCategoryNames}}
+					   			{{ } else { }}
+					   				{{=Liferay.Language.get("book-list-no-category")}}
+					   			{{ } }}
+					   		</p>
+				   		</div>
+				   		<div>
+	
+							<a class="btn btn-success book-info-button" href="{{=book.infoURL}}">
+								{{=Liferay.Language.get('book-info-link')}}
+							</a>
+							<div class="book-information"></div>
+						</div>
+			    </div>	 -->
+					</div>
+			</div>
+		</div>
+	
+	{{ } }}
+	</div>
+{{ } }}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-module version="2.0" xmlns:m2="http://ant.apache.org/ivy/maven" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
+	<info organisation="com.liferay" module="tiis-library-portlet" revision="working@DESKTOP-1N5JNQ1" status="integration" publication="20161116122309">
+		<extends extendType="configurations,description,info" location="../../ivy.xml" module="com.liferay.sdk" organisation="com.liferay" revision="latest.integration"/>
+	</info>
+
+	<dependencies defaultconf="default">
+		<dependency org="commons-lang" name="commons-lang" rev="2.3"/>
+		<dependency org="org.apache.poi" name="poi" rev="3.13"/>
+		<dependency org="org.apache.poi" name="poi-ooxml" rev="3.13"/>
+		<dependency org="org.apache.poi" name="poi-ooxml-schemas" rev="3.13"/>
+		<dependency org="org.apache.poi" name="poi-scratchpad" rev="3.13"/>
+		<dependency org="org.apache.xmlbeans" name="xmlbeans" rev="2.6.0"/>
+		<dependency org="org.apache.httpcomponents" name="httpclient" rev="4.5.2"/>
+		<dependency org="org.apache.httpcomponents" name="httpmime" rev="4.5.2"/>
+		<dependency org="org.apache.httpcomponents" name="fluent-hc" rev="4.5.2"/>
+		<dependency org="com.google.apis" name="google-api-services-drive" rev="v3-rev49-1.22.0"/>
+		<dependency org="com.google.http-client" name="google-http-client" rev="1.22.0"/>
+		<dependency org="com.google.http-client" name="google-http-client-jackson2" rev="1.22.0"/>
+		<dependency org="com.google.oauth-client" name="google-oauth-client-jetty" rev="1.22.0"/>
+	</dependencies>
+
+</ivy-module>

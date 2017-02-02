@@ -1,0 +1,27 @@
+create table TIISBook (
+	bookId LONG not null primary key,
+	createDate DATE null,
+	modifiedDate DATE null,
+	gDriveId VARCHAR(75) null,
+	title VARCHAR(75) null,
+	description VARCHAR(750) null,
+	googleDriveLink VARCHAR(750) null,
+	bookLogo BLOB
+);
+
+create table TIISTest (
+	testId LONG not null primary key,
+	createDate DATE null,
+	modifiedDate DATE null,
+	isBookTest BOOLEAN,
+	bookId LONG,
+	content VARCHAR(950) null
+);
+
+create table TIISTestAttempt (
+	testId LONG not null primary key,
+	userId LONG,
+	startTime DATE null,
+	finishTime DATE null,
+	result DOUBLE
+);

@@ -1,0 +1,49 @@
+.book-grid-border {
+	border: 2px;
+	border-color: #E7F4F7;
+	border-style: solid;
+	border-radius: 5px;
+}
+
+.book-info {
+	text-align: center;
+}
+
+.book-grid-item .book-information {
+	background-repeat: no-repeat;
+	width: 30px;
+	height: 30px;
+	float: right;
+	margin-right: 10px;
+	margin-bottom: 5px;
+}
+
+.book-grid-item .book-information:hover {
+	background-repeat: no-repeat;
+	width: 30px;
+	height: 30px;
+	float: right;
+	margin-right: 10px;
+	margin-bottom: 5px;
+}
+
+.book-grid-item .book-tags-block {
+	background-color: #E7F4F7;
+	width: 100%;
+}
+
+.book-grid-item .book-tags-content {
+	margin: auto;
+	width: 80%;
+	height: 0px;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+.book-tags-content .book-tags {
+	font-size: medium;
+    margin: 10px;
+    height: 40px;
+    position: relative;
+    overflow: hidden;
+}

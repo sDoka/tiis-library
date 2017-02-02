@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="ru.tiis.srv.model.Book">
+		<field name="bookId" type="long" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="gDriveId" type="String" />
+		<field name="title" type="String" />
+		<field name="description" type="String">
+			<hint name="max-length">750</hint>
+		</field>
+		<field name="googleDriveLink" type="String">
+			<hint name="max-length">750</hint>
+		</field>
+		<field name="bookLogo" type="Blob" />
+	</model>
+	<model name="ru.tiis.srv.model.Test">
+		<field name="testId" type="long" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="isBookTest" type="boolean" />
+		<field name="bookId" type="long" />
+		<field name="content" type="String">
+			<hint name="max-length">950</hint>
+		</field>
+	</model>
+	<model name="ru.tiis.srv.model.TestAttempt">
+		<field name="testId" type="long" />
+		<field name="userId" type="long" />
+		<field name="startTime" type="Date" />
+		<field name="finishTime" type="Date" />
+		<field name="result" type="double" />
+	</model>
+</model-hints>

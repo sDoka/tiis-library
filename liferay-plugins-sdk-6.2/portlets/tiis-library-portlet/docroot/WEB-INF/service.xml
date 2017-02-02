@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+<service-builder package-path="ru.tiis.srv">
+	<author>Michael</author>
+	<namespace>TIIS</namespace>
+	
+	<entity name="Book" local-service="true" remote-service="false" table="TIISBook">
+		
+		<!-- PK fields -->
+		<column name="bookId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+		<!-- Other fields -->
+		<column name="gDriveId" type="String"></column>
+		<column name="title" type="String" />
+		<column name="description" type="String" />
+		<column name="googleDriveLink" type="String" />
+		<column name="bookLogo" type="Blob" />
+		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
+		<reference package-path="com.liferay.portlet.asset" entity="AssetLink" />
+	</entity>
+	<entity name="Test" local-service="true" remote-service="false" table="TIISTest">
+
+		<column name="testId" type="long" primary="true" />
+		<!-- Audit fields -->
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+		
+		<column name="isBookTest" type="boolean"/>
+		<column name="bookId" type="long"/>
+		<column name="content" type="String"/>
+		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
+		<reference package-path="com.liferay.portlet.asset" entity="AssetLink" />
+	</entity>
+	
+	<entity name="TestAttempt" local-service="true" remote-service="false" table="TIISTestAttempt">
+
+		<column name="testId" type="long" primary="true" />
+		<column name="userId" type="long"/>
+		<column name="startTime" type="Date" />
+		<column name="finishTime" type="Date" />
+		<column name="result" type="double"/>
+
+	</entity>
+	
+	
+</service-builder>

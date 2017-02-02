@@ -1,0 +1,82 @@
+/* ---------- Logo ---------- */
+/* ---------- HTML editor ---------- */
+/* ---------- Text formatting ---------- */
+/* ---------- Main content body ---------- */
+/* ---------- Loading animation ---------- */
+/* ---------- Separator ---------- */
+/* ---------- Update manager ---------- */
+/* ---------- Text highlighting ---------- */
+/* ---------- Dragging/sorting indicators ---------- */
+/* ---------- Portal tool tips ---------- */
+/* ---------- Tags ---------- */
+/* ---------- Tag cloud and tag list ---------- */
+.tag-cloud .tag-popularity-1 {
+  /*font-size: $tag-popularity-font-size + ($i * 0.3);*/ }
+.tag-cloud .tag-popularity-2 {
+  /*font-size: $tag-popularity-font-size + ($i * 0.3);*/ }
+.tag-cloud .tag-popularity-3 {
+  /*font-size: $tag-popularity-font-size + ($i * 0.3);*/ }
+.tag-cloud .tag-popularity-4 {
+  /*font-size: $tag-popularity-font-size + ($i * 0.3);*/ }
+.tag-cloud .tag-popularity-5 {
+  /*font-size: $tag-popularity-font-size + ($i * 0.3);*/ }
+.tag-cloud .tag-popularity-6 {
+  /*font-size: $tag-popularity-font-size + ($i * 0.3);*/ }
+
+/* ---------- Underlay ---------- */
+/* ---------- Tabs ---------- */
+/* ---------- Miscellaneous ---------- */
+/* ---------- Menus ---------- */
+/* ---------- Loading mask ---------- */
+/* ---------- Tree view ---------- */
+/* ---------- Page customization ---------- */
+/* ---------- Pagination ---------- */
+/* ---------- Inline editing ---------- */
+/* ---------- Column widths ---------- */
+/* ---------- Staging dockbar ---------- */
+/* ---------- Menus ---------- */
+/* ---------- Customization bar ---------- */
+/* ---------- Add/remove page ---------- */
+/* ---------- Navigation portlet ---------- */
+/* ---------- Page template selector ---------- */
+/* ---------- Portlet wrapper and icons ---------- */
+/* ---------- Borderless portlet ---------- */
+/* ---------- Panel page ---------- */
+/* ---------- Standard styles defined in the JSR 168 ---------- */
+/* ---------- Fonts ---------- */
+/* ---------- Font attributes for the 'normal' fragment font ---------- */
+/* ---------- Font attributes similar to the .portlet-font but the color is lighter ---------- */
+/* ---------- Messages ---------- */
+/* ---------- Status labels ---------- */
+/* ---------- Liferay messages ---------- */
+/* ---------- Sections ---------- */
+/* ---------- Text in a selected cell range ---------- */
+/* ---------- Text of a subheading ---------- */
+/* ---------- Table or section footnote ---------- */
+/* ---------- Text that belongs to the table but does not fall in one of the other categories (e.g. explanatory or help text that is associated with the section) ---------- */
+/* ---------- Forms ---------- */
+/* ---------- Text used for the descriptive label of the whole form (not the labels for fields) ---------- */
+/* ---------- Text of the user-input in an input field ---------- */
+/* ---------- Text on a button ---------- */
+/* ---------- Text that appears beside a context dependent action icon ---------- */
+/* ---------- Text that appears beside a 'standard' icon (e.g. Ok, or cancel) ---------- */
+/* ---------- Text for a separator of fields (e.g. checkboxes, etc.) ---------- */
+/* ---------- Text for a field (not input field, e.g. checkboxes, etc.) ---------- */
+/* ---------- Menus ---------- */
+/* ---------- General menu settings such as background color, margins, etc. ---------- */
+/* ---------- Normal, unselected menu item ---------- */
+/* ---------- Selected menu item ---------- */
+/* ---------- Normal, unselected menu item when the mouse hovers over it ---------- */
+/* ---------- Selected menu item when the mouse hovers over it ---------- */
+/* ---------- Normal, unselected menu item that has sub-menus ---------- */
+/* ---------- Selected sub-menu item that has sub-menus ---------- */
+/* ---------- Descriptive text for the menu (e.g. in a help context below the menu) ---------- */
+/* ---------- Menu caption ---------- */
+/* ---------- Miscellaneous portlet styles ---------- */
+/* ---------- Permissions ---------- */
+/* ---------- Miscellaneous component styles ---------- */
+/* ---------- Add content dialog ---------- */
+/* ---------- Calendar taglib ---------- */
+/* ---------- navbar form search ---------- */
+/* This file allows you to override default styles in one central location for easier upgrade and maintenance. */
+

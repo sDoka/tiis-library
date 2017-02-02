@@ -1,0 +1,16 @@
+/* Margin and padding fixes */
+html.mdldemo.dashboard > body > div > div > main > div > div.container-fluid {
+  margin-top: 30px !important; }
+
+/* Dockbar fixes */
+html.mdldemo.dashboard > body div.portlet-dockbar {
+  display: none; }
+
+/* Active navigation */
+html.mdldemo.dashboard > body .demo-layout .demo-navigation .mdl-navigation__link.is-active {
+  color: white; }
+
+/* Search box fixes */
+html.mdldemo.dashboard > body header.demo-header form {
+  margin: 0 0 0px; }
+

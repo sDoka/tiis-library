@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE look-and-feel PUBLIC "-//Liferay//DTD Look and Feel 6.2.0//EN" "http://www.liferay.com/dtd/liferay-look-and-feel_6_2_0.dtd">
+
+<look-and-feel>
+   <compatibility>
+      <version>6.2.3+</version>
+   </compatibility>
+   <theme id="mdldemo" name="Material Design Lite">
+      <template-extension>ftl</template-extension>
+      <settings>
+         <setting configurable="true" key="bullet-style" options="dots,arrows" type="select" value="dots" />
+         <setting configurable="true" key="portlet-setup-show-borders-default" type="checkbox" value="true" />
+         <setting configurable="true" key="template" options="normal,android,dashboard" type="select" value="normal" />
+         <setting configurable="true" key="show-search" type="checkbox" value="true" />
+         <setting configurable="true" key="show-breadcrumb" type="checkbox" value="false" />
+         <setting configurable="true" key="show-page-description" type="checkbox" value="false" />
+         <setting configurable="true" key="show-header-content" type="checkbox" value="false" />
+         <setting configurable="true" key="show-footer-content" type="checkbox" value="false" />
+         <setting configurable="true" key="show-site-logo" type="checkbox"  value="false" />
+         <setting configurable="false" key="portlet-setup-show-borders-default" type="checkbox" value="true" />
+         <setting configurable="false" key="show-site-name-default" value="true" />
+         <setting configurable="false" key="show-site-name-supported" value="true" />
+      </settings>
+   </theme>
+</look-and-feel>

@@ -1,0 +1,22 @@
+/* Margin and padding fixes */
+html.mdldemo.android > body > div > div > div.android-content > div.container-fluid {
+  margin-top: 30px !important; }
+
+/* Dockbar fixes */
+html.mdldemo.android > body div.portlet-dockbar {
+  display: none; }
+
+/* Logo fixes */
+html.mdldemo.android > body .android-logo-image {
+  height: inherit !important;
+  width: inherit !important;
+  max-height: 100px; }
+
+/* Active navigation fixes */
+html.mdldemo.android > body .android-header .mdl-navigation__link.is-active {
+  color: #6ab344; }
+
+/* Search box fixes */
+.aui .android-header .android-search-box form {
+  margin: 0 0 0px; }
+
