@@ -4,10 +4,10 @@
 	<info
 		organisation="com.liferay"
 		module="tiis-library-portlet"
-		revision="working@DESKTOP-1N5JNQ1"
+		revision="working@KKK"
 		conf="test"
 		confs="default, internal, provided, runtime, test"
-		date="20161116122310"/>
+		date="20170211171428"/>
 	<dependencies>
 	</dependencies>
 </ivy-report>

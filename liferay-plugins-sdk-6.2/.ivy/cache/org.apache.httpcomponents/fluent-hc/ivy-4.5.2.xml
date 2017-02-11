@@ -9,40 +9,40 @@
 		<description homepage="http://hc.apache.org/httpcomponents-client">
 		Apache HttpComponents Client fluent API
 		</description>
+		<m:properties__api.comparison.version>4.4</m:properties__api.comparison.version>
+		<m:properties__maven.compiler.source>1.6</m:properties__maven.compiler.source>
+		<m:properties__mockito.version>1.8.5</m:properties__mockito.version>
+		<m:properties__httpcore.version>4.4.4</m:properties__httpcore.version>
+		<m:properties__hc.stylecheck.version>1</m:properties__hc.stylecheck.version>
+		<m:properties__easymock.version>2.5.2</m:properties__easymock.version>
+		<m:properties__ehcache.version>2.6.9</m:properties__ehcache.version>
 		<m:properties__maven.compiler.target>1.6</m:properties__maven.compiler.target>
 		<m:properties__memcached.version>2.11.4</m:properties__memcached.version>
-		<m:properties__commons-codec.version>1.9</m:properties__commons-codec.version>
-		<m:properties__commons-logging.version>1.2</m:properties__commons-logging.version>
-		<m:properties__maven.compiler.source>1.6</m:properties__maven.compiler.source>
-		<m:properties__hc.stylecheck.version>1</m:properties__hc.stylecheck.version>
-		<m:properties__ehcache.version>2.6.9</m:properties__ehcache.version>
-		<m:properties__easymock.version>2.5.2</m:properties__easymock.version>
-		<m:properties__httpcore.version>4.4.4</m:properties__httpcore.version>
-		<m:properties__jna.version>4.1.0</m:properties__jna.version>
 		<m:properties__slf4j.version>1.7.7</m:properties__slf4j.version>
-		<m:properties__api.comparison.version>4.4</m:properties__api.comparison.version>
+		<m:properties__commons-logging.version>1.2</m:properties__commons-logging.version>
+		<m:properties__commons-codec.version>1.9</m:properties__commons-codec.version>
 		<m:properties__junit.version>4.11</m:properties__junit.version>
-		<m:properties__mockito.version>1.8.5</m:properties__mockito.version>
-		<m:properties__hc.clover2.version>3.1.11</m:properties__hc.clover2.version>
-		<m:properties__hc.javadoc.version>2.9.1</m:properties__hc.javadoc.version>
-		<m:properties__project.reporting.outputEncoding>UTF-8</m:properties__project.reporting.outputEncoding>
-		<m:properties__maven.build.timestamp.format>yyyy-MM-dd HH:mm:ssZ</m:properties__maven.build.timestamp.format>
+		<m:properties__jna.version>4.1.0</m:properties__jna.version>
+		<m:properties__maven.compiler.optimize>true</m:properties__maven.compiler.optimize>
+		<m:properties__hc.surefire.version>2.15</m:properties__hc.surefire.version>
+		<m:properties__maven.compiler.showDeprecation>true</m:properties__maven.compiler.showDeprecation>
 		<m:properties__implementation.build>${scmBranch}@r${buildNumber}; ${maven.build.timestamp}</m:properties__implementation.build>
-		<m:properties__hc.project-info.version>2.7</m:properties__hc.project-info.version>
+		<m:properties__project.reporting.outputEncoding>UTF-8</m:properties__project.reporting.outputEncoding>
+		<m:properties__hc.clirr.version>2.5</m:properties__hc.clirr.version>
 		<m:properties__hc.jxr.version>2.3</m:properties__hc.jxr.version>
 		<m:properties__minSeverity>info</m:properties__minSeverity>
-		<m:properties__maven.compiler.optimize>true</m:properties__maven.compiler.optimize>
-		<m:properties__maven.compiler.showDeprecation>true</m:properties__maven.compiler.showDeprecation>
-		<m:properties__hc.surefire.version>2.15</m:properties__hc.surefire.version>
-		<m:properties__hc.clirr.version>2.5</m:properties__hc.clirr.version>
-		<m:properties__hc.surefire-report.version>2.15</m:properties__hc.surefire-report.version>
-		<m:properties__project.build.sourceEncoding>UTF-8</m:properties__project.build.sourceEncoding>
 		<m:properties__hc.site.url>scp://people.apache.org/www/hc.apache.org/</m:properties__hc.site.url>
-		<m:properties__gpg.useagent>true</m:properties__gpg.useagent>
+		<m:properties__hc.clover2.version>3.1.11</m:properties__hc.clover2.version>
+		<m:properties__maven.build.timestamp.format>yyyy-MM-dd HH:mm:ssZ</m:properties__maven.build.timestamp.format>
+		<m:properties__project.build.sourceEncoding>UTF-8</m:properties__project.build.sourceEncoding>
+		<m:properties__hc.project-info.version>2.7</m:properties__hc.project-info.version>
+		<m:properties__hc.surefire-report.version>2.15</m:properties__hc.surefire-report.version>
+		<m:properties__hc.javadoc.version>2.9.1</m:properties__hc.javadoc.version>
 		<m:properties__distMgmtSnapshotsUrl>https://repository.apache.org/content/repositories/snapshots</m:properties__distMgmtSnapshotsUrl>
+		<m:properties__gpg.useagent>true</m:properties__gpg.useagent>
+		<m:properties__distMgmtSnapshotsName>Apache Development Snapshot Repository</m:properties__distMgmtSnapshotsName>
 		<m:properties__arguments/>
 		<m:properties__sourceReleaseAssemblyDescriptor>source-release</m:properties__sourceReleaseAssemblyDescriptor>
-		<m:properties__distMgmtSnapshotsName>Apache Development Snapshot Repository</m:properties__distMgmtSnapshotsName>
 		<m:properties__organization.logo>http://www.apache.org/images/asf_logo_wide.gif</m:properties__organization.logo>
 		<m:maven.plugins>org.apache.maven.plugins__maven-remote-resources-plugin__null|org.apache.maven.plugins__maven-remote-resources-plugin__null|null__maven-compiler-plugin__null|null__maven-jar-plugin__null|org.apache.maven.plugins__maven-remote-resources-plugin__null|org.apache.maven.plugins__maven-remote-resources-plugin__null|null__maven-compiler-plugin__null|null__maven-jar-plugin__null|null__maven-jar-plugin__null|null__maven-source-plugin__null|null__maven-javadoc-plugin__null|com.agilejava.docbkx__docbkx-maven-plugin__null|null__maven-resources-plugin__null|org.apache.maven.plugins__maven-checkstyle-plugin__2.9.1|org.codehaus.mojo__clirr-maven-plugin__2.5|org.apache.rat__apache-rat-plugin__0.11|org.apache.maven.plugins__maven-remote-resources-plugin__null|org.apache.maven.plugins__maven-remote-resources-plugin__null|null__maven-compiler-plugin__null|null__maven-jar-plugin__null|org.apache.maven.plugins__maven-remote-resources-plugin__null|org.apache.maven.plugins__maven-remote-resources-plugin__null|null__maven-compiler-plugin__null|null__maven-jar-plugin__null|null__maven-jar-plugin__null|null__maven-source-plugin__null|null__maven-javadoc-plugin__null|com.agilejava.docbkx__docbkx-maven-plugin__null|null__maven-resources-plugin__null|org.apache.maven.plugins__maven-checkstyle-plugin__2.9.1|org.codehaus.mojo__clirr-maven-plugin__2.5|org.apache.rat__apache-rat-plugin__0.11</m:maven.plugins>
 		<m:dependency.management__org.apache.httpcomponents__httpcore__version>4.4.4</m:dependency.management__org.apache.httpcomponents__httpcore__version>
@@ -87,17 +87,17 @@
 		<dependency org="commons-logging" name="commons-logging" rev="1.2" force="true" conf="compile->compile(*),master(*);runtime->runtime(*)"/>
 		<dependency org="junit" name="junit" rev="4.11" force="true" conf="test->runtime(*),master(*)"/>
 		<dependency org="org.mockito" name="mockito-core" rev="1.8.5" force="true" conf="test->runtime(*),master(*)"/>
-		<override org="org.easymock" module="easymock" matcher="exact" rev="2.5.2"/>
+		<override org="commons-codec" module="commons-codec" matcher="exact" rev="1.9"/>
+		<override org="net.java.dev.jna" module="jna-platform" matcher="exact" rev="4.1.0"/>
 		<override org="net.sf.ehcache" module="ehcache-core" matcher="exact" rev="2.6.9"/>
 		<override org="org.slf4j" module="slf4j-jcl" matcher="exact" rev="1.7.7"/>
-		<override org="commons-logging" module="commons-logging" matcher="exact" rev="1.2"/>
-		<override org="org.easymock" module="easymockclassextension" matcher="exact" rev="2.5.2"/>
-		<override org="org.mockito" module="mockito-core" matcher="exact" rev="1.8.5"/>
-		<override org="commons-codec" module="commons-codec" matcher="exact" rev="1.9"/>
-		<override org="net.java.dev.jna" module="jna" matcher="exact" rev="4.1.0"/>
-		<override org="junit" module="junit" matcher="exact" rev="4.11"/>
 		<override org="net.spy" module="spymemcached" matcher="exact" rev="2.11.4"/>
-		<override org="net.java.dev.jna" module="jna-platform" matcher="exact" rev="4.1.0"/>
+		<override org="net.java.dev.jna" module="jna" matcher="exact" rev="4.1.0"/>
+		<override org="org.easymock" module="easymock" matcher="exact" rev="2.5.2"/>
+		<override org="junit" module="junit" matcher="exact" rev="4.11"/>
+		<override org="commons-logging" module="commons-logging" matcher="exact" rev="1.2"/>
 		<override org="org.apache.httpcomponents" module="httpcore" matcher="exact" rev="4.4.4"/>
+		<override org="org.mockito" module="mockito-core" matcher="exact" rev="1.8.5"/>
+		<override org="org.easymock" module="easymockclassextension" matcher="exact" rev="2.5.2"/>
 	</dependencies>
 </ivy-module>

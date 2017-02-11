@@ -7,16 +7,16 @@
 		publication="20101111003740"
 	>
 		<description homepage="" />
-		<m:properties__maven-jar-plugin-version>2.2</m:properties__maven-jar-plugin-version>
 		<m:properties__ant-version>1.6.5</m:properties__ant-version>
-		<m:properties__slf4j-version>1.3.1</m:properties__slf4j-version>
-		<m:properties__test-test>${basedir}</m:properties__test-test>
-		<m:properties__maven-bundle-plugin-version>1.4.0</m:properties__maven-bundle-plugin-version>
-		<m:properties__activation-version>1.1</m:properties__activation-version>
-		<m:properties__junit-version>3.8.2</m:properties__junit-version>
-		<m:properties__jta-spec-version>1.0.1B-rc4</m:properties__jta-spec-version>
 		<m:properties__mail-version>1.4</m:properties__mail-version>
+		<m:properties__activation-version>1.1</m:properties__activation-version>
+		<m:properties__test-test>${basedir}</m:properties__test-test>
+		<m:properties__jta-spec-version>1.0.1B-rc4</m:properties__jta-spec-version>
+		<m:properties__maven-bundle-plugin-version>1.4.0</m:properties__maven-bundle-plugin-version>
 		<m:properties__jsp21-version>2.1.v20091210</m:properties__jsp21-version>
+		<m:properties__junit-version>3.8.2</m:properties__junit-version>
+		<m:properties__slf4j-version>1.3.1</m:properties__slf4j-version>
+		<m:properties__maven-jar-plugin-version>2.2</m:properties__maven-jar-plugin-version>
 		<m:properties__servlet-version>2.5-20081211</m:properties__servlet-version>
 		<m:properties__project.build.sourceEncoding>UTF-8</m:properties__project.build.sourceEncoding>
 		<m:maven.plugins>org.apache.maven.plugins__maven-enforcer-plugin__1.0-alpha-4|org.apache.maven.plugins__maven-release-plugin__null|org.apache.maven.plugins__maven-enforcer-plugin__1.0-alpha-4|org.apache.maven.plugins__maven-release-plugin__null|org.apache.maven.plugins__maven-release-plugin__null|org.apache.maven.plugins__maven-enforcer-plugin__1.0-alpha-4|org.apache.maven.plugins__maven-release-plugin__null|org.apache.maven.plugins__maven-enforcer-plugin__1.0-alpha-4|org.apache.maven.plugins__maven-release-plugin__null|org.apache.maven.plugins__maven-release-plugin__null|org.apache.maven.plugins__maven-enforcer-plugin__null|null__maven-compiler-plugin__null|null__maven-release-plugin__null|org.apache.maven.plugins__maven-jar-plugin__2.1|org.apache.maven.plugins__maven-source-plugin__null</m:maven.plugins>
