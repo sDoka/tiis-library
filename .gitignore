@@ -1,0 +1,8 @@
+/liferay-plugins-sdk-6.2/.ivy/cache
+/liferay-plugins-sdk-6.2/dist
+/liferay-plugins-sdk-6.2/build.*.properties
+/liferay-plugins-sdk-6.2/ivy.xml.MD5
+/liferay-plugins-sdk-6.2/portlets/tiis-library-portlet/target/classes
+/liferay-plugins-sdk-6.2/portlets/tiis-library-portlet/docroot/WEB-INF/classes
+/liferay-plugins-sdk-6.2/portlets/tiis-library-portlet/docroot/WEB-INF/lib/tiis-library-portlet-service.jar
+.sass-cache
