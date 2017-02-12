@@ -3,7 +3,6 @@
 	<name>tiis-library-portlet</name>
 	<comment></comment>
 	<projects>
-		<project>Servers</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
