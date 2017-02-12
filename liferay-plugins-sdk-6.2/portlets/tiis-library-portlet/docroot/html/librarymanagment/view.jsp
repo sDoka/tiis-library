@@ -16,61 +16,61 @@
 		enctype="multipart/form-data">
 
 
-		<aui:col>
-			<aui:row cssClass="col col-sm-2">
+		<aui:row>
+			<aui:col span="2">
 				Name
-			</aui:row>
-			<aui:row cssClass="col col-sm-2">
+			</aui:col >
+			<aui:col span="2">
 				<input type="text" class="form-control"
 					name="<portlet:namespace/>bookTitle" value="" />
-			</aui:row>
-		</aui:col>
+			</aui:col>
+		</aui:row>
 
-		<aui:col>
-			<aui:row cssClass="col col-sm-2">
+		<aui:row>
+			<aui:col span="2">
 				Description
-			</aui:row>
-			<aui:row cssClass="col col-sm-2">
+			</aui:col>
+			<aui:col span="2">
 				<textarea class="form-control" name="<portlet:namespace/>bookDescription" rows="5"></textarea>
-			</aui:row>
-		</aui:col>
+			</aui:col>
+		</aui:row>
 
-		<aui:col>
-			<aui:row cssClass="col col-sm-2">
+		<aui:row>
+			<aui:col span="2">
 				Category
-			</aui:row>
-			<aui:row cssClass="col col-sm-2">
+			</aui:col>
+			<aui:col span="2">
 				<select class="selectpicker" name="<portlet:namespace/>bookCategory">
 					<option>Category 1</option>
 					<option>Category 2</option>
 					<option>Category 3</option>
 				</select>
-			</aui:row>
-		</aui:col>
+			</aui:col>
+		</aui:row>
 
-		<aui:col>
-			<aui:row cssClass="col col-sm-2">
+		<aui:row>
+			<aui:col span="2">
 				Logo file
-			</aui:row>
-			<aui:row cssClass="col col-sm-2">
+			</aui:col>
+			<aui:col span="2">
 				<label class="btn btn-default btn-file"> Browse <input
 					type="file" name="<portlet:namespace/>bookLogo"
 					accept="image/jpeg,image/bmp,image/png" style="display: none;" />
 				</label>
-			</aui:row>
-		</aui:col>
+			</aui:col>
+		</aui:row>
 
-		<aui:col>
-			<aui:row cssClass="col col-sm-2">
+		<aui:row>
+			<aui:col span="2">
 				Book file
-			</aui:row>
-			<aui:row cssClass="col col-sm-2">
+			</aui:col>
+			<aui:col span="2">
 				<label class="btn btn-default btn-file"> Browse <input
 					type="file" name="<portlet:namespace/>bookPdfFile"
 					accept="application/pdf" style="display: none;" />
 				</label>
-			</aui:row>
-		</aui:col>
+			</aui:col>
+		</aui:row>
 
 		<br />
 
