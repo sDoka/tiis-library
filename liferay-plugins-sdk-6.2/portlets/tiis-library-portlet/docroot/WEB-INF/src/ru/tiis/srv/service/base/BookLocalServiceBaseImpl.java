@@ -218,6 +218,34 @@ public abstract class BookLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
+	 * Returns the book with the matching UUID and company.
+	 *
+	 * @param uuid the book's UUID
+	 * @param  companyId the primary key of the company
+	 * @return the matching book, or <code>null</code> if a matching book could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Book fetchBookByUuidAndCompanyId(String uuid, long companyId)
+		throws SystemException {
+		return bookPersistence.fetchByUuid_C_First(uuid, companyId, null);
+	}
+
+	/**
+	 * Returns the book matching the UUID and group.
+	 *
+	 * @param uuid the book's UUID
+	 * @param groupId the primary key of the group
+	 * @return the matching book, or <code>null</code> if a matching book could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Book fetchBookByUuidAndGroupId(String uuid, long groupId)
+		throws SystemException {
+		return bookPersistence.fetchByUUID_G(uuid, groupId);
+	}
+
+	/**
 	 * Returns the book with the primary key.
 	 *
 	 * @param bookId the primary key of the book
@@ -234,6 +262,36 @@ public abstract class BookLocalServiceBaseImpl extends BaseLocalServiceImpl
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException, SystemException {
 		return bookPersistence.findByPrimaryKey(primaryKeyObj);
+	}
+
+	/**
+	 * Returns the book with the matching UUID and company.
+	 *
+	 * @param uuid the book's UUID
+	 * @param  companyId the primary key of the company
+	 * @return the matching book
+	 * @throws PortalException if a matching book could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Book getBookByUuidAndCompanyId(String uuid, long companyId)
+		throws PortalException, SystemException {
+		return bookPersistence.findByUuid_C_First(uuid, companyId, null);
+	}
+
+	/**
+	 * Returns the book matching the UUID and group.
+	 *
+	 * @param uuid the book's UUID
+	 * @param groupId the primary key of the group
+	 * @return the matching book
+	 * @throws PortalException if a matching book could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Book getBookByUuidAndGroupId(String uuid, long groupId)
+		throws PortalException, SystemException {
+		return bookPersistence.findByUUID_G(uuid, groupId);
 	}
 
 	/**

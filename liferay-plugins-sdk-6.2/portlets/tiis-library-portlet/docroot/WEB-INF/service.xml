@@ -4,14 +4,21 @@
 	<author>Michael</author>
 	<namespace>TIIS</namespace>
 	
-	<entity name="Book" local-service="true" remote-service="false" table="TIISBook">
+	<entity name="Book" uuid="true" local-service="true" remote-service="false" table="TIISBook">
 		
 		<!-- PK fields -->
 		<column name="bookId" type="long" primary="true" />
 
+		<!-- Asset fields -->
+		<column name="companyId" type="long" />
+		<column name="groupId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		
 		<!-- Audit fields -->
 		<column name="createDate" type="Date" />
 		<column name="modifiedDate" type="Date" />
+		
 		<!-- Other fields -->
 		<column name="gDriveId" type="String"></column>
 		<column name="title" type="String" />
@@ -21,6 +28,7 @@
 		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
 		<reference package-path="com.liferay.portlet.asset" entity="AssetLink" />
 	</entity>
+	
 	<entity name="Test" local-service="true" remote-service="false" table="TIISTest">
 
 		<column name="testId" type="long" primary="true" />

@@ -56,7 +56,7 @@ public class BookServiceImpl implements BookService {
 			log.error("Failed to save image to the book " + title + " : " + e.getMessage());
 		}
 		
-		BookLocalServiceUtil.updateBook(book);
+		BookLocalServiceUtil.addBook(book);
 		return getBook(book);
 	}
 

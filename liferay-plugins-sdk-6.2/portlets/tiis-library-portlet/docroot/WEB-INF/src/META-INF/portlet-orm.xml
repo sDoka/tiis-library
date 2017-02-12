@@ -10,6 +10,13 @@
 	<mapped-superclass class="ru.tiis.srv.model.impl.BookModelImpl">
 		<attributes>
 			<id name="bookId" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<basic name="userId" />
+			<basic name="userName" />
 			<basic name="createDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
@@ -25,6 +32,7 @@
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="ru.tiis.srv.model.impl.TestModelImpl">

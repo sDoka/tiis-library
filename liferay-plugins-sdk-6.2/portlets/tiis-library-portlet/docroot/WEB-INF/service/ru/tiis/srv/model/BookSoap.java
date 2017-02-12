@@ -32,7 +32,12 @@ public class BookSoap implements Serializable {
 	public static BookSoap toSoapModel(Book model) {
 		BookSoap soapModel = new BookSoap();
 
+		soapModel.setUuid(model.getUuid());
 		soapModel.setBookId(model.getBookId());
+		soapModel.setCompanyId(model.getCompanyId());
+		soapModel.setGroupId(model.getGroupId());
+		soapModel.setUserId(model.getUserId());
+		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setGDriveId(model.getGDriveId());
@@ -92,12 +97,52 @@ public class BookSoap implements Serializable {
 		setBookId(pk);
 	}
 
+	public String getUuid() {
+		return _uuid;
+	}
+
+	public void setUuid(String uuid) {
+		_uuid = uuid;
+	}
+
 	public long getBookId() {
 		return _bookId;
 	}
 
 	public void setBookId(long bookId) {
 		_bookId = bookId;
+	}
+
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+	}
+
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+	}
+
+	public long getUserId() {
+		return _userId;
+	}
+
+	public void setUserId(long userId) {
+		_userId = userId;
+	}
+
+	public String getUserName() {
+		return _userName;
+	}
+
+	public void setUserName(String userName) {
+		_userName = userName;
 	}
 
 	public Date getCreateDate() {
@@ -156,7 +201,12 @@ public class BookSoap implements Serializable {
 		_bookLogo = bookLogo;
 	}
 
+	private String _uuid;
 	private long _bookId;
+	private long _companyId;
+	private long _groupId;
+	private long _userId;
+	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private String _gDriveId;

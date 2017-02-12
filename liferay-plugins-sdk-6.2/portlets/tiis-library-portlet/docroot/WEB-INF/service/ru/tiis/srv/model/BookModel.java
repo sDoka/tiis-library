@@ -15,8 +15,10 @@
 package ru.tiis.srv.model;
 
 import com.liferay.portal.kernel.bean.AutoEscape;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
+import com.liferay.portal.model.StagedGroupedModel;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -40,7 +42,7 @@ import java.util.Date;
  * @see ru.tiis.srv.model.impl.BookModelImpl
  * @generated
  */
-public interface BookModel extends BaseModel<Book> {
+public interface BookModel extends BaseModel<Book>, StagedGroupedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -62,6 +64,23 @@ public interface BookModel extends BaseModel<Book> {
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the uuid of this book.
+	 *
+	 * @return the uuid of this book
+	 */
+	@AutoEscape
+	@Override
+	public String getUuid();
+
+	/**
+	 * Sets the uuid of this book.
+	 *
+	 * @param uuid the uuid of this book
+	 */
+	@Override
+	public void setUuid(String uuid);
+
+	/**
 	 * Returns the book ID of this book.
 	 *
 	 * @return the book ID of this book
@@ -76,10 +95,93 @@ public interface BookModel extends BaseModel<Book> {
 	public void setBookId(long bookId);
 
 	/**
+	 * Returns the company ID of this book.
+	 *
+	 * @return the company ID of this book
+	 */
+	@Override
+	public long getCompanyId();
+
+	/**
+	 * Sets the company ID of this book.
+	 *
+	 * @param companyId the company ID of this book
+	 */
+	@Override
+	public void setCompanyId(long companyId);
+
+	/**
+	 * Returns the group ID of this book.
+	 *
+	 * @return the group ID of this book
+	 */
+	@Override
+	public long getGroupId();
+
+	/**
+	 * Sets the group ID of this book.
+	 *
+	 * @param groupId the group ID of this book
+	 */
+	@Override
+	public void setGroupId(long groupId);
+
+	/**
+	 * Returns the user ID of this book.
+	 *
+	 * @return the user ID of this book
+	 */
+	@Override
+	public long getUserId();
+
+	/**
+	 * Sets the user ID of this book.
+	 *
+	 * @param userId the user ID of this book
+	 */
+	@Override
+	public void setUserId(long userId);
+
+	/**
+	 * Returns the user uuid of this book.
+	 *
+	 * @return the user uuid of this book
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public String getUserUuid() throws SystemException;
+
+	/**
+	 * Sets the user uuid of this book.
+	 *
+	 * @param userUuid the user uuid of this book
+	 */
+	@Override
+	public void setUserUuid(String userUuid);
+
+	/**
+	 * Returns the user name of this book.
+	 *
+	 * @return the user name of this book
+	 */
+	@AutoEscape
+	@Override
+	public String getUserName();
+
+	/**
+	 * Sets the user name of this book.
+	 *
+	 * @param userName the user name of this book
+	 */
+	@Override
+	public void setUserName(String userName);
+
+	/**
 	 * Returns the create date of this book.
 	 *
 	 * @return the create date of this book
 	 */
+	@Override
 	public Date getCreateDate();
 
 	/**
@@ -87,6 +189,7 @@ public interface BookModel extends BaseModel<Book> {
 	 *
 	 * @param createDate the create date of this book
 	 */
+	@Override
 	public void setCreateDate(Date createDate);
 
 	/**
@@ -94,6 +197,7 @@ public interface BookModel extends BaseModel<Book> {
 	 *
 	 * @return the modified date of this book
 	 */
+	@Override
 	public Date getModifiedDate();
 
 	/**
@@ -101,6 +205,7 @@ public interface BookModel extends BaseModel<Book> {
 	 *
 	 * @param modifiedDate the modified date of this book
 	 */
+	@Override
 	public void setModifiedDate(Date modifiedDate);
 
 	/**

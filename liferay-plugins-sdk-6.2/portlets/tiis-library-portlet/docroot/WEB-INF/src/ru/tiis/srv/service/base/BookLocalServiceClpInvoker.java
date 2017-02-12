@@ -80,37 +80,65 @@ public class BookLocalServiceClpInvoker {
 
 		_methodParameterTypes10 = new String[] { "long" };
 
-		_methodName11 = "getBook";
+		_methodName11 = "fetchBookByUuidAndCompanyId";
 
-		_methodParameterTypes11 = new String[] { "long" };
+		_methodParameterTypes11 = new String[] { "java.lang.String", "long" };
 
-		_methodName12 = "getPersistedModel";
+		_methodName12 = "fetchBookByUuidAndGroupId";
 
-		_methodParameterTypes12 = new String[] { "java.io.Serializable" };
+		_methodParameterTypes12 = new String[] { "java.lang.String", "long" };
 
-		_methodName13 = "getBooks";
+		_methodName13 = "getBook";
 
-		_methodParameterTypes13 = new String[] { "int", "int" };
+		_methodParameterTypes13 = new String[] { "long" };
 
-		_methodName14 = "getBooksCount";
+		_methodName14 = "getPersistedModel";
 
-		_methodParameterTypes14 = new String[] {  };
+		_methodParameterTypes14 = new String[] { "java.io.Serializable" };
 
-		_methodName15 = "updateBook";
+		_methodName15 = "getBookByUuidAndCompanyId";
 
-		_methodParameterTypes15 = new String[] { "ru.tiis.srv.model.Book" };
+		_methodParameterTypes15 = new String[] { "java.lang.String", "long" };
 
-		_methodName16 = "getBookLogoBlobModel";
+		_methodName16 = "getBookByUuidAndGroupId";
 
-		_methodParameterTypes16 = new String[] { "java.io.Serializable" };
+		_methodParameterTypes16 = new String[] { "java.lang.String", "long" };
 
-		_methodName51 = "getBeanIdentifier";
+		_methodName17 = "getBooks";
 
-		_methodParameterTypes51 = new String[] {  };
+		_methodParameterTypes17 = new String[] { "int", "int" };
 
-		_methodName52 = "setBeanIdentifier";
+		_methodName18 = "getBooksCount";
 
-		_methodParameterTypes52 = new String[] { "java.lang.String" };
+		_methodParameterTypes18 = new String[] {  };
+
+		_methodName19 = "updateBook";
+
+		_methodParameterTypes19 = new String[] { "ru.tiis.srv.model.Book" };
+
+		_methodName20 = "getBookLogoBlobModel";
+
+		_methodParameterTypes20 = new String[] { "java.io.Serializable" };
+
+		_methodName55 = "getBeanIdentifier";
+
+		_methodParameterTypes55 = new String[] {  };
+
+		_methodName56 = "setBeanIdentifier";
+
+		_methodParameterTypes56 = new String[] { "java.lang.String" };
+
+		_methodName61 = "addBook";
+
+		_methodParameterTypes61 = new String[] { "ru.tiis.srv.model.Book" };
+
+		_methodName62 = "updateBook";
+
+		_methodParameterTypes62 = new String[] { "ru.tiis.srv.model.Book" };
+
+		_methodName63 = "deleteBook";
+
+		_methodParameterTypes63 = new String[] { "ru.tiis.srv.model.Book" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -178,45 +206,84 @@ public class BookLocalServiceClpInvoker {
 
 		if (_methodName11.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes11, parameterTypes)) {
-			return BookLocalServiceUtil.getBook(((Long)arguments[0]).longValue());
+			return BookLocalServiceUtil.fetchBookByUuidAndCompanyId((java.lang.String)arguments[0],
+				((Long)arguments[1]).longValue());
 		}
 
 		if (_methodName12.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes12, parameterTypes)) {
-			return BookLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
+			return BookLocalServiceUtil.fetchBookByUuidAndGroupId((java.lang.String)arguments[0],
+				((Long)arguments[1]).longValue());
 		}
 
 		if (_methodName13.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes13, parameterTypes)) {
-			return BookLocalServiceUtil.getBooks(((Integer)arguments[0]).intValue(),
-				((Integer)arguments[1]).intValue());
+			return BookLocalServiceUtil.getBook(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName14.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes14, parameterTypes)) {
-			return BookLocalServiceUtil.getBooksCount();
+			return BookLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
 		}
 
 		if (_methodName15.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes15, parameterTypes)) {
-			return BookLocalServiceUtil.updateBook((ru.tiis.srv.model.Book)arguments[0]);
+			return BookLocalServiceUtil.getBookByUuidAndCompanyId((java.lang.String)arguments[0],
+				((Long)arguments[1]).longValue());
 		}
 
 		if (_methodName16.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes16, parameterTypes)) {
+			return BookLocalServiceUtil.getBookByUuidAndGroupId((java.lang.String)arguments[0],
+				((Long)arguments[1]).longValue());
+		}
+
+		if (_methodName17.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes17, parameterTypes)) {
+			return BookLocalServiceUtil.getBooks(((Integer)arguments[0]).intValue(),
+				((Integer)arguments[1]).intValue());
+		}
+
+		if (_methodName18.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes18, parameterTypes)) {
+			return BookLocalServiceUtil.getBooksCount();
+		}
+
+		if (_methodName19.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes19, parameterTypes)) {
+			return BookLocalServiceUtil.updateBook((ru.tiis.srv.model.Book)arguments[0]);
+		}
+
+		if (_methodName20.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes20, parameterTypes)) {
 			return BookLocalServiceUtil.getBookLogoBlobModel((java.io.Serializable)arguments[0]);
 		}
 
-		if (_methodName51.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes51, parameterTypes)) {
+		if (_methodName55.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes55, parameterTypes)) {
 			return BookLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName52.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes52, parameterTypes)) {
+		if (_methodName56.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes56, parameterTypes)) {
 			BookLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
+		}
+
+		if (_methodName61.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes61, parameterTypes)) {
+			return BookLocalServiceUtil.addBook((ru.tiis.srv.model.Book)arguments[0]);
+		}
+
+		if (_methodName62.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes62, parameterTypes)) {
+			return BookLocalServiceUtil.updateBook((ru.tiis.srv.model.Book)arguments[0]);
+		}
+
+		if (_methodName63.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes63, parameterTypes)) {
+			return BookLocalServiceUtil.deleteBook((ru.tiis.srv.model.Book)arguments[0]);
 		}
 
 		throw new UnsupportedOperationException();
@@ -256,8 +323,22 @@ public class BookLocalServiceClpInvoker {
 	private String[] _methodParameterTypes15;
 	private String _methodName16;
 	private String[] _methodParameterTypes16;
-	private String _methodName51;
-	private String[] _methodParameterTypes51;
-	private String _methodName52;
-	private String[] _methodParameterTypes52;
+	private String _methodName17;
+	private String[] _methodParameterTypes17;
+	private String _methodName18;
+	private String[] _methodParameterTypes18;
+	private String _methodName19;
+	private String[] _methodParameterTypes19;
+	private String _methodName20;
+	private String[] _methodParameterTypes20;
+	private String _methodName55;
+	private String[] _methodParameterTypes55;
+	private String _methodName56;
+	private String[] _methodParameterTypes56;
+	private String _methodName61;
+	private String[] _methodParameterTypes61;
+	private String _methodName62;
+	private String[] _methodParameterTypes62;
+	private String _methodName63;
+	private String[] _methodParameterTypes63;
 }
