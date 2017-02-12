@@ -14,3 +14,10 @@ liferay-plugins-sdk-6.2/portlets/tiis-library-portlet/.settings/com.liferay.ide.
 liferay-plugins-sdk-6.2/portlets/tiis-library-portlet/.settings/com.liferay.ide.sdk.core.prefs
 liferay-plugins-sdk-6.2/portlets/tiis-library-portlet/.settings/org.eclipse.wst.ws.service.policy.prefs
 /liferay-plugins-sdk-6.2/portlets/tiis-library-portlet/docroot/WEB-INF/src/service.properties
+/liferay-plugins-sdk-6.2/portlets/tiis-library-portlet/docroot/WEB-INF/lib/commons-loggins.jar
+/liferay-plugins-sdk-6.2/portlets/tiis-library-portlet/docroot/WEB-INF/lib/jstl-api.jar
+/liferay-plugins-sdk-6.2/portlets/tiis-library-portlet/docroot/WEB-INF/lib/jstl-impl.jar
+/liferay-plugins-sdk-6.2/portlets/tiis-library-portlet/docroot/WEB-INF/lib/log4j.jar
+/liferay-plugins-sdk-6.2/portlets/tiis-library-portlet/docroot/WEB-INF/lib/util-bridges.jar
+/liferay-plugins-sdk-6.2/portlets/tiis-library-portlet/docroot/WEB-INF/lib/util-java.jar
+/liferay-plugins-sdk-6.2/portlets/tiis-library-portlet/docroot/WEB-INF/lib/util-taglib.jar
