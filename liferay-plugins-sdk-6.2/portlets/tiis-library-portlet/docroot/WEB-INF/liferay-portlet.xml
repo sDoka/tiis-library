@@ -31,7 +31,7 @@
 	<portlet>
 		<portlet-name>library-managment</portlet-name>
 		<icon>/icon.png</icon>
-		<indexer-class>ru.tiis.srv.service.indexer.BookEntryIndexer</indexer-class>
+		<indexer-class>ru.tiis.srv.service.indexer.BookIndexer</indexer-class>
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>
 			/js/main.js
