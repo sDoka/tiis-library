@@ -55,6 +55,7 @@ public class LibraryManagmentPortlet extends MVCPortlet {
 		String description = ParamUtil.get(request, "bookDescription", "No description");
 		File bookLogo = uploadRequest.getFile("bookLogo");
 		File bookPdfFile = uploadRequest.getFile("bookPdfFile");
+		
 		BookModel bookModel = null;
 		try {
 			bookModel = bookService.addBook(title, description, bookLogo, bookPdfFile);
