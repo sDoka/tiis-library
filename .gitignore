@@ -6,3 +6,11 @@
 /liferay-plugins-sdk-6.2/portlets/tiis-library-portlet/docroot/WEB-INF/classes
 /liferay-plugins-sdk-6.2/portlets/tiis-library-portlet/docroot/WEB-INF/lib/tiis-library-portlet-service.jar
 .sass-cache
+liferay-plugins-sdk-6.2/portlets/tiis-library-portlet/docroot/WEB-INF/.gitignore
+liferay-plugins-sdk-6.2/portlets/tiis-library-portlet/target/.gitignore
+liferay-plugins-sdk-6.2/themes/tiis-main-page-theme/docroot/WEB-INF/.gitignore
+liferay-plugins-sdk-6.2/themes/tiis-theme/docroot/WEB-INF/classes/.gitignore
+liferay-plugins-sdk-6.2/portlets/tiis-library-portlet/.settings/com.liferay.ide.project.core.prefs
+liferay-plugins-sdk-6.2/portlets/tiis-library-portlet/.settings/com.liferay.ide.sdk.core.prefs
+liferay-plugins-sdk-6.2/portlets/tiis-library-portlet/.settings/org.eclipse.wst.ws.service.policy.prefs
+/liferay-plugins-sdk-6.2/portlets/tiis-library-portlet/docroot/WEB-INF/src/service.properties
