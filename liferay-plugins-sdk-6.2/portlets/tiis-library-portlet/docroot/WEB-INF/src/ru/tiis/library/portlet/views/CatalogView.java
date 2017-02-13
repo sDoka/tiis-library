@@ -11,13 +11,10 @@ import javax.portlet.RenderResponse;
 
 import ru.tiis.constants.FriendlyUrlConstants;
 import ru.tiis.library.portlet.BookInfoPortlet;
-import ru.tiis.library.portlet.LibraryPortlet;
 import ru.tiis.library.service.BookService;
 import ru.tiis.library.service.impl.BookServiceFactory;
 import ru.tiis.library.service.model.BookModel;
 
-import com.google.api.services.drive.DriveScopes;
-import com.google.api.services.samples.drive.cmdline.DriveSample;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;

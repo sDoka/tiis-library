@@ -15,7 +15,7 @@
 package ru.tiis.srv.model.impl;
 
 /**
- * The extended model implementation for the TestAttempt service. Represents a row in the &quot;tiis_TestAttempt&quot; database table, with each column mapped to a property of this class.
+ * The extended model implementation for the TestAttempt service. Represents a row in the &quot;TIISTestAttempt&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
  * Helper methods and all application logic should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link ru.tiis.srv.model.TestAttempt} interface.

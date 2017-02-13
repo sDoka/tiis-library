@@ -15,7 +15,7 @@
 package ru.tiis.srv.model.impl;
 
 /**
- * The extended model implementation for the Book service. Represents a row in the &quot;tiis_Book&quot; database table, with each column mapped to a property of this class.
+ * The extended model implementation for the Book service. Represents a row in the &quot;TIISBook&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
  * Helper methods and all application logic should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link ru.tiis.srv.model.Book} interface.

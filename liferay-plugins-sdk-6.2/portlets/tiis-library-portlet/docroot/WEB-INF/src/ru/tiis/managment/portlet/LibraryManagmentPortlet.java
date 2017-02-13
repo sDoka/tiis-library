@@ -17,12 +17,10 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.log.LogUtil;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
-import com.mysql.jdbc.log.LogUtils;
 
 /**
  * Portlet implementation class LibraryManagmentPortlet
@@ -56,11 +54,16 @@ public class LibraryManagmentPortlet extends MVCPortlet {
 		File bookLogo = uploadRequest.getFile("bookLogo");
 		File bookPdfFile = uploadRequest.getFile("bookPdfFile");
 		
-		BookModel bookModel = null;
 		try {
-			bookModel = bookService.addBook(title, description, bookLogo, bookPdfFile);
+			BookModel bookModel = bookService.addBook(title, description, bookLogo, bookPdfFile);
+			
+			//TODO catch NonAuthorizedUserException and open in new tab
+			//https://accounts.google.com/o/oauth2/auth?client_id=1097637469091-gdshlvm5m4sub6l1m6hrtg83c07umaa4.apps.googleusercontent.com&redirect_uri=http://localhost:9001/Callback&response_type=code&scope=https://www.googleapis.com/auth/drive.file
+			//or i'll make utility method for gdrive auth check -> authorize -> add book
+			
 		} catch (PortalException | SystemException e) {
 			log.error("Can't add a book with title " + title + ": " + e.getMessage());
 		}
+		//TODO send AJAX Response
 	}
 }

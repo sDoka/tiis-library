@@ -13,7 +13,6 @@ import ru.tiis.library.service.model.BookModel;
 import ru.tiis.srv.model.Book;
 import ru.tiis.srv.service.BookLocalServiceUtil;
 
-import com.google.api.services.samples.drive.cmdline.DriveSample;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.dao.jdbc.OutputBlob;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -40,16 +39,18 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public BookModel addBook(String title, String description, File bookLogo, File bookPdf)
 			throws PortalException, SystemException {
+		
+		String gdriveBookUrl = GDriveService.uploadNewBook(bookPdf);
+		
 		long bookId = CounterLocalServiceUtil.increment(Book.class.getName());
 		Book book = BookLocalServiceUtil.createBook(bookId);
 		book.setBookId(bookId);
 		book.setTitle(title);
 		book.setDescription(description);
 		book.setCreateDate(new Date());
-		book.setGoogleDriveLink(uploadBookToGDrive());
-		InputStream fis;
+		book.setGoogleDriveLink(gdriveBookUrl);
 		try {
-			fis = new FileInputStream(bookLogo);
+			InputStream fis = new FileInputStream(bookLogo);
 			OutputBlob bookLogoBlob = new OutputBlob(fis, bookLogo.length());
 			book.setBookLogo(bookLogoBlob);
 		} catch (FileNotFoundException e) {
@@ -100,18 +101,4 @@ public class BookServiceImpl implements BookService {
 		}
 		return bookModels;
 	}
-	
-	private String uploadBookToGDrive() {
-		String bookViewUrl = StringPool.BLANK;
-		
-		log.info("Testing drive api");
-		try {
-			bookViewUrl = DriveSample.uploadNewBook();
-		} catch (Exception e) {
-			log.error(e.getMessage());
-		}
-		
-		return bookViewUrl;
-	}
-
 }
