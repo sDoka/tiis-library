@@ -1,16 +1,16 @@
-<%@tag import="ru.tiis.library.service.model.BookModel"%>
-<%@tag import="java.util.List"%>
-<%@tag import="com.liferay.portal.util.PortalUtil"%>
-<%@tag import="com.liferay.portal.kernel.json.JSONFactoryUtil"%>
-<%@tag import="com.liferay.portal.kernel.json.JSONArray"%>
-<%@tag import="com.liferay.portal.kernel.language.LanguageUtil"%>
-<%@ tag	import="com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil"%>
-<%@ tag	import="com.liferay.portlet.messageboards.model.MBMessage"%>
 <%@ tag	import="java.util.ArrayList"%>
+<%@ tag import="java.util.List"%>
+<%@ tag import="com.liferay.portal.util.PortalUtil"%>
+<%@ tag import="com.liferay.portal.kernel.json.JSONFactoryUtil"%>
+<%@ tag import="com.liferay.portal.kernel.json.JSONArray"%>
+<%@ tag import="com.liferay.portal.kernel.language.LanguageUtil"%>
 <%@ tag import="com.liferay.portal.model.User"%>
 <%@ tag import="com.liferay.portal.service.UserLocalServiceUtil"%>
 <%@ tag import="com.liferay.portal.service.ServiceContext"%>
+<%@ tag	import="com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil"%>
+<%@ tag	import="com.liferay.portlet.messageboards.model.MBMessage"%>
 <%@ tag import="ru.tiis.discussion.MessageBean"%>
+<%@ tag import="ru.tiis.library.service.model.BookModel"%>
 
 <%@ tag body-content="empty"%>
 <%@ attribute name="classPK" required="true" rtexprvalue="true"
@@ -38,41 +38,24 @@
 <script type="text/html" id="display_template"><%@include file="/html/comments/templates/commenttemplate.html" %></script>
 <script type="text/html" id="no_comments_page"><%@include file="/html/comments/templates/nocommentpage.html" %></script>
 
-<!-- Initialize variables -->
+<%-- Initialize variables --%>
 <c:set var="groupId" value="${themeDisplay.companyGroupId}"/>
 <c:set var="threadId" value="0"/>
 <c:set var="rootMessageId" value="0"/>
 
 <% 	
-	BookModel book = (BookModel)request.getAttribute("course");
+	BookModel book = (BookModel) request.getAttribute("course");
 	long bookId = 0;//course.getCourseId();	
 	if (book != null) { 
 		bookId = book.getBookId();
-	};
-	boolean userHasMessagePermissions = themeDisplay.isSignedIn();
-	
+	};	
 %>
-
-<script type="text/javascript"> 
-	//variables used for comment entries rendering
-	var userIdParam = <%=userId%>;
-	var objectIdParam = <%=classPK%>;
-	var classNameParam = "<%=className%>";
-	var userHasMessagePermissionsParam = <%=userHasMessagePermissions%>;
-	var commentsHeaderText = "<%=LanguageUtil.get(themeDisplay.getLocale(), "comments") %>";
-</script>
-
-<aui:script>
-	AUI().ready(function () {
-		displayComments(<%=classPK %>, '<%=className %>');
-	});
-</aui:script>
 								
-<!-- Display comments form-->
+<%-- Display comments form--%>
 
 <div id="main">
 	<div class="row-fluid">						
-	<!--show messages-->		
+	<%--show messages--%>		
 		<div class="span12">	
 			<h3 id="commentsHeader"></h3>
 				<div id="comments">				
@@ -85,7 +68,7 @@
 	</div>
 
 	<div class="row-fluid">	
-		<!-- Add comments form -->
+		<%-- Add comments form --%>
 		<c:choose>
 			<c:when test="${!themeDisplay.permissionChecker.isSignedIn()}">
 				<div class="span4 offset6 please-login-container">
@@ -127,56 +110,78 @@
 								</div>	
 							</div>								
 					</div>	
-				</div>
-				
-				
-				<aui:script>
-					var captchaContainer = null;
-					var loadRecaptcha = function() {
-						captchaContainer = grecaptcha.render('g-recaptcha', {
-							'sitekey' : '6LdVSQITAAAAADTJsWgkmQ-7OsljM0s05jlSADhh',
-							'callback' : function(response) {}
-						});
-					};
-					
-					function submit(groupId, classPK, className, userId, threadId, parentMessageId, recaptchaResponse, courseId){
-						AUI().ready(function () {
-							var subject;
-							var comment;		
-								subject = document.getElementById("subject").value;
-								comment = document.getElementById("comment").value;
-							
-							Liferay.Service(
-							  '/it-deutsch-portlet.messagessection/check-re-captcha-challange-and-submit',
-							  {
-							    gReCaptchaResponse: recaptchaResponse,							    
-							    groupId: groupId,
-								className: className,
-								classPK: classPK,
-								permissionClassName: className,
-								permissionClassPK: classPK,
-								permissionOwnerId: userId,
-								threadId: threadId,
-								parentMessageId: parentMessageId,
-								subject: subject,
-								body: comment,
-								courseId: courseId
-							  },
-							  function(obj) {
-							    var checkResult = JSON.parse(obj);
-
-								if (checkResult.success) {
-									document.getElementById("subject").value = "";
-									document.getElementById("comment").value = "";
-									displayComments(<%=classPK %>, '<%=className %>');
-								}
-								grecaptcha.reset();
-							  }
-							);					
-						});	
-					};
-				</aui:script>				
+				</div>			
 			</c:otherwise>
 		</c:choose>
 	</div>
 </div>
+
+<script type="text/javascript"> 
+
+	//variables used for rendering and adding comment entries
+	var discussionParams = {};
+	discussionParams.userId = <%=userId%>;
+	discussionParams.classPK = "<%=classPK%>";
+	discussionParams.className = "<%=className%>";
+	discussionParams.userHasMessagePermissionsParam = <%=userHasMessagePermissions%>;
+	discussionParams.commentsHeaderText = "<%=LanguageUtil.get(themeDisplay.getLocale(), "comments") %>";
+
+	AUI().ready(function () {
+		displayComments(discussionParams.classPK, discussionParams.className);
+	});
+
+	DiscussionController = function(){
+		
+		var captchaContainer = null;
+		var loadRecaptcha = function() {
+			captchaContainer = grecaptcha.render('g-recaptcha', {
+				'sitekey' : '6LdVSQITAAAAADTJsWgkmQ-7OsljM0s05jlSADhh',
+				'callback' : function(response) {}
+			});
+		};
+		
+		function submit(groupId, 
+				classPK, 
+				className, 
+				userId, 
+				threadId, 
+				parentMessageId, 
+				recaptchaResponse, 
+				courseId) {
+			AUI().ready(function () {
+				var subject;
+				var comment;		
+					subject = document.getElementById("subject").value;
+					comment = document.getElementById("comment").value;
+				
+				Liferay.Service(
+				  '/it-deutsch-portlet.messagessection/check-re-captcha-challange-and-submit',
+				  {
+				    gReCaptchaResponse: recaptchaResponse,							    
+				    groupId: groupId,
+					className: className,
+					classPK: classPK,
+					permissionClassName: className,
+					permissionClassPK: classPK,
+					permissionOwnerId: userId,
+					threadId: threadId,
+					parentMessageId: parentMessageId,
+					subject: subject,
+					body: comment,
+					courseId: courseId
+				  },
+				  function(obj) {
+				    var checkResult = JSON.parse(obj);
+	
+					if (checkResult.success) {
+						document.getElementById("subject").value = "";
+						document.getElementById("comment").value = "";
+						displayComments(<%=classPK %>, '<%=className %>');
+					}
+					grecaptcha.reset();
+				  }
+				);					
+			});	
+		}
+	}
+</script>	

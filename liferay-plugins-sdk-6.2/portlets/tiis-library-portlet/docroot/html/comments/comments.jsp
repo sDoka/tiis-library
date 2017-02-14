@@ -5,4 +5,9 @@
   
 <portlet:defineObjects />
 <liferay-theme:defineObjects />
-<itd:discussion classPK="<%=layout.getPlid()%>" userId="${ user.getUserId()}" className="<%=Layout.class.getName()%>" themeDisplay="<%=themeDisplay %>"/>
+<itd:discussion 
+	classPK="<%=layout.getPlid()%>" 
+	userId="${user.getUserId()}" 
+	className="<%=Layout.class.getName()%>" 
+	themeDisplay="<%=themeDisplay %>"
+/>
