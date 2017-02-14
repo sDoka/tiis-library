@@ -22,21 +22,6 @@
 	</portlet-resource>
 	
 	<model-resource>
-	    <model-name>ru.tiis.srv.model</model-name>
-	    <portlet-ref>
-	    	<portlet-name>library</portlet-name>
-	    	<portlet-name>book-info</portlet-name>
-	        <portlet-name>library-managment</portlet-name>
-	    </portlet-ref>
-	    <permissions>
-	        <supports />
-	        <site-member-defaults />
-	        <guest-defaults />
-	        <guest-unsupported />
-	    </permissions>
-	</model-resource>
-	
-	<model-resource>
 	    <model-name>ru.tiis.srv.model.Book</model-name>
 	    <portlet-ref>
 	    	<portlet-name>library</portlet-name>
@@ -45,14 +30,18 @@
 	    </portlet-ref>
 	    <permissions>
 	        <supports>
-	            <action-key>ADD_BOOK</action-key>
+	            <action-key>ADD</action-key>
+	            <action-key>UPDATE</action-key>
 	            <action-key>DELETE</action-key>
 	            <action-key>PERMISSIONS</action-key>
-	            <action-key>UPDATE</action-key>
 	            <action-key>VIEW</action-key>
+	            <action-key>ADD_DISCUSSION</action-key>
+	            <action-key>UPDATE_DISCUSSION</action-key>
+	            <action-key>DELETE_DISCUSSION</action-key>
 	        </supports>
 	        <site-member-defaults>
 	            <action-key>VIEW</action-key>
+	            <action-key>ADD_DISCUSSION</action-key>
 	        </site-member-defaults>
 	        <guest-defaults>
 	        </guest-defaults>
