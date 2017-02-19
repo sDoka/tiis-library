@@ -1,6 +1,7 @@
 package ru.tiis.library.service.constants;
 
 public class LibraryConstants {
+	
 	public static enum GoogleDriveCredentials {
 		TEST_CREDENTIALS(0, "baibousm@gmail.com", "89068260511cfif");
 		

@@ -12,7 +12,12 @@
  * the License.
  */
 
-package com.google.api.services.samples.drive.cmdline;
+package ru.tiis.library.service.impl;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Collections;
 
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
@@ -21,14 +26,11 @@ import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver.Bu
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
-import com.google.api.client.googleapis.media.MediaHttpDownloader;
 import com.google.api.client.googleapis.media.MediaHttpUploader;
 import com.google.api.client.http.FileContent;
-import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
-import com.google.api.client.util.Preconditions;
 import com.google.api.client.util.store.DataStoreFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.drive.Drive;
@@ -39,44 +41,16 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.util.Collections;
 
-/**
- * A sample application that runs multiple requests against the Drive API. The
- * requests this sample makes are:
- * <ul>
- * <li>Does a resumable media upload</li>
- * <li>Updates the uploaded file by renaming it</li>
- * <li>Does a resumable media download</li>
- * <li>Does a direct media upload</li>
- * <li>Does a direct media download</li>
- * </ul>
- *
- * @author rmistry@google.com (Ravi Mistry)
- */
-public class DriveSample {
+class GDriveService {
 
-	private static Log log = LogFactoryUtil.getLog(DriveSample.class);
+	private static Log log = LogFactoryUtil.getLog(GDriveService.class);
 	/**
 	 * Be sure to specify the name of your application. If the application name
 	 * is {@code null} or blank, the application will log a warning. Suggested
 	 * format is "MyCompany-ProductName/1.0".
 	 */
 	private static final String APPLICATION_NAME = "tiis-library";
-
-	private static final String UPLOAD_FILE_PATH = "D:\\TIIS\\downloads\\test_pdf.pdf";
-	private static final String MIME_TYPE = "application/pdf";
-	private static final String DIR_FOR_DOWNLOADS = "D:\\TIIS\\downloads\\drive-download";
-	private static final java.io.File UPLOAD_FILE = new java.io.File(
-			UPLOAD_FILE_PATH);
 
 	/** Directory to store user credentials. */
 	private static final java.io.File DATA_STORE_DIR = new java.io.File(
@@ -101,17 +75,18 @@ public class DriveSample {
 	/** Authorizes the installed application to access user's protected data. */
 	private static Credential authorize() throws Exception {
 		// load client secrets
-		java.io.File file = new java.io.File(
-				"D:\\TIIS\\downloads\\upload-service-credentials.json");
-		FileInputStream fis = new FileInputStream(file);
+		//FIXME make it work
+		java.io.File credentials = new java.io.File(GDriveService.class.getResource("upload-service-credentials.json").getFile());
+		log.info("Data store dir : " + DATA_STORE_DIR);
+		FileInputStream fis = new FileInputStream(credentials);
 		GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(
 				JSON_FACTORY, new InputStreamReader(fis));
 		if (clientSecrets.getDetails().getClientId().startsWith("Enter")
 				|| clientSecrets.getDetails().getClientSecret()
 						.startsWith("Enter ")) {
-			System.out
-					.println("Enter Client ID and Secret from https://code.google.com/apis/console/?api=drive "
-							+ "into drive-cmdline-sample/src/main/resources/client_secrets.json");
+			
+			log.warn("Enter Client ID and Secret from https://code.google.com/apis/console/?api=drive "
+					+ "into drive-cmdline-sample/src/main/resources/client_secrets.json");
 			return null;
 		}
 		log.info("Google client secrets loaded");
@@ -126,18 +101,12 @@ public class DriveSample {
 		Builder serverBuilder = new Builder();
 		serverBuilder.setPort(9001);
 		LocalServerReceiver localhostResiever = serverBuilder.build();
-
+		
 		return new AuthorizationCodeInstalledApp(flow, localhostResiever)
 				.authorize("user");
 	}
 
-	public static String uploadNewBook() {
-		Preconditions
-				.checkArgument(
-						!UPLOAD_FILE_PATH.startsWith("Enter ")
-								&& !DIR_FOR_DOWNLOADS.startsWith("Enter "),
-						"Please enter the upload file path and download directory in %s",
-						DriveSample.class);
+	public static String uploadNewBook(java.io.File bookPdf) {
 
 		try {
 			httpTransport = GoogleNetHttpTransport.newTrustedTransport();
@@ -153,51 +122,56 @@ public class DriveSample {
 			log.info("Drive instance set");
 
 			// run commands
-			View.header1("Starting Simple Media Upload");
-			File uploadedFile = uploadFile(true);
-			
-			View.header1("Setting up permissions");
+			log.info("Starting Simple Media Upload");
+			boolean useDirectUpload = true;
+			File uploadedFile = uploadFile(useDirectUpload, bookPdf);
+
+			log.info("Setting up permissions");
 			createPermissions(uploadedFile.getId());
 
 			String fileId = uploadedFile.getId();
-			File testFile = drive.files().get(fileId).setFields("id,name,webContentLink,shared,mimeType,webViewLink").execute();
+			File testFile = drive
+					.files()
+					.get(fileId)
+					.setFields(
+							"id,name,webContentLink,shared,mimeType,webViewLink")
+					.execute();
 			log.info("File name : " + testFile.getName());
 			log.info("File mime type : " + testFile.getMimeType());
 			log.info("File web content link : " + testFile.getWebContentLink());
 			log.info("File web view link : " + testFile.getWebViewLink());
 			log.info("File is shared : " + testFile.getShared());
 
-			View.header1("Success!");
+			log.info("Success!");
 			return testFile.getWebViewLink();
 		} catch (IOException e) {
-			System.err.println(e.getMessage());
+			log.error(e.getMessage());
 		} catch (Throwable t) {
 			t.printStackTrace();
 		}
-		
+
 		return StringPool.BLANK;
 	}
 
 	/** Uploads a file using either resumable or direct media upload. */
-	private static File uploadFile(boolean useDirectUpload) throws IOException {
+	private static File uploadFile(boolean useDirectUpload, java.io.File bookPdf)
+			throws IOException {
 		File fileMetadata = new File();
-		fileMetadata.setName(UPLOAD_FILE.getName());
+		fileMetadata.setName(bookPdf.getName());
 		fileMetadata.setViewersCanCopyContent(false);
-		FileContent mediaContent = new FileContent(null, UPLOAD_FILE);
+		FileContent mediaContent = new FileContent(null, bookPdf);
 
 		Drive.Files.Create create = drive.files().create(fileMetadata,
 				mediaContent);
 		MediaHttpUploader uploader = create.getMediaHttpUploader();
 		uploader.setDirectUploadEnabled(useDirectUpload);
-		uploader.setProgressListener(new FileUploadProgressListener());
 		return create.execute();
 	}
 
-	private static Permission createPermissions(String fileId)
-			throws Exception {
+	private static Permission createPermissions(String fileId) throws Exception {
 		Permission newPermission = new Permission();
 		newPermission.setType("anyone");
 		newPermission.setRole("reader");
 		return drive.permissions().create(fileId, newPermission).execute();
-	}	
+	}
 }

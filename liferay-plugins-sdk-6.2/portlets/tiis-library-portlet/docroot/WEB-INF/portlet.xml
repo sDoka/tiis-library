@@ -1,13 +1,14 @@
 <?xml version="1.0"?>
 
-<portlet-app xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" version="2.0">
-	
+<portlet-app xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd"
+	version="2.0">
+
 	<portlet>
 		<portlet-name>library</portlet-name>
 		<display-name>Library</display-name>
-		<portlet-class>
-			ru.tiis.library.portlet.LibraryPortlet
-		</portlet-class>
+		<portlet-class>ru.tiis.library.portlet.LibraryPortlet</portlet-class>
 		<init-param>
 			<name>view-template</name>
 			<value>/html/library/catalog.jsp</value>
@@ -43,9 +44,7 @@
 	<portlet>
 		<portlet-name>book-info</portlet-name>
 		<display-name>Book Info</display-name>
-		<portlet-class>
-			ru.tiis.library.portlet.BookInfoPortlet
-		</portlet-class>
+		<portlet-class>ru.tiis.library.portlet.BookInfoPortlet</portlet-class>
 		<init-param>
 			<name>view-jsp</name>
 			<value>/html/library/book-info/book-info.jsp</value>
@@ -76,9 +75,7 @@
 	<portlet>
 		<portlet-name>library-managment</portlet-name>
 		<display-name>Library Managment</display-name>
-		<portlet-class>
-			ru.tiis.managment.portlet.LibraryManagmentPortlet
-		</portlet-class>
+		<portlet-class>ru.tiis.managment.portlet.LibraryManagmentPortlet</portlet-class>
 		<init-param>
 			<name>view-jsp</name>
 			<value>/html/librarymanagment/view.jsp</value>
