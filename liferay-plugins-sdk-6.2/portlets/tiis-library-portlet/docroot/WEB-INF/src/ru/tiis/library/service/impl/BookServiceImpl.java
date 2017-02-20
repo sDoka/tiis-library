@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.service.ServiceContext;
 
 public class BookServiceImpl implements BookService {
 	private static Log log = LogFactoryUtil.getLog(BookServiceImpl.class);
@@ -37,8 +38,8 @@ public class BookServiceImpl implements BookService {
 	}
 	
 	@Override
-	public BookModel addBook(String title, String description, File bookLogo, File bookPdf)
-			throws PortalException, SystemException {
+	public BookModel addBook(String title, String description, File bookLogo, File bookPdf,
+			ServiceContext serviceContext) throws PortalException, SystemException {
 		
 		String gdriveBookUrl = GDriveService.uploadNewBook(bookPdf);
 		
@@ -57,8 +58,14 @@ public class BookServiceImpl implements BookService {
 			log.error("Failed to save image to the book " + title + " : " + e.getMessage());
 		}
 		
-		BookLocalServiceUtil.addBook(book);
+		BookLocalServiceUtil.addBook(book, serviceContext);
 		return getBook(book);
+	}
+
+	@Override
+	public BookModel updateBook(BookModel book, ServiceContext serviceContext) throws PortalException {
+		//TODO implement		
+		return book;
 	}
 
 	@Override
@@ -69,14 +76,7 @@ public class BookServiceImpl implements BookService {
 	private BookModel getBook(Book book) {
 		return new BookModel(book);
 	}
-
-	@Override
-	public BookModel updateBook(BookModel book) throws PortalException {
-		//TODO implement
-		
-		return book;
-	}
-
+	
 	@Override
 	public BookModel deleteBook(long bookId) throws PortalException, SystemException {
 		return deleteBook(BookLocalServiceUtil.getBook(bookId));

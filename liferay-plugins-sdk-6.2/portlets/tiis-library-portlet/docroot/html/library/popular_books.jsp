@@ -1,15 +1,9 @@
-<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
+<%@include file="/html/init.jsp"%>
 <%@page import="com.liferay.portal.util.PortalUtil"%>
 <%@page import="com.liferay.portal.service.LayoutLocalServiceUtil"%>
 <%@page import="com.liferay.portal.model.GroupConstants"%>
 <%@page import="com.liferay.portal.service.GroupLocalServiceUtil"%>
 <%@page import="com.liferay.portal.kernel.language.LanguageUtil"%>
-<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme"%>
-<%@ taglib uri="http://liferay.com/tld/portlet" prefix="liferay-portlet" %>
-<%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui" %>
-<%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
 <portlet:defineObjects />
 <liferay-theme:defineObjects />

@@ -1,8 +1,8 @@
+<%@page contentType="text/html; charset=utf-8" session="false" pageEncoding="utf-8" trimDirectiveWhitespaces="true" %>
+<%@page import="ru.tiis.srv.model.Book"%>
+<%@include file="/html/init.jsp"%>
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet"%>
-<%@ taglib prefix="aui" uri="http://alloy.liferay.com/tld/aui"%>
-
+<liferay-theme:defineObjects />
 <portlet:defineObjects />
 
 <portlet:actionURL name="createBook" var="createBookUrl"></portlet:actionURL>
@@ -20,7 +20,7 @@
 			<aui:col span="2">
 				Name
 			</aui:col >
-			<aui:col span="2">
+			<aui:col span="4">
 				<input type="text" class="form-control"
 					name="<portlet:namespace/>bookTitle" value="" />
 			</aui:col>
@@ -30,29 +30,43 @@
 			<aui:col span="2">
 				Description
 			</aui:col>
-			<aui:col span="2">
+			<aui:col span="4">
 				<textarea class="form-control" name="<portlet:namespace/>bookDescription" rows="5"></textarea>
 			</aui:col>
 		</aui:row>
 
 		<aui:row>
 			<aui:col span="2">
-				Category
+				Categorization
 			</aui:col>
-			<aui:col span="2">
-				<select class="selectpicker" name="<portlet:namespace/>bookCategory">
-					<option>Category 1</option>
-					<option>Category 2</option>
-					<option>Category 3</option>
-				</select>
+			<aui:col span="4">
+				<liferay-ui:asset-categories-error />
+				<liferay-ui:asset-tags-error />
+				<liferay-ui:panel 
+						id="bookCategorizationPanel"
+						defaultState="closed" 
+						extended="${false}" 
+						persistState="${true}"
+						title="">
+				    <aui:fieldset>
+					    <liferay-ui:asset-categories-selector 
+					    	className="<%=Book.class.getName()%>"
+			            	classPK="${book.bookId}"
+			            />
+			            <liferay-ui:asset-tags-selector 
+					    	className="<%=Book.class.getName()%>"
+			            	classPK="${book.bookId}"
+			            />
+				     </aui:fieldset>
+				</liferay-ui:panel>
 			</aui:col>
 		</aui:row>
-
+		
 		<aui:row>
 			<aui:col span="2">
 				Logo file
 			</aui:col>
-			<aui:col span="2">
+			<aui:col span="4">
 				<label class="btn btn-default btn-file"> Browse <input
 					type="file" name="<portlet:namespace/>bookLogo"
 					accept="image/jpeg,image/bmp,image/png" style="display: none;" />
@@ -64,7 +78,7 @@
 			<aui:col span="2">
 				Book file
 			</aui:col>
-			<aui:col span="2">
+			<aui:col span="4">
 				<label class="btn btn-default btn-file"> Browse <input
 					type="file" name="<portlet:namespace/>bookPdfFile"
 					accept="application/pdf" style="display: none;" />

@@ -348,6 +348,34 @@ public class BookLocalServiceWrapper implements BookLocalService,
 	}
 
 	/**
+	* Adds the book to the database. Also notifies the appropriate model listeners.
+	*
+	* @param book the book
+	* @return the book that was added
+	* @throws SystemException if a system exception occurred
+	*/
+	@Override
+	public ru.tiis.srv.model.Book addBook(ru.tiis.srv.model.Book book,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _bookLocalService.addBook(book, serviceContext);
+	}
+
+	/**
+	* Updates the book in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
+	*
+	* @param book the book
+	* @return the book that was updated
+	* @throws SystemException if a system exception occurred
+	*/
+	@Override
+	public ru.tiis.srv.model.Book updateBook(ru.tiis.srv.model.Book book,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _bookLocalService.updateBook(book, serviceContext);
+	}
+
+	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
 	public BookLocalService getWrappedBookLocalService() {

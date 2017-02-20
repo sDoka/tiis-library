@@ -120,5 +120,5 @@ public class BookModel {
 		this.bookInfoUrl = url;
 		
 	}
-
+	
 }

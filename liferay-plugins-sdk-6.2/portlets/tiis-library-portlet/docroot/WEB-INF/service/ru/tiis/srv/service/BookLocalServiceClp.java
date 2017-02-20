@@ -127,6 +127,20 @@ public class BookLocalServiceClp implements BookLocalService {
 		_methodName22 = "setBeanIdentifier";
 
 		_methodParameterTypes22 = new String[] { "java.lang.String" };
+
+		_methodName24 = "addBook";
+
+		_methodParameterTypes24 = new String[] {
+				"ru.tiis.srv.model.Book",
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName25 = "updateBook";
+
+		_methodParameterTypes25 = new String[] {
+				"ru.tiis.srv.model.Book",
+				"com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	@Override
@@ -831,6 +845,74 @@ public class BookLocalServiceClp implements BookLocalService {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public ru.tiis.srv.model.Book addBook(ru.tiis.srv.model.Book book,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName24,
+					_methodParameterTypes24,
+					new Object[] {
+						ClpSerializer.translateInput(book),
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (ru.tiis.srv.model.Book)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public ru.tiis.srv.model.Book updateBook(ru.tiis.srv.model.Book book,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName25,
+					_methodParameterTypes25,
+					new Object[] {
+						ClpSerializer.translateInput(book),
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (ru.tiis.srv.model.Book)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -878,4 +960,8 @@ public class BookLocalServiceClp implements BookLocalService {
 	private String[] _methodParameterTypes21;
 	private String _methodName22;
 	private String[] _methodParameterTypes22;
+	private String _methodName24;
+	private String[] _methodParameterTypes24;
+	private String _methodName25;
+	private String[] _methodParameterTypes25;
 }

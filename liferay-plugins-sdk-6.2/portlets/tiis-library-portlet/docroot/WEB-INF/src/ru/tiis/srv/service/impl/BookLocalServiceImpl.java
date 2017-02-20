@@ -14,6 +14,7 @@
 
 package ru.tiis.srv.service.impl;
 
+import org.apache.commons.lang.NullArgumentException;
 import org.apache.commons.lang.StringUtils;
 
 import com.liferay.portal.kernel.exception.PortalException;
@@ -65,7 +66,16 @@ public class BookLocalServiceImpl extends BookLocalServiceBaseImpl {
 	 */
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
-	public Book addBook(Book book) throws SystemException {
+	public Book addBook(Book book, ServiceContext serviceContext) throws SystemException {
+		
+		if (null == book || null == serviceContext) {
+			throw new NullArgumentException("Arguments cannot be null.");
+		}
+		
+		book.setCompanyId(serviceContext.getCompanyId());
+		book.setGroupId(serviceContext.getScopeGroupId());
+		book.setUserId(serviceContext.getUserId());
+		book.setUserName(String.valueOf(serviceContext.getUserId())); // actual userName not necessary
 		
 		Book newBook = super.addBook(book);
 		
@@ -77,7 +87,6 @@ public class BookLocalServiceImpl extends BookLocalServiceBaseImpl {
 		}
 		
 		try {
-			ServiceContext serviceContext = new ServiceContext(); //TODO inject as method parameter
 			AssetEntry assetEntry = assetEntryLocalService.updateEntry(
 				    book.getUserId(), book.getGroupId(), book.getCreateDate(),
 				    book.getModifiedDate(), Book.class.getName(),
@@ -116,7 +125,20 @@ public class BookLocalServiceImpl extends BookLocalServiceBaseImpl {
 	 */
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
-	public Book updateBook(Book book) throws SystemException {
+	public Book updateBook(Book book, ServiceContext serviceContext) throws SystemException {
+		
+		if (null == book || null == serviceContext) {
+			throw new NullArgumentException("Arguments cannot be null.");
+		}
+		
+		// temp (can be deleted after dev) fix to enable pre-asset-integration books as assets
+		// if companyId is not set, then book has not been made an asset
+		if (0 == book.getCompanyId()) {
+			book.setCompanyId(serviceContext.getCompanyId());
+			book.setGroupId(serviceContext.getScopeGroupId());
+			book.setUserId(serviceContext.getUserId());
+			book.setUserName(String.valueOf(serviceContext.getUserId()));
+		}
 		
 		Book updatedBook = super.updateBook(book);
 		
@@ -124,7 +146,6 @@ public class BookLocalServiceImpl extends BookLocalServiceBaseImpl {
 		// are no plans to change permissions via UI
 		
 		try {
-			ServiceContext serviceContext = new ServiceContext(); //TODO inject as method parameter
 			AssetEntry assetEntry = assetEntryLocalService.updateEntry(
 				    book.getUserId(), book.getGroupId(), book.getCreateDate(),
 				    book.getModifiedDate(), Book.class.getName(),

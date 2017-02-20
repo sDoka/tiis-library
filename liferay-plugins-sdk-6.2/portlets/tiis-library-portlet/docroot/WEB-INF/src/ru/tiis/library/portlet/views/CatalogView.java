@@ -23,6 +23,8 @@ import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.PortletURLFactoryUtil;
 
@@ -70,7 +72,8 @@ public class CatalogView extends View {
 					File bookPdf = new File("D:\\TIIS\\downloads\\test_pdf.pdf");
 					//TODO check file size
 					/*log.info("File size is: " + testFile.getTotalSpace());*/
-					BookModel bookModel = bookService.addBook("bookTitle" + i, "Book description" + i, testFile, bookPdf);
+					ServiceContext serviceContext = ServiceContextFactory.getInstance(request);
+					BookModel bookModel = bookService.addBook("bookTitle" + i, "Book description" + i, testFile, bookPdf, serviceContext);
 					books.add(bookModel);
 				} catch (PortalException e) {
 					log.error("Failed to create book : bookTitle" + i + ". " + e.getMessage());

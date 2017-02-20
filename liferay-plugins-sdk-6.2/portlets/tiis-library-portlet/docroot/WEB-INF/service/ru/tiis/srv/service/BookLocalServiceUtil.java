@@ -333,6 +333,33 @@ public class BookLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	/**
+	* Adds the book to the database. Also notifies the appropriate model listeners.
+	*
+	* @param book the book
+	* @return the book that was added
+	* @throws SystemException if a system exception occurred
+	*/
+	public static ru.tiis.srv.model.Book addBook(ru.tiis.srv.model.Book book,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().addBook(book, serviceContext);
+	}
+
+	/**
+	* Updates the book in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
+	*
+	* @param book the book
+	* @return the book that was updated
+	* @throws SystemException if a system exception occurred
+	*/
+	public static ru.tiis.srv.model.Book updateBook(
+		ru.tiis.srv.model.Book book,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().updateBook(book, serviceContext);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

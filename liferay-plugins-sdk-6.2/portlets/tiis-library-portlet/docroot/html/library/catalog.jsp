@@ -1,3 +1,4 @@
+<%@include file="/html/init.jsp"%>
 <%@page import="com.liferay.portal.kernel.util.ParamUtil"%>
 <%@page import="com.liferay.portal.model.User"%>
 <%@page import="com.liferay.portal.kernel.util.OrderByComparator"%>
@@ -12,12 +13,6 @@
 <%@page import="com.liferay.portal.service.RoleLocalServiceUtil"%>
 <%@page import="com.liferay.portal.util.PortalUtil"%>
 <%@page import="com.liferay.portal.kernel.language.LanguageUtil"%>
-<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui" %>
-<%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme"%>
-<%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
-
 
 <portlet:defineObjects />
 <liferay-theme:defineObjects />
