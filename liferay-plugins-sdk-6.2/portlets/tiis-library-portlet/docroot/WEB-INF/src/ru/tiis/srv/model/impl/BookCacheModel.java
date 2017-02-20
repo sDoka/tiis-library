@@ -37,10 +37,20 @@ import java.util.Date;
 public class BookCacheModel implements CacheModel<Book>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(25);
 
-		sb.append("{bookId=");
+		sb.append("{uuid=");
+		sb.append(uuid);
+		sb.append(", bookId=");
 		sb.append(bookId);
+		sb.append(", companyId=");
+		sb.append(companyId);
+		sb.append(", groupId=");
+		sb.append(groupId);
+		sb.append(", userId=");
+		sb.append(userId);
+		sb.append(", userName=");
+		sb.append(userName);
 		sb.append(", createDate=");
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
@@ -61,7 +71,24 @@ public class BookCacheModel implements CacheModel<Book>, Externalizable {
 	public Book toEntityModel() {
 		BookImpl bookImpl = new BookImpl();
 
+		if (uuid == null) {
+			bookImpl.setUuid(StringPool.BLANK);
+		}
+		else {
+			bookImpl.setUuid(uuid);
+		}
+
 		bookImpl.setBookId(bookId);
+		bookImpl.setCompanyId(companyId);
+		bookImpl.setGroupId(groupId);
+		bookImpl.setUserId(userId);
+
+		if (userName == null) {
+			bookImpl.setUserName(StringPool.BLANK);
+		}
+		else {
+			bookImpl.setUserName(userName);
+		}
 
 		if (createDate == Long.MIN_VALUE) {
 			bookImpl.setCreateDate(null);
@@ -112,7 +139,12 @@ public class BookCacheModel implements CacheModel<Book>, Externalizable {
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		uuid = objectInput.readUTF();
 		bookId = objectInput.readLong();
+		companyId = objectInput.readLong();
+		groupId = objectInput.readLong();
+		userId = objectInput.readLong();
+		userName = objectInput.readUTF();
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
 		gDriveId = objectInput.readUTF();
@@ -124,7 +156,25 @@ public class BookCacheModel implements CacheModel<Book>, Externalizable {
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		if (uuid == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(uuid);
+		}
+
 		objectOutput.writeLong(bookId);
+		objectOutput.writeLong(companyId);
+		objectOutput.writeLong(groupId);
+		objectOutput.writeLong(userId);
+
+		if (userName == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(userName);
+		}
+
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
 
@@ -157,7 +207,12 @@ public class BookCacheModel implements CacheModel<Book>, Externalizable {
 		}
 	}
 
+	public String uuid;
 	public long bookId;
+	public long companyId;
+	public long groupId;
+	public long userId;
+	public String userName;
 	public long createDate;
 	public long modifiedDate;
 	public String gDriveId;

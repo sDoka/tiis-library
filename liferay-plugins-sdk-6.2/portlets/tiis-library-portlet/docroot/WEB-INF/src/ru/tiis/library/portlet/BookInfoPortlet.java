@@ -2,7 +2,10 @@ package ru.tiis.library.portlet;
 
 import java.io.IOException;
 
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
+import javax.portlet.ProcessAction;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -14,6 +17,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.struts.PortletActionInvoker;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
@@ -48,4 +52,12 @@ public class BookInfoPortlet extends MVCPortlet {
 		include(BOOK_INFO_JSP_PATH, request, response);
 	}
 
+	@ProcessAction(name = "addDiscussion")  
+	public void addDiscussion(ActionRequest actionRequest, ActionResponse actionResponse){  
+		try {  
+			PortletActionInvoker.processAction("com.liferay.portlet.messageboards.action.EditDiscussionAction", null, actionRequest, actionResponse);  
+		} catch (Exception e) {  
+			// TODO Auto-generated catch block  
+		}  
+	} 
 }

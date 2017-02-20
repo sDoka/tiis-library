@@ -184,6 +184,36 @@ public class BookLocalServiceWrapper implements BookLocalService,
 	}
 
 	/**
+	* Returns the book with the matching UUID and company.
+	*
+	* @param uuid the book's UUID
+	* @param companyId the primary key of the company
+	* @return the matching book, or <code>null</code> if a matching book could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	@Override
+	public ru.tiis.srv.model.Book fetchBookByUuidAndCompanyId(
+		java.lang.String uuid, long companyId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _bookLocalService.fetchBookByUuidAndCompanyId(uuid, companyId);
+	}
+
+	/**
+	* Returns the book matching the UUID and group.
+	*
+	* @param uuid the book's UUID
+	* @param groupId the primary key of the group
+	* @return the matching book, or <code>null</code> if a matching book could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	@Override
+	public ru.tiis.srv.model.Book fetchBookByUuidAndGroupId(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _bookLocalService.fetchBookByUuidAndGroupId(uuid, groupId);
+	}
+
+	/**
 	* Returns the book with the primary key.
 	*
 	* @param bookId the primary key of the book
@@ -204,6 +234,40 @@ public class BookLocalServiceWrapper implements BookLocalService,
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _bookLocalService.getPersistedModel(primaryKeyObj);
+	}
+
+	/**
+	* Returns the book with the matching UUID and company.
+	*
+	* @param uuid the book's UUID
+	* @param companyId the primary key of the company
+	* @return the matching book
+	* @throws PortalException if a matching book could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	@Override
+	public ru.tiis.srv.model.Book getBookByUuidAndCompanyId(
+		java.lang.String uuid, long companyId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _bookLocalService.getBookByUuidAndCompanyId(uuid, companyId);
+	}
+
+	/**
+	* Returns the book matching the UUID and group.
+	*
+	* @param uuid the book's UUID
+	* @param groupId the primary key of the group
+	* @return the matching book
+	* @throws PortalException if a matching book could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	@Override
+	public ru.tiis.srv.model.Book getBookByUuidAndGroupId(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _bookLocalService.getBookByUuidAndGroupId(uuid, groupId);
 	}
 
 	/**

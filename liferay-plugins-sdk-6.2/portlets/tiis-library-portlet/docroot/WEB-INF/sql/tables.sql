@@ -1,5 +1,10 @@
 create table TIISBook (
+	uuid_ VARCHAR(75) null,
 	bookId LONG not null primary key,
+	companyId LONG,
+	groupId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
 	gDriveId VARCHAR(75) null,

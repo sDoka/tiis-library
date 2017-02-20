@@ -15,6 +15,8 @@
 package ru.tiis.srv.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.lar.StagedModelType;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -22,6 +24,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
@@ -61,7 +64,12 @@ public class BookModelImpl extends BaseModelImpl<Book> implements BookModel {
 	 */
 	public static final String TABLE_NAME = "TIISBook";
 	public static final Object[][] TABLE_COLUMNS = {
+			{ "uuid_", Types.VARCHAR },
 			{ "bookId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
+			{ "groupId", Types.BIGINT },
+			{ "userId", Types.BIGINT },
+			{ "userName", Types.VARCHAR },
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "gDriveId", Types.VARCHAR },
@@ -70,7 +78,7 @@ public class BookModelImpl extends BaseModelImpl<Book> implements BookModel {
 			{ "googleDriveLink", Types.VARCHAR },
 			{ "bookLogo", Types.BLOB }
 		};
-	public static final String TABLE_SQL_CREATE = "create table TIISBook (bookId LONG not null primary key,createDate DATE null,modifiedDate DATE null,gDriveId VARCHAR(75) null,title VARCHAR(75) null,description VARCHAR(750) null,googleDriveLink VARCHAR(750) null,bookLogo BLOB)";
+	public static final String TABLE_SQL_CREATE = "create table TIISBook (uuid_ VARCHAR(75) null,bookId LONG not null primary key,companyId LONG,groupId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,gDriveId VARCHAR(75) null,title VARCHAR(75) null,description VARCHAR(750) null,googleDriveLink VARCHAR(750) null,bookLogo BLOB)";
 	public static final String TABLE_SQL_DROP = "drop table TIISBook";
 	public static final String ORDER_BY_JPQL = " ORDER BY book.bookId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY TIISBook.bookId ASC";
@@ -83,7 +91,13 @@ public class BookModelImpl extends BaseModelImpl<Book> implements BookModel {
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.finder.cache.enabled.ru.tiis.srv.model.Book"),
 			true);
-	public static final boolean COLUMN_BITMASK_ENABLED = false;
+	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
+				"value.object.column.bitmask.enabled.ru.tiis.srv.model.Book"),
+			true);
+	public static long COMPANYID_COLUMN_BITMASK = 1L;
+	public static long GROUPID_COLUMN_BITMASK = 2L;
+	public static long UUID_COLUMN_BITMASK = 4L;
+	public static long BOOKID_COLUMN_BITMASK = 8L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
 				"lock.expiration.time.ru.tiis.srv.model.Book"));
 
@@ -124,7 +138,12 @@ public class BookModelImpl extends BaseModelImpl<Book> implements BookModel {
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("uuid", getUuid());
 		attributes.put("bookId", getBookId());
+		attributes.put("companyId", getCompanyId());
+		attributes.put("groupId", getGroupId());
+		attributes.put("userId", getUserId());
+		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("gDriveId", getGDriveId());
@@ -138,10 +157,40 @@ public class BookModelImpl extends BaseModelImpl<Book> implements BookModel {
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		String uuid = (String)attributes.get("uuid");
+
+		if (uuid != null) {
+			setUuid(uuid);
+		}
+
 		Long bookId = (Long)attributes.get("bookId");
 
 		if (bookId != null) {
 			setBookId(bookId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
+		}
+
+		Long userId = (Long)attributes.get("userId");
+
+		if (userId != null) {
+			setUserId(userId);
+		}
+
+		String userName = (String)attributes.get("userName");
+
+		if (userName != null) {
+			setUserName(userName);
 		}
 
 		Date createDate = (Date)attributes.get("createDate");
@@ -188,6 +237,29 @@ public class BookModelImpl extends BaseModelImpl<Book> implements BookModel {
 	}
 
 	@Override
+	public String getUuid() {
+		if (_uuid == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _uuid;
+		}
+	}
+
+	@Override
+	public void setUuid(String uuid) {
+		if (_originalUuid == null) {
+			_originalUuid = _uuid;
+		}
+
+		_uuid = uuid;
+	}
+
+	public String getOriginalUuid() {
+		return GetterUtil.getString(_originalUuid);
+	}
+
+	@Override
 	public long getBookId() {
 		return _bookId;
 	}
@@ -195,6 +267,85 @@ public class BookModelImpl extends BaseModelImpl<Book> implements BookModel {
 	@Override
 	public void setBookId(long bookId) {
 		_bookId = bookId;
+	}
+
+	@Override
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	@Override
+	public void setCompanyId(long companyId) {
+		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
+
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
+
+			_originalCompanyId = _companyId;
+		}
+
+		_companyId = companyId;
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
+	}
+
+	@Override
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	@Override
+	public void setGroupId(long groupId) {
+		_columnBitmask |= GROUPID_COLUMN_BITMASK;
+
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
+
+			_originalGroupId = _groupId;
+		}
+
+		_groupId = groupId;
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
+	}
+
+	@Override
+	public long getUserId() {
+		return _userId;
+	}
+
+	@Override
+	public void setUserId(long userId) {
+		_userId = userId;
+	}
+
+	@Override
+	public String getUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
+	}
+
+	@Override
+	public void setUserUuid(String userUuid) {
+		_userUuid = userUuid;
+	}
+
+	@Override
+	public String getUserName() {
+		if (_userName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _userName;
+		}
+	}
+
+	@Override
+	public void setUserName(String userName) {
+		_userName = userName;
 	}
 
 	@Override
@@ -308,8 +459,18 @@ public class BookModelImpl extends BaseModelImpl<Book> implements BookModel {
 	}
 
 	@Override
+	public StagedModelType getStagedModelType() {
+		return new StagedModelType(PortalUtil.getClassNameId(
+				Book.class.getName()));
+	}
+
+	public long getColumnBitmask() {
+		return _columnBitmask;
+	}
+
+	@Override
 	public ExpandoBridge getExpandoBridge() {
-		return ExpandoBridgeFactoryUtil.getExpandoBridge(0,
+		return ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
 			Book.class.getName(), getPrimaryKey());
 	}
 
@@ -334,7 +495,12 @@ public class BookModelImpl extends BaseModelImpl<Book> implements BookModel {
 	public Object clone() {
 		BookImpl bookImpl = new BookImpl();
 
+		bookImpl.setUuid(getUuid());
 		bookImpl.setBookId(getBookId());
+		bookImpl.setCompanyId(getCompanyId());
+		bookImpl.setGroupId(getGroupId());
+		bookImpl.setUserId(getUserId());
+		bookImpl.setUserName(getUserName());
 		bookImpl.setCreateDate(getCreateDate());
 		bookImpl.setModifiedDate(getModifiedDate());
 		bookImpl.setGDriveId(getGDriveId());
@@ -393,14 +559,48 @@ public class BookModelImpl extends BaseModelImpl<Book> implements BookModel {
 	public void resetOriginalValues() {
 		BookModelImpl bookModelImpl = this;
 
+		bookModelImpl._originalUuid = bookModelImpl._uuid;
+
+		bookModelImpl._originalCompanyId = bookModelImpl._companyId;
+
+		bookModelImpl._setOriginalCompanyId = false;
+
+		bookModelImpl._originalGroupId = bookModelImpl._groupId;
+
+		bookModelImpl._setOriginalGroupId = false;
+
 		bookModelImpl._bookLogoBlobModel = null;
+
+		bookModelImpl._columnBitmask = 0;
 	}
 
 	@Override
 	public CacheModel<Book> toCacheModel() {
 		BookCacheModel bookCacheModel = new BookCacheModel();
 
+		bookCacheModel.uuid = getUuid();
+
+		String uuid = bookCacheModel.uuid;
+
+		if ((uuid != null) && (uuid.length() == 0)) {
+			bookCacheModel.uuid = null;
+		}
+
 		bookCacheModel.bookId = getBookId();
+
+		bookCacheModel.companyId = getCompanyId();
+
+		bookCacheModel.groupId = getGroupId();
+
+		bookCacheModel.userId = getUserId();
+
+		bookCacheModel.userName = getUserName();
+
+		String userName = bookCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
+			bookCacheModel.userName = null;
+		}
 
 		Date createDate = getCreateDate();
 
@@ -457,10 +657,20 @@ public class BookModelImpl extends BaseModelImpl<Book> implements BookModel {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(27);
 
-		sb.append("{bookId=");
+		sb.append("{uuid=");
+		sb.append(getUuid());
+		sb.append(", bookId=");
 		sb.append(getBookId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", userId=");
+		sb.append(getUserId());
+		sb.append(", userName=");
+		sb.append(getUserName());
 		sb.append(", createDate=");
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
@@ -479,15 +689,35 @@ public class BookModelImpl extends BaseModelImpl<Book> implements BookModel {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(28);
+		StringBundler sb = new StringBundler(43);
 
 		sb.append("<model><model-name>");
 		sb.append("ru.tiis.srv.model.Book");
 		sb.append("</model-name>");
 
 		sb.append(
+			"<column><column-name>uuid</column-name><column-value><![CDATA[");
+		sb.append(getUuid());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>bookId</column-name><column-value><![CDATA[");
 		sb.append(getBookId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append(getCompanyId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append(getGroupId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userId</column-name><column-value><![CDATA[");
+		sb.append(getUserId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userName</column-name><column-value><![CDATA[");
+		sb.append(getUserName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>createDate</column-name><column-value><![CDATA[");
@@ -521,7 +751,18 @@ public class BookModelImpl extends BaseModelImpl<Book> implements BookModel {
 
 	private static ClassLoader _classLoader = Book.class.getClassLoader();
 	private static Class<?>[] _escapedModelInterfaces = new Class[] { Book.class };
+	private String _uuid;
+	private String _originalUuid;
 	private long _bookId;
+	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
+	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
+	private long _userId;
+	private String _userUuid;
+	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private String _gDriveId;
@@ -529,5 +770,6 @@ public class BookModelImpl extends BaseModelImpl<Book> implements BookModel {
 	private String _description;
 	private String _googleDriveLink;
 	private BookBookLogoBlobModel _bookLogoBlobModel;
+	private long _columnBitmask;
 	private Book _escapedModel;
 }

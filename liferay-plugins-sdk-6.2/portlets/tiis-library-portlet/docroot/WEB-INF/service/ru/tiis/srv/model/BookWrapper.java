@@ -14,6 +14,7 @@
 
 package ru.tiis.srv.model;
 
+import com.liferay.portal.kernel.lar.StagedModelType;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
@@ -51,7 +52,12 @@ public class BookWrapper implements Book, ModelWrapper<Book> {
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("uuid", getUuid());
 		attributes.put("bookId", getBookId());
+		attributes.put("companyId", getCompanyId());
+		attributes.put("groupId", getGroupId());
+		attributes.put("userId", getUserId());
+		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("gDriveId", getGDriveId());
@@ -65,10 +71,40 @@ public class BookWrapper implements Book, ModelWrapper<Book> {
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		String uuid = (String)attributes.get("uuid");
+
+		if (uuid != null) {
+			setUuid(uuid);
+		}
+
 		Long bookId = (Long)attributes.get("bookId");
 
 		if (bookId != null) {
 			setBookId(bookId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
+		}
+
+		Long userId = (Long)attributes.get("userId");
+
+		if (userId != null) {
+			setUserId(userId);
+		}
+
+		String userName = (String)attributes.get("userName");
+
+		if (userName != null) {
+			setUserName(userName);
 		}
 
 		Date createDate = (Date)attributes.get("createDate");
@@ -135,6 +171,26 @@ public class BookWrapper implements Book, ModelWrapper<Book> {
 	}
 
 	/**
+	* Returns the uuid of this book.
+	*
+	* @return the uuid of this book
+	*/
+	@Override
+	public java.lang.String getUuid() {
+		return _book.getUuid();
+	}
+
+	/**
+	* Sets the uuid of this book.
+	*
+	* @param uuid the uuid of this book
+	*/
+	@Override
+	public void setUuid(java.lang.String uuid) {
+		_book.setUuid(uuid);
+	}
+
+	/**
 	* Returns the book ID of this book.
 	*
 	* @return the book ID of this book
@@ -152,6 +208,108 @@ public class BookWrapper implements Book, ModelWrapper<Book> {
 	@Override
 	public void setBookId(long bookId) {
 		_book.setBookId(bookId);
+	}
+
+	/**
+	* Returns the company ID of this book.
+	*
+	* @return the company ID of this book
+	*/
+	@Override
+	public long getCompanyId() {
+		return _book.getCompanyId();
+	}
+
+	/**
+	* Sets the company ID of this book.
+	*
+	* @param companyId the company ID of this book
+	*/
+	@Override
+	public void setCompanyId(long companyId) {
+		_book.setCompanyId(companyId);
+	}
+
+	/**
+	* Returns the group ID of this book.
+	*
+	* @return the group ID of this book
+	*/
+	@Override
+	public long getGroupId() {
+		return _book.getGroupId();
+	}
+
+	/**
+	* Sets the group ID of this book.
+	*
+	* @param groupId the group ID of this book
+	*/
+	@Override
+	public void setGroupId(long groupId) {
+		_book.setGroupId(groupId);
+	}
+
+	/**
+	* Returns the user ID of this book.
+	*
+	* @return the user ID of this book
+	*/
+	@Override
+	public long getUserId() {
+		return _book.getUserId();
+	}
+
+	/**
+	* Sets the user ID of this book.
+	*
+	* @param userId the user ID of this book
+	*/
+	@Override
+	public void setUserId(long userId) {
+		_book.setUserId(userId);
+	}
+
+	/**
+	* Returns the user uuid of this book.
+	*
+	* @return the user uuid of this book
+	* @throws SystemException if a system exception occurred
+	*/
+	@Override
+	public java.lang.String getUserUuid()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _book.getUserUuid();
+	}
+
+	/**
+	* Sets the user uuid of this book.
+	*
+	* @param userUuid the user uuid of this book
+	*/
+	@Override
+	public void setUserUuid(java.lang.String userUuid) {
+		_book.setUserUuid(userUuid);
+	}
+
+	/**
+	* Returns the user name of this book.
+	*
+	* @return the user name of this book
+	*/
+	@Override
+	public java.lang.String getUserName() {
+		return _book.getUserName();
+	}
+
+	/**
+	* Sets the user name of this book.
+	*
+	* @param userName the user name of this book
+	*/
+	@Override
+	public void setUserName(java.lang.String userName) {
+		_book.setUserName(userName);
 	}
 
 	/**
@@ -415,6 +573,11 @@ public class BookWrapper implements Book, ModelWrapper<Book> {
 		}
 
 		return false;
+	}
+
+	@Override
+	public StagedModelType getStagedModelType() {
+		return _book.getStagedModelType();
 	}
 
 	/**
