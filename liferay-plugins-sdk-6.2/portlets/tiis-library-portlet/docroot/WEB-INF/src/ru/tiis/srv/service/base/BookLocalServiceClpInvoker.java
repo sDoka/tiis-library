@@ -130,11 +130,17 @@ public class BookLocalServiceClpInvoker {
 
 		_methodName61 = "addBook";
 
-		_methodParameterTypes61 = new String[] { "ru.tiis.srv.model.Book" };
+		_methodParameterTypes61 = new String[] {
+				"ru.tiis.srv.model.Book",
+				"com.liferay.portal.service.ServiceContext"
+			};
 
 		_methodName62 = "updateBook";
 
-		_methodParameterTypes62 = new String[] { "ru.tiis.srv.model.Book" };
+		_methodParameterTypes62 = new String[] {
+				"ru.tiis.srv.model.Book",
+				"com.liferay.portal.service.ServiceContext"
+			};
 
 		_methodName63 = "deleteBook";
 
@@ -273,12 +279,14 @@ public class BookLocalServiceClpInvoker {
 
 		if (_methodName61.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes61, parameterTypes)) {
-			return BookLocalServiceUtil.addBook((ru.tiis.srv.model.Book)arguments[0]);
+			return BookLocalServiceUtil.addBook((ru.tiis.srv.model.Book)arguments[0],
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
 
 		if (_methodName62.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes62, parameterTypes)) {
-			return BookLocalServiceUtil.updateBook((ru.tiis.srv.model.Book)arguments[0]);
+			return BookLocalServiceUtil.updateBook((ru.tiis.srv.model.Book)arguments[0],
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
 
 		if (_methodName63.equals(name) &&

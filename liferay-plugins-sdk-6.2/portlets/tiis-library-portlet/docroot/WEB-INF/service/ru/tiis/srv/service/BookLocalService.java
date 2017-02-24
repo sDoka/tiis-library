@@ -306,4 +306,28 @@ public interface BookLocalService extends BaseLocalService, InvokableLocalServic
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	/**
+	* Adds the book to the database. Also notifies the appropriate model listeners.
+	*
+	* @param book the book
+	* @return the book that was added
+	* @throws SystemException if a system exception occurred
+	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.REINDEX)
+	public ru.tiis.srv.model.Book addBook(ru.tiis.srv.model.Book book,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Updates the book in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
+	*
+	* @param book the book
+	* @return the book that was updated
+	* @throws SystemException if a system exception occurred
+	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.REINDEX)
+	public ru.tiis.srv.model.Book updateBook(ru.tiis.srv.model.Book book,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

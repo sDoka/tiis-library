@@ -19,6 +19,8 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
@@ -55,7 +57,8 @@ public class LibraryManagmentPortlet extends MVCPortlet {
 		File bookPdfFile = uploadRequest.getFile("bookPdfFile");
 		
 		try {
-			BookModel bookModel = bookService.addBook(title, description, bookLogo, bookPdfFile);
+			ServiceContext serviceContext = ServiceContextFactory.getInstance(request);
+			BookModel bookModel = bookService.addBook(title, description, bookLogo, bookPdfFile, serviceContext);
 			
 			//TODO catch NonAuthorizedUserException and open in new tab
 			//https://accounts.google.com/o/oauth2/auth?client_id=1097637469091-gdshlvm5m4sub6l1m6hrtg83c07umaa4.apps.googleusercontent.com&redirect_uri=http://localhost:9001/Callback&response_type=code&scope=https://www.googleapis.com/auth/drive.file
