@@ -6,12 +6,15 @@
 
 <head>
 	<title>$the_title - $company_name</title>
-
 	<meta content="initial-scale=1.0, width=device-width" name="viewport" />
-
+	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:700,400&amp;subset=cyrillic,latin,greek,vietnamese">
+	
 	$theme.include($top_head_include)
-</head>
+	
 
+</head>
+ 
 <body class="$css_class">
 
 <a href="#main-content" id="skip-to-content">#language ("skip-to-content")</a>
@@ -20,33 +23,45 @@ $theme.include($body_top_include)
 
 #dockbar()
 
-<div class="container-fluid" id="wrapper">
-	<header id="banner" role="banner">
-		<div id="heading">
-			<h1 class="site-title">
-				<a class="$logo_css_class" href="$site_default_url" title="#language_format ("go-to-x", [$site_name])">
-					<img alt="$logo_description" height="$site_logo_height" src="$site_logo" width="$site_logo_width" />
+<header class="navbar navbar--sticky " >
+    <div class="navbar__wrapper">
+        <div class="container top-menu">
+               
+            <div class="col-md-3 navbar__column navbar__brand">
+            	<span class="brand__logo">
+	            	<a href="$site_default_url" title="#language_format ("go-to-x", [$site_name])">
+						<img class="navbar__brand-img" alt="$logo_description" src="$site_logo" width="$site_logo_width" />
+					</a>
+            	</span>
+            </div>
 
-					#if ($show_site_name)
-						<span class="site-name" title="#language_format ("go-to-x", [$site_name])">
-							$site_name
-						</span>
-					#end
-				</a>
 
-			</h1>
+            <div class="col-md-9 navbar__column navbar__menu">
+               	<label for="topmenu" class="navbar__hamburger hamburger text-white"><span class="hamburger__line"></span></label>
+               	<input type="checkbox" id="topmenu">
+               		<nav class="navbar__menu-box">
+               			<div class="col-md-10 navbar__column">
+	                		#if ($has_navigation || $is_signed_in)
+								#parse ("$full_templates_path/navigation.vm")
+							#end
+						</div>
+                    	<div class="col-md-2 navbar__column">
+							<ul class="navbar__items navbar__items--right btn-inverse">
+								<li class="navbar__item">
+									<a class="buttons__btn btn btn-login text-white" href="#">Login</a>
+								</li>
+							</ul>
+                    	</div>
+                	</nav>
+            </div>
+        </div>
+    </div>
+</header>
 
-			<h2 class="page-title">
-				<span>$the_title</span>
-			</h2>
-		</div>
+<!-- CONTENT -->
 
-		#if ($has_navigation || $is_signed_in)
-			#parse ("$full_templates_path/navigation.vm")
-		#end
-	</header>
-
-	<div id="content">
+<section id="content" class="main-content">
+	<div class="container">
 		#if ($selectable)
 			$theme.include($content_include)
 		#else
@@ -57,11 +72,24 @@ $theme.include($body_top_include)
 			$theme.wrapPortlet("portlet.vm", $content_include)
 		#end
 	</div>
-</div>
+</section>
 
 $theme.include($body_bottom_include)
 
 $theme.include($bottom_include)
+
+
+<footer class="section" >
+    
+    <div class="container">
+        <div class="footer row">
+            <div class="col-sm-12">
+                <p class="mbr-footer__copyright"></p><p>© 2016 ООО «Тюменский институт инженерных систем «Инновация»</p><p></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
 
 </body>
 
