@@ -1,28 +1,27 @@
 @import url(https://fonts.googleapis.com/css?family=Oxygen:400,300,700);
 
-.book-image-container {
-	height: auto;
-	overflow: hidden;
-	width: 100%;
-	height: 100%;
-}
-
 .book-title-caption {
-	padding: 75px 0;
 	text-align: center;
 	color: #ffffff;
 	top: 0;
 	position: absolute;
 	width: 100%;
+	background-repeat: no-repeat;
+	background-size: 100%;
 }
 
-.book-title {
+.book-title-card {
 	height: 230px;
 	margin-bottom:20px;
 }
 
-body {
-	font-family: 'Oxygen', sans-serif;
+.book-title {
+	padding: 75px 0;
+	background: rgba(0, 0, 0, 0.5);
+}
+
+.book-description {
+	margin-bottom: 20px;
 }
 
 #header1-40 .btn {
