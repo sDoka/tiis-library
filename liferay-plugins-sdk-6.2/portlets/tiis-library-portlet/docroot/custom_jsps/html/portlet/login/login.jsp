@@ -24,11 +24,12 @@
 <%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <%@ taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-<!--  -->
+
+<%-- Hook #2. Removed additional styling for maximized mode
 <c:if test="<%=windowState.equals(WindowState.MAXIMIZED) %>" >
 	<link href="/tiis-library-portlet/css/custom_jsps/login/login_page.css" rel="stylesheet">
 </c:if>
-
+--%>
 <c:choose>
 	<c:when test="<%=themeDisplay.isSignedIn()%>">
 		<%

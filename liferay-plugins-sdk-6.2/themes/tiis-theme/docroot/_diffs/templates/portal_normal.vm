@@ -48,7 +48,12 @@ $theme.include($body_top_include)
                     	<div class="col-md-2 navbar__column">
 							<ul class="navbar__items navbar__items--right btn-inverse">
 								<li class="navbar__item">
-									<a class="buttons__btn btn btn-login text-white" href="#">Login</a>
+									#if (!$is_signed_in)							
+										<a class="buttons__btn btn btn-login text-white" href="$sign_in_url">#language ("login")</a>
+									#else
+										<a href="/profile">$user.fullName</a> |
+										<a href="$sign_out_url">#language ("sign-out")</a>
+									#end
 								</li>
 							</ul>
                     	</div>
@@ -62,14 +67,14 @@ $theme.include($body_top_include)
 
 <section id="content" class="main-content">
 	<div class="container">
-		#if ($selectable)
-			$theme.include($content_include)
+		<!-- If user not signed in, show login window instead of content -->
+		#if (!$is_signed_in && $theme_display.ppid != 58)
+			#set ($VOID = $velocityPortletPreferences.setValue('display-style', '1'))
+			#set ($VOID = $velocityPortletPreferences.setValue('portlet-setup-show-borders', 'false'))
+			$theme.runtime("58", "", $velocityPortletPreferences.toString())
+			#set ($VOID = $velocityPortletPreferences.reset())
 		#else
-			$portletDisplay.recycle()
-
-			$portletDisplay.setTitle($the_title)
-
-			$theme.wrapPortlet("portlet.vm", $content_include)
+			$theme.include($content_include)
 		#end
 	</div>
 </section>
@@ -84,7 +89,7 @@ $theme.include($bottom_include)
     <div class="container">
         <div class="footer row">
             <div class="col-sm-12">
-                <p class="mbr-footer__copyright"></p><p>© 2016 ООО «Тюменский институт инженерных систем «Инновация»</p><p></p>
+                <p class="mbr-footer__copyright"></p><p>© $dateTool.getYear() ООО «Тюменский институт инженерных систем «Инновация»</p><p></p>
             </div>
         </div>
     </div>

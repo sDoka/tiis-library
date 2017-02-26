@@ -24,7 +24,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  --%>
 
 <%@ include file="/html/portlet/login/init.jsp" %>
+
+<%-- Hook #2. Removed additional styling for maximized mode
 <link href="/tiis-library-portlet/css/custom_jsps/login/create_account.css" rel="stylesheet">
+--%>
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
