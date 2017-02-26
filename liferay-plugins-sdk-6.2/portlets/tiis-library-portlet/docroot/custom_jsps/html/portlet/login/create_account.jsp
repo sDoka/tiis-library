@@ -137,6 +137,12 @@ birthdayCalendar.set(Calendar.YEAR, 1900);
 				screenName = request.getParameter("screen_name");
 	%>
 	
+	<aui:fieldset>
+		<aui:input label="invite-code" name="inviteCode" size="30" type="text" value="">
+			<aui:validator name="required" />
+		</aui:input>
+	</aui:fieldset>
+	
 	<aui:fieldset column="<%= true %>">
 		<aui:col width="<%= 50 %>">
 			<%@ include file="/html/portlet/login/create_account_user_name.jspf" %>
