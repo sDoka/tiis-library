@@ -26,16 +26,10 @@
 	<%-- Example categorization of a created model for testing --%>
 	<div class="row-fluid book-categorization">
 		<label>Categories</label>
-		<liferay-ui:asset-categories-summary
-		    className="<%=Book.class.getName()%>"
-		    classPK="${book.bookId}"
-		/>
+		${ book.categoriesList }
 		
 		<label>Tags</label>
-		<liferay-ui:asset-tags-summary
-		    className="<%=Book.class.getName()%>"
-		    classPK="${book.bookId}"
-		/>
+		${ book.tagsList }
 	</div>
 	
 	<div class="row-fluid content-block">

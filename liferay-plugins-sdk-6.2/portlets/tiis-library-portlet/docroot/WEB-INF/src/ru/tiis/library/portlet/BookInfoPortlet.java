@@ -1,7 +1,6 @@
 package ru.tiis.library.portlet;
 
 import java.io.IOException;
-
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
@@ -11,8 +10,8 @@ import javax.portlet.RenderResponse;
 
 import ru.tiis.library.service.BookService;
 import ru.tiis.library.service.impl.BookServiceFactory;
+import ru.tiis.library.service.impl.BookServiceUtil;
 import ru.tiis.library.service.model.BookModel;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
@@ -36,28 +35,38 @@ public class BookInfoPortlet extends MVCPortlet {
 		long bookId = ParamUtil.get(request, "bookId", 0);
 		if (bookId == 0) {
 			log.error("Book id attribute is not set");
-			//TODO error response
+			// TODO error response
 			return;
 		}
-		
+
 		try {
 			BookModel book = bookService.getBook(bookId);
+			book.setCategoriesList(BookServiceUtil.getBookCategoryNames(bookId));
+			book.setTagsList(BookServiceUtil.getBookTags(bookId));
 			request.setAttribute("book", book);
 		} catch (PortalException e) {
-			log.error("Failed to get book with id : " + bookId + ". " + e.getMessage());
+			log.error("Failed to get book with id : " + bookId + ". "
+					+ e.getMessage());
 		} catch (SystemException e) {
-			log.error("Failed to get book with id : " + bookId + ". " + e.getMessage());
+			log.error("Failed to get book with id : " + bookId + ". "
+					+ e.getMessage());
 		}
-		
+
 		include(BOOK_INFO_JSP_PATH, request, response);
 	}
 
-	@ProcessAction(name = "addDiscussion")  
-	public void addDiscussion(ActionRequest actionRequest, ActionResponse actionResponse){  
-		try {  
-			PortletActionInvoker.processAction("com.liferay.portlet.messageboards.action.EditDiscussionAction", null, actionRequest, actionResponse);  
-		} catch (Exception e) {  
-			// TODO Auto-generated catch block  
-		}  
-	} 
+	
+
+	@ProcessAction(name = "addDiscussion")
+	public void addDiscussion(ActionRequest actionRequest,
+			ActionResponse actionResponse) {
+		try {
+			PortletActionInvoker
+					.processAction(
+							"com.liferay.portlet.messageboards.action.EditDiscussionAction",
+							null, actionRequest, actionResponse);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		}
+	}
 }

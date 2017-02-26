@@ -28,7 +28,9 @@ public class BookModel {
 	private String bookLogoUrl;
 	private String bookInfoUrl;
 	private List<Long> catIds = new ArrayList<Long>();
-	
+	private List<String> categoriesList = new ArrayList<String>();
+	private List<String> tagsList = new ArrayList<String>();
+
 	public BookModel(long bookId) throws PortalException, SystemException {
 		this(BookLocalServiceUtil.getBook(bookId));
 	}
@@ -68,6 +70,39 @@ public class BookModel {
 	public String getGoogleDriveLink() {
 		return book.getGoogleDriveLink();
 	}
+
+	public String getInfoURL() {
+		return bookInfoUrl;
+	}
+
+	public void setBookInfoUrl(String url) {
+		this.bookInfoUrl = url;
+		
+	}
+	
+	public List<Long> getCatIds() {
+		return catIds;
+	}
+
+	public void setCatIds(List<Long> catIds) {
+		this.catIds = catIds;
+	}
+	
+	public List<String> getCategoriesList() {
+		return categoriesList;
+	}
+
+	public void setCategoriesList(List<String> categoriesList) {
+		this.categoriesList = categoriesList;
+	}
+	
+	public List<String> getTagsList() {
+		return tagsList;
+	}
+
+	public void setTagsList(List<String> tagsList) {
+		this.tagsList = tagsList;
+	}
 	
 	@Override
 	public String toString() {
@@ -89,20 +124,20 @@ public class BookModel {
 					+ "\nError:" + e.getMessage());
 		}
 		
-		List<String> courseCategoryNames = new ArrayList<String>();
-		for (int i = 0; i < catIds.size(); i++) {
+		//List<String> courseCategoryNames = new ArrayList<String>();
+		/*for (int i = 0; i < catIds.size(); i++) {
 			try {
 				AssetCategory category = AssetCategoryLocalServiceUtil.getAssetCategory(catIds.get(i));
-				courseCategoryNames.add(category.getName());
+				//courseCategoryNames.add(category.getName());
 			} catch (PortalException | SystemException e) {
 				log.error("Failed to initialize JSON array of course categories. " + "{courseId="
 						+ getBookId() + ", categories:" + catIds + "}." + "\nError:" + e.getMessage());
 				continue;
 			}
-		}
+		}*/
 
 		try {
-			JSONArray courseCategories = JSONFactoryUtil.createJSONArray(courseCategoryNames.toString());
+			JSONArray courseCategories = JSONFactoryUtil.createJSONArray(categoriesList.toString());
 			jsonObject.put("categoryNames", courseCategories);
 		} catch (JSONException e) {
 			log.error("Failed to initialize JSON array of course categories. " + "{bookId="
@@ -110,15 +145,6 @@ public class BookModel {
 		}
 		
 		return jsonObject.toString();
-	}
-
-	public String getInfoURL() {
-		return bookInfoUrl;
-	}
-
-	public void setBookInfoUrl(String url) {
-		this.bookInfoUrl = url;
-		
 	}
 	
 }

@@ -13,6 +13,7 @@ import ru.tiis.constants.FriendlyUrlConstants;
 import ru.tiis.library.portlet.BookInfoPortlet;
 import ru.tiis.library.service.BookService;
 import ru.tiis.library.service.impl.BookServiceFactory;
+import ru.tiis.library.service.impl.BookServiceUtil;
 import ru.tiis.library.service.model.BookModel;
 
 import com.liferay.portal.kernel.exception.PortalException;
@@ -27,6 +28,9 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.PortletURLFactoryUtil;
+import com.liferay.portlet.asset.model.AssetCategory;
+import com.liferay.portlet.asset.model.AssetEntry;
+import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
 
 public class CatalogView extends View {
 	private static Log log = LogFactoryUtil.getLog(CatalogView.class);
@@ -88,8 +92,28 @@ public class CatalogView extends View {
 				String url = bookInfoUrl.toString();
 				//log.info("Url is : " + url);
 				book.setBookInfoUrl(url);
+				List<AssetCategory> assetCategories = BookServiceUtil.getBookCategories(book.getBookId());
+				List<Long> categoryIds = new ArrayList<Long>();
+				for (AssetCategory assetCategory : assetCategories) {
+					categoryIds.add(assetCategory.getCategoryId());
+				}
+				book.setCatIds(categoryIds);
 			}
 		}
+		//Retrieving categories
+		int categoriesNumber = AssetEntryLocalServiceUtil.getAssetEntriesCount();
+		List<AssetEntry> assetEntries = AssetEntryLocalServiceUtil.getAssetEntries(0, categoriesNumber);
+		List<AssetCategory> assetCategories = new ArrayList<AssetCategory>();
+		for (AssetEntry assetEntry : assetEntries) {
+			List<AssetCategory> assetEntryCategory = assetEntry.getCategories();
+			for (AssetCategory assetCategory : assetEntryCategory) {
+				if (!assetCategories.contains(assetCategory)) {
+					assetCategories.add(assetCategory);
+				}
+			}
+		}
+		
+		request.setAttribute("categories", assetCategories);
 		request.setAttribute("books", books);
 		super.render(request, response);
 	}

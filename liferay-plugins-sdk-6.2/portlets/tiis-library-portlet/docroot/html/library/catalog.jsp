@@ -128,8 +128,17 @@ AUI().ready(function () {
 			<div class="sidebar">
 				<h3><%=LanguageUtil.get(pageContext, "categories") %></h3>
 				<ul class="clickable-list">
+					<c:forEach items="${categories}" var="rootCategory">
+						<li>
+							<a class="category-link" data-cat-id="${rootCategory.categoryId}"
+										id="cat${rootCategory.categoryId}">
+										${rootCategory.getTitle(locale)}
+									<span data-cat-count></span>
+							</a>
+						</li>
+					</c:forEach>
 
-					<c:forEach items="${model.rootCategories}" var="rootCategory">
+					<%-- <c:forEach items="${model.rootCategories}" var="rootCategory">
 						<li>
 							<a class="category-link" data-cat-id="${rootCategory.categoryId}"
 									id="cat${rootCategory.categoryId}">
@@ -150,7 +159,7 @@ AUI().ready(function () {
 								</c:if>
 							</c:forEach>
 						</ul>
-					</c:forEach>
+					</c:forEach> --%>
 				</ul>
 			</div>
 			<div class="sidebar">
