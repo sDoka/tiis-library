@@ -70,8 +70,7 @@ public class BookServiceUtil {
 			AssetEntry asset = AssetEntryLocalServiceUtil.fetchEntry(
 					Book.class.getName(), bookEntity.getBookId());
 			if (null == asset) {
-				// Return empty array if there is no categories
-				log.error("Could not get book category names. "
+				log.warn("Could not get book category names. Book does not have an Asset. "
 						+ "Setting empty category list. ");
 				return new ArrayList<AssetCategory>();
 			}
@@ -98,8 +97,7 @@ public class BookServiceUtil {
 			AssetEntry asset = AssetEntryLocalServiceUtil.fetchEntry(
 					Book.class.getName(), bookEntity.getBookId());
 			if (null == asset) {
-				// Return empty array if there is no categories
-				log.error("Could not get book tags. "
+				log.warn("Could not get book tags. Book does not have an Asset. "
 						+ "Setting empty category list. ");
 				return new ArrayList<String>();
 			}

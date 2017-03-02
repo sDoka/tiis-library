@@ -42,8 +42,6 @@ AUI().ready(function () {
 
 <jsp:include page="/html/library/init.jsp" ></jsp:include>
 
-<a href="#"><%=LanguageUtil.get(pageContext, "create-book") %></a>
-
 <div class="books-list">
 
 	<%-- Top controls --%>
