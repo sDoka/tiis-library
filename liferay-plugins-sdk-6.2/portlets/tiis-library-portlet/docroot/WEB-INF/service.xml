@@ -29,6 +29,20 @@
 		<reference package-path="com.liferay.portlet.asset" entity="AssetLink" />
 	</entity>
 	
+	<entity name="PromoCode" local-service="true" remote-service="false" table="TIISPromoCode">
+		<column name="promoCodeId" type="long" primary="true" />
+		<column name="promoType" type="int"></column>
+		<column name="promoCodeContent" type="String"/>
+		<column name="createTime" type="Date" />
+		<column name="isUsed" type="boolean"/>
+		<column name="userId" type="long"/>
+		<column name="usedTime" type="Date" />
+		
+		<finder return-type="PromoCode" name="Content">
+			<finder-column name="promoCodeContent"></finder-column>
+		</finder>
+	</entity>
+	
 	<entity name="Test" local-service="true" remote-service="false" table="TIISTest">
 
 		<column name="testId" type="long" primary="true" />
@@ -52,6 +66,5 @@
 		<column name="result" type="double"/>
 
 	</entity>
-	
 	
 </service-builder>
