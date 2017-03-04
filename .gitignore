@@ -42,3 +42,12 @@ liferay-plugins-sdk-6.2/portlets/tiis-library-portlet/docroot/WEB-INF/src/ru/tii
 liferay-plugins-sdk-6.2/portlets/tiis-library-portlet/docroot/WEB-INF/src/ru/tiis/srv/service/base/PromoCodeLocalServiceBaseImpl.java
 liferay-plugins-sdk-6.2/portlets/tiis-library-portlet/docroot/WEB-INF/src/ru/tiis/srv/service/base/PromoCodeLocalServiceClpInvoker.java
 liferay-plugins-sdk-6.2/portlets/tiis-library-portlet/docroot/WEB-INF/src/ru/tiis/srv/service/persistence/PromoCodePersistenceImpl.java
+liferay-plugins-sdk-6.2/portlets/tiis-library-portlet/docroot/WEB-INF/service/ru/tiis/srv/service/ClpSerializer.java
+liferay-plugins-sdk-6.2/portlets/tiis-library-portlet/docroot/WEB-INF/service/ru/tiis/srv/service/messaging/ClpMessageListener.java
+liferay-plugins-sdk-6.2/portlets/tiis-library-portlet/docroot/WEB-INF/sql/indexes.properties
+liferay-plugins-sdk-6.2/portlets/tiis-library-portlet/docroot/WEB-INF/src/ru/tiis/srv/service/base/BookLocalServiceBaseImpl.java
+liferay-plugins-sdk-6.2/portlets/tiis-library-portlet/docroot/WEB-INF/src/ru/tiis/srv/service/base/BookLocalServiceClpInvoker.java
+liferay-plugins-sdk-6.2/portlets/tiis-library-portlet/docroot/WEB-INF/src/ru/tiis/srv/service/base/TestAttemptLocalServiceBaseImpl.java
+liferay-plugins-sdk-6.2/portlets/tiis-library-portlet/docroot/WEB-INF/src/ru/tiis/srv/service/base/TestAttemptLocalServiceClpInvoker.java
+liferay-plugins-sdk-6.2/portlets/tiis-library-portlet/docroot/WEB-INF/src/ru/tiis/srv/service/base/TestLocalServiceBaseImpl.java
+liferay-plugins-sdk-6.2/portlets/tiis-library-portlet/docroot/WEB-INF/src/ru/tiis/srv/service/base/TestLocalServiceClpInvoker.java
