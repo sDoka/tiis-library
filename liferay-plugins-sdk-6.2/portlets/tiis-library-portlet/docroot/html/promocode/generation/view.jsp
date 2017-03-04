@@ -1,3 +1,4 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page contentType="text/html; charset=utf-8" session="false" pageEncoding="utf-8" trimDirectiveWhitespaces="true" %>
 <%@page import="ru.tiis.srv.model.Book"%>
 <%@include file="/html/init.jsp"%>
@@ -6,6 +7,9 @@
 <portlet:defineObjects />
 
 <portlet:actionURL name="generatePromoCodes" var="generatePromoUrl"></portlet:actionURL>
+<%
+SimpleDateFormat dateFormat = new SimpleDateFormat( "dd-MM-yyyy hh-mm-ss");
+%>
 
 	<form action="<%=generatePromoUrl%>" method="POST"
 		id="<portlet:namespace />fm" name="<portlet:namespace />fm"
@@ -40,8 +44,8 @@
 			      		<c:if test = "${ !promoCode.isUsed }">
 							<tr>
 								<td>${ iterator.index }</td>
-								<td>${ promoCode.promoCodeId }</td>
-								<td>${ promoCode.createTime }</td>
+								<td>${ promoCode.promoCodeContent }</td>
+								<td><fmt:formatDate pattern="dd-MM-yyy" value="${ promoCode.createTime }" /></td>
 							</tr>
 						</c:if>
 					</c:forEach>
@@ -66,8 +70,8 @@
 							<tr>
 								<td>${ iterator.index }</td>
 								<td>${ promoCode.promoCodeId }</td>
-								<td>${ promoCode.createTime }</td>
-								<td>${ promoCode.usedTime}</td>
+								<td><fmt:formatDate pattern="dd-MM-yyy" value="${ promoCode.createTime }" /></td>
+								<td><fmt:formatDate pattern="dd-MM-yyy" value="${ promoCode.usedTime }" /></td>
 								<td>${ promoCode.userId}</td>
 							</tr>
 						</c:if>
