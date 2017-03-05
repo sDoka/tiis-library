@@ -12,4 +12,9 @@
 		<struts-action-path>/portal/oauth</struts-action-path>
 		<struts-action-impl>ru.tiis.hook.login.OAuthAction</struts-action-impl>
 	</struts-action>
+	
+	<struts-action>
+    <struts-action-path>/login/create_account</struts-action-path>
+    <struts-action-impl>ru.tiis.hook.registration.RegistrationPortletAction</struts-action-impl>
+</struts-action>
 </hook>

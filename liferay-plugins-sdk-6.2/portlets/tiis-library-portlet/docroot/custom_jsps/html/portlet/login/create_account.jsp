@@ -124,6 +124,8 @@ birthdayCalendar.set(Calendar.YEAR, 1900);
 
 	<liferay-ui:error exception="<%= UserScreenNameException.class %>" message="please-enter-a-valid-screen-name" />
 	<liferay-ui:error exception="<%= WebsiteURLException.class %>" message="please-enter-a-valid-url" />
+	<liferay-ui:error key="bad-promo-code" message="promo-code-is-invalid"></liferay-ui:error>
+	<liferay-ui:error key="used-promo-code" message="promo-code-is-used"></liferay-ui:error>
 
 	<c:if test='<%= SessionMessages.contains(request, "openIdUserInformationMissing") %>'>
 		<div class="alert alert-info">
