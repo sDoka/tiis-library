@@ -71,7 +71,7 @@
 
 .navbar {
     
-	min-height: 90px;
+	min-height: 70px;
     border: none;
     
 }
@@ -83,7 +83,7 @@
 
 .navbar__menu,
 .navbar__brand {
-    line-height: 80px;
+    line-height: 70px;
 }
 .navbar__wrapper{
   position: fixed;
@@ -93,6 +93,10 @@
 .buttons__link {
     padding: 9px 14px;
     text-transform: uppercase;
+}
+
+.navbar__items {
+    margin-bottom: 0;
 }
 
 .navbar__brand-img {
@@ -169,10 +173,10 @@
     line-height: normal;
     color: #fff;
     padding: 0;
-    padding-top: 25px;
+    padding-top: 17px;
 }
 
-navbar__item--logged {
+.navbar__item--logged {
     padding-top: 10px;
 }
 
@@ -231,7 +235,7 @@ footer {
 
 
 .main-content {
-    min-height: calc(100vh - 149px);
+    min-height: calc(100vh - 109px);
 }
 
 
@@ -387,6 +391,7 @@ footer {
 	}
 	.navbar__brand-img {
     	max-width: 90%;
+        padding: 10px;
 	}
 	.navbar__item {
 		line-height: 4em;
