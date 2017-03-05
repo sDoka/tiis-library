@@ -164,6 +164,26 @@
 }
 */
 
+
+.navbar__items--login {
+    line-height: normal;
+    color: #fff;
+    padding: 0;
+    padding-top: 25px;
+}
+
+navbar__item--logged {
+    padding-top: 10px;
+}
+
+.navbar__items--login li{
+    text-align: right;
+}
+
+.navbar__items--login li a{
+    color: #fff;
+}
+
 .btn.btn-login {
     border: 2px solid #fff;
     text-transform: uppercase;
@@ -347,6 +367,12 @@ footer {
 
 
 @media all and (max-width:991px) {
+    
+    .dockbar {
+        min-height: 0;
+        margin-bottom: 0;
+    }
+    
 	.navbar__hamburger{
 		display: block;
 	}
@@ -378,7 +404,24 @@ footer {
 	.image-box {
     	min-height: 20vh;	
 	}
+    
+    .navbar__items {
+        padding: 0;
+    }
+    
+    .navbar__items--login li {
+        text-align: center;
+    }    
+    
+    .navbar__items--login span {
+        display: none;
+    }
+    .navbar__items--login .logout-link {
+        border: 1px dashed #337ab7;
+        padding: 5px;
+        display: block;
+        color: #337ab7;
+    }
 
 }
-
 

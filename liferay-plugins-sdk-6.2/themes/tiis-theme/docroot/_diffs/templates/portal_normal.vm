@@ -21,7 +21,9 @@
 
 $theme.include($body_top_include)
 
-#dockbar()
+#if ($permissionChecker.isOmniadmin())
+    #dockbar()
+#end
 
 <header class="navbar navbar--sticky " >
     <div class="navbar__wrapper">
@@ -40,21 +42,23 @@ $theme.include($body_top_include)
                	<label for="topmenu" class="navbar__hamburger hamburger text-white"><span class="hamburger__line"></span></label>
                	<input type="checkbox" id="topmenu">
                		<nav class="navbar__menu-box">
-               			<div class="col-md-10 navbar__column">
+               			<div class="col-md-9 navbar__column">
 	                		#if ($has_navigation || $is_signed_in)
 								#parse ("$full_templates_path/navigation.vm")
 							#end
 						</div>
-                    	<div class="col-md-2 navbar__column">
-							<ul class="navbar__items navbar__items--right btn-inverse">
-								<li class="navbar__item">
-									#if (!$is_signed_in)							
+                    	<div class="col-md-3 navbar__column">
+							<ul class="navbar__items navbar__items--right navbar__items--login btn-inverse">
+								#if (!$is_signed_in)
+									<li class="navbar__item">							
 										<a class="buttons__btn btn btn-login text-white" href="$sign_in_url">#language ("login")</a>
-									#else
-										<a href="/profile">$user.fullName</a> |
-										<a href="$sign_out_url">#language ("sign-out")</a>
-									#end
-								</li>
+									</li>
+								#else
+									<li class="navbar__item navbar__item--logged">
+										<a class="userprofile-link" href="/profile">$user.fullName</a> <span>|</span>
+										<a class="logout-link" href="$sign_out_url">#language ("sign-out")</a>
+									</li>
+								#end
 							</ul>
                     	</div>
                 	</nav>
