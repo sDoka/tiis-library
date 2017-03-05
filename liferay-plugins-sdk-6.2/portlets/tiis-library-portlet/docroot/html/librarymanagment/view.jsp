@@ -1,4 +1,6 @@
-<%@page contentType="text/html; charset=utf-8" session="false" pageEncoding="utf-8" trimDirectiveWhitespaces="true" %>
+<%@page import="com.liferay.portal.kernel.language.LanguageUtil"%>
+<%@page contentType="text/html; charset=utf-8" session="false"
+	pageEncoding="utf-8" trimDirectiveWhitespaces="true"%>
 <%@page import="ru.tiis.srv.model.Book"%>
 <%@include file="/html/init.jsp"%>
 
@@ -14,12 +16,22 @@
 	<form action="<%=createBookUrl%>" method="POST"
 		id="<portlet:namespace />fm" name="<portlet:namespace />fm"
 		enctype="multipart/form-data">
-
+		
+	<aui:button-row>
+		<div class="alert alert-info">
+		  	<%=LanguageUtil.get(pageContext, "beta-version-auth") %>
+		</div>
+		<a href="https://accounts.google.com/o/oauth2/auth?client_id=1097637469091-gdshlvm5m4sub6l1m6hrtg83c07umaa4.apps.googleusercontent.com&redirect_uri=http://localhost:9002/Callback&response_type=code&scope=https://www.googleapis.com/auth/drive.file"
+			target = "blank">
+			<input type="button" class="btn btn-success" onclick="uploadBook()"
+				value="Authorization" />
+		</a>
+	</aui:button-row>
 
 		<aui:row>
 			<aui:col span="2">
 				Name
-			</aui:col >
+			</aui:col>
 			<aui:col span="4">
 				<input type="text" class="form-control"
 					name="<portlet:namespace/>bookTitle" value="" />
@@ -31,7 +43,8 @@
 				Description
 			</aui:col>
 			<aui:col span="4">
-				<textarea class="form-control" name="<portlet:namespace/>bookDescription" rows="5"></textarea>
+				<textarea class="form-control"
+					name="<portlet:namespace/>bookDescription" rows="5"></textarea>
 			</aui:col>
 		</aui:row>
 
@@ -42,26 +55,18 @@
 			<aui:col span="4">
 				<liferay-ui:asset-categories-error />
 				<liferay-ui:asset-tags-error />
-				<liferay-ui:panel 
-						id="bookCategorizationPanel"
-						defaultState="closed" 
-						extended="${false}" 
-						persistState="${true}"
-						title="">
-				    <aui:fieldset>
-					    <liferay-ui:asset-categories-selector 
-					    	className="<%=Book.class.getName()%>"
-			            	classPK="${book.bookId}"
-			            />
-			            <liferay-ui:asset-tags-selector 
-					    	className="<%=Book.class.getName()%>"
-			            	classPK="${book.bookId}"
-			            />
-				     </aui:fieldset>
+				<liferay-ui:panel id="bookCategorizationPanel" defaultState="closed"
+					extended="${false}" persistState="${true}" title="">
+					<aui:fieldset>
+						<liferay-ui:asset-categories-selector
+							className="<%=Book.class.getName()%>" classPK="${book.bookId}" />
+						<liferay-ui:asset-tags-selector
+							className="<%=Book.class.getName()%>" classPK="${book.bookId}" />
+					</aui:fieldset>
 				</liferay-ui:panel>
 			</aui:col>
 		</aui:row>
-		
+
 		<aui:row>
 			<aui:col span="2">
 				Logo file
@@ -94,7 +99,7 @@
 		</aui:button-row>
 
 	</form>
-
+	
 </div>
 
 <script>
