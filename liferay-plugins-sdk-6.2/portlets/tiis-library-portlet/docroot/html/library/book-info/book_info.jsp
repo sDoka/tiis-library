@@ -33,7 +33,9 @@
 			<div class="col-md-4">
 				<div class="author-preview">
 					<div class="read-button">
-						<button class="btn btn-success"><%=LanguageUtil.get(pageContext, "book-read") %></button>
+						<a href = "${ book.googleDriveLink }" target = _blank>
+							<button class="btn btn-success"><%=LanguageUtil.get(pageContext, "book-read") %></button>
+						</a>
 					</div>
 				</div>
 				<!-- <div class="book-index">
