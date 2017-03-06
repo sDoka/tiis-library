@@ -160,7 +160,7 @@ AUI().ready(function () {
 					</c:forEach> --%>
 				</ul>
 			</div>
-			<div class="sidebar">
+			<%-- <div class="sidebar">
 				<h3><%=LanguageUtil.get(pageContext, "booklist-portlet-filters") %></h3>
 				<c:forEach items="${model.filters}" var="filter">
 					<h5>${filter.vocabulary.getTitle(locale)}:</h5>
@@ -173,7 +173,7 @@ AUI().ready(function () {
 						</div>
 					</c:forEach>
 				</c:forEach>
-			</div>
+			</div> --%>
 		</div>
 	
 		<div class="span9">
