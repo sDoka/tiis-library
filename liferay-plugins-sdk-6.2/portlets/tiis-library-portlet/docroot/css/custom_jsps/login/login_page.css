@@ -1,22 +1,18 @@
-#wrap #main {
-	padding-bottom: 0px;
-}
-
-#itd-header-placeholder {
-	background: white;
-}
-
-#wrap {
+#content {
 	background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)),
-		url(/it-deutsch-portlet/images/login_page_background.jpg);
+		url(/tiis-library-portlet/images/bookshelves.jpg);
     background-size: cover;
     background-repeat: no-repeat;
+}
+.aui .navbar {
+	min-height: 69px;
+	margin-bottom: 0px;
 }
 
 #portlet_58 {
 	max-width: 500px;
 	margin: 10% auto;
-	background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65));
+	background-color: #2c3e50;
 	border-radius: 10px;
 	padding: 15px;
 }
@@ -55,10 +51,8 @@ input#_58_password:-webkit-autofill {
     font-size: 1.6em;
 }
 
-#portlet_58 .portlet-topper .portlet-topper-toolbar .portlet-icon-back {
-	color: white;
-    font-size: 1.6em;
-    font-weight: 400;
+#portlet_58 .portlet-topper .portlet-topper-toolbar  {
+	display: none;
 }
 
 #portlet_58 .btn-sign-in {
@@ -82,7 +76,7 @@ input#_58_password:-webkit-autofill {
 
 .portlet-content .portlet-content-container .portlet-body label {
 	color: white;
-    font-size: 1.6em !important;
+    font-size: 1.3em !important;
 }
 
 .portlet-body .navigation a {

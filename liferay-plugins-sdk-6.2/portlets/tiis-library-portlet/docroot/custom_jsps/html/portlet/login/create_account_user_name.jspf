@@ -19,7 +19,7 @@
 			lastName = request.getParameter("last_name");
 %>
 
-<aui:input model="<%= User.class %>" name="firstName" value='<%=((firstName!=null)?firstName:"")%>' >
+<aui:input model="<%= User.class %>" type="text" name="firstName" value='<%=((firstName!=null)?firstName:"")%>' >
 	<aui:validator name="required" />
 </aui:input>
 

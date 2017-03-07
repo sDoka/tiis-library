@@ -25,11 +25,10 @@
 <%@ taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 
-<%-- Hook #2. Removed additional styling for maximized mode
-<c:if test="<%=windowState.equals(WindowState.MAXIMIZED) %>" >
-	<link href="/tiis-library-portlet/css/custom_jsps/login/login_page.css" rel="stylesheet">
-</c:if>
---%>
+
+<link href="/tiis-library-portlet/css/custom_jsps/login/login_page.css" rel="stylesheet">
+
+
 <c:choose>
 	<c:when test="<%=themeDisplay.isSignedIn()%>">
 		<%
@@ -232,31 +231,11 @@
 						+ "/auth/userinfo.email&state=gp";
 			%>
 			<div class="row-fluid">
-				<div class="span4 offset4 sign-in-btn-container">
+				<div class="span4 offset4 sign-in-btn-container button-holder">
 						<aui:button class="btn btn-success btn-sign-in" type="submit" value="sign-in" />
 				</div>
 			</div>
 			
-			<aui:button-row>
-				<div id="socialLoginButtonsSet" class="row-fluid">
-					
-					<a class="btn btn-vk span4"
-						style="background: #50739a; color: white;"
-						href='<%=vkOauthUrl %>'>
-  						<span class="fa fa-vk"></span>
-					</a>
-					<a class="btn btn-google-plus span4"
-						style="background: #dd4b39; color: white;"
-						href='<%=googleOauthUrl%>'>
-  						<span class="fa fa-google-plus"></span>
-					</a>
-					<a class="btn btn-facebook span4"
-						style="background: #2b4b90; color: white;"
-						href='<%=fbOauthUrl %>'>
-  						<span class="fa fa-facebook"></span>
-					</a>
-				</div>
-			</aui:button-row>
 		</aui:form>
 		
 		<liferay-util:include page="/html/portlet/login/navigation.jsp" />

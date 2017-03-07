@@ -16,9 +16,9 @@
 
 <%@ include file="/html/portlet/login/init.jsp" %>
 
-<%-- Hook #2. Removed additional styling for maximized mode
+
 <link href="/tiis-library-portlet/css/custom_jsps/login/forgot_password.css" rel="stylesheet">
---%>
+
 
 <%
 User user2 = (User)request.getAttribute(WebKeys.FORGOT_PASSWORD_REMINDER_USER);

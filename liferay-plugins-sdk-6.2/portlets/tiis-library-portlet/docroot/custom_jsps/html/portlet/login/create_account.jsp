@@ -25,9 +25,7 @@
 
 <%@ include file="/html/portlet/login/init.jsp" %>
 
-<%-- Hook #2. Removed additional styling for maximized mode
 <link href="/tiis-library-portlet/css/custom_jsps/login/create_account.css" rel="stylesheet">
---%>
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
@@ -145,11 +143,11 @@ birthdayCalendar.set(Calendar.YEAR, 1900);
 		</aui:input>
 	</aui:fieldset>
 	
-	<aui:fieldset column="<%= true %>">
-		<aui:col width="<%= 50 %>">
+	<aui:fieldset>
+<%-- <aui:col width="<%= 100 %>"> --%>
 			<%@ include file="/html/portlet/login/create_account_user_name.jspf" %>
 			<c:if test="<%= !PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE) %>">
-				<aui:input model="<%= User.class %>" name="screenName" value='<%=((screenName!=null)?screenName:"")%>'>
+				<aui:input model="<%= User.class %>" type="text" size="30" name="screenName" value='<%=((screenName!=null)?screenName:"")%>'>
 					<aui:validator name="custom" errorMessage="login-validation-error">
 						function(val, fieldNode, ruleValue) {
 					     	var loginRegex = /^[a-zA-Z0-9.-]+$/;
@@ -161,14 +159,14 @@ birthdayCalendar.set(Calendar.YEAR, 1900);
 				</aui:input>
 			</c:if>
 
-			<aui:input model="<%= User.class %>" name="emailAddress" value='<%=((email!=null)?email:"")%>'>
+			<aui:input model="<%= User.class %>" type="text" name="emailAddress" value='<%=((email!=null)?email:"")%>'>
 				<c:if test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.USERS_EMAIL_ADDRESS_REQUIRED) %>">
 					<aui:validator name="required" />
 				</c:if>
 			</aui:input>
-		</aui:col>
+		<%-- </aui:col>--%>
 			
-		<aui:col width="<%= 50 %>">
+<%-- <aui:col width="<%= 100 %>"> --%>
 			<c:if test="<%= PropsValues.LOGIN_CREATE_ACCOUNT_ALLOW_CUSTOM_PASSWORD %>">
 				<aui:input label="password" name="password1" size="30" type="password" value="">
 					<aui:validator name="custom" errorMessage="password-validation-error">
@@ -211,7 +209,7 @@ birthdayCalendar.set(Calendar.YEAR, 1900);
 
 				<liferay-ui:captcha url="<%= captchaURL %>" />
 			</c:if>
-		</aui:col>
+		<%-- </aui:col>--%>
 	</aui:fieldset>
 	<aui:button-row>
 		<aui:button type="submit" value="register-new-account"/>

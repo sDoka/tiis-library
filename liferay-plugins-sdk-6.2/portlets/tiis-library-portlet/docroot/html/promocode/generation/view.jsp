@@ -1,3 +1,4 @@
+<%@page import="com.liferay.portal.kernel.language.LanguageUtil"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page contentType="text/html; charset=utf-8" session="false" pageEncoding="utf-8" trimDirectiveWhitespaces="true" %>
 <%@page import="ru.tiis.srv.model.Book"%>
@@ -17,15 +18,15 @@ SimpleDateFormat dateFormat = new SimpleDateFormat( "dd-MM-yyyy hh-mm-ss");
 
 		<aui:button-row>
 			<input type="text" value = "0" name = "<portlet:namespace/>promoCodesNumber"/>
-			<input type="submit" class="btn btn-success" value="Generate promo codes" />
+			<input type="submit" class="btn btn-success" value="<%=LanguageUtil.get(pageContext, "generate-promo-codes") %>" />
 		</aui:button-row>
 		
 		
 		<div id="promoTabs">
 
 		  <ul class="nav nav-tabs">
-		    <li class="active"><a href="#tab-1">Active Codes</a></li>
-		    <li><a href="#tab-2">Used Codes</a></li>
+		    <li class="active"><a href="#tab-1"><%=LanguageUtil.get(pageContext, "active-codes") %></a></li>
+		    <li><a href="#tab-2"><%=LanguageUtil.get(pageContext, "used-codes") %></a></li>
 		  </ul>
 		
 		  <div class="tab-content">
@@ -35,8 +36,8 @@ SimpleDateFormat dateFormat = new SimpleDateFormat( "dd-MM-yyyy hh-mm-ss");
 			    <thead>
 			      <tr>
 			        <th>#</th>
-			        <th>Promo code</th>
-			        <th>Created at</th>
+			        <th><%=LanguageUtil.get(pageContext, "promo-code") %></th>
+			        <th><%=LanguageUtil.get(pageContext, "created-date") %></th>
 			      </tr>
 			    </thead>
 			    <tbody>
@@ -58,10 +59,10 @@ SimpleDateFormat dateFormat = new SimpleDateFormat( "dd-MM-yyyy hh-mm-ss");
 			    <thead>
 			      <tr>
 			        <th>#</th>
-			        <th>Promo code</th>
-			        <th>Created at</th>
-			        <th>Used at</th>
-			        <th>Used by</th>
+			        <th><%=LanguageUtil.get(pageContext, "promo-code") %></th>
+			        <th><%=LanguageUtil.get(pageContext, "created-date") %></th>
+			        <th><%=LanguageUtil.get(pageContext, "used-date") %></th>
+			        <th><%=LanguageUtil.get(pageContext, "used-by") %></th>
 			      </tr>
 			    </thead>
 			    <tbody>

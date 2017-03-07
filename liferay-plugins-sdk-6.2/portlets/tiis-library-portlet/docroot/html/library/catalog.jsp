@@ -84,10 +84,10 @@ AUI().ready(function () {
 				<div class="select-div sort-by-div">				
 					<select class="form-control" id="<portlet:namespace />sortBy" >
 						<option value="by-date-desc">
-							<%=LanguageUtil.get(pageContext, "booklist-sort-by-date-desc") %>
+							<%=LanguageUtil.get(pageContext, "booklist-sort-by-date-asc") %>
 						</option>
 						<option value="by-date-asc">
-							<%=LanguageUtil.get(pageContext, "booklist-sort-by-date-asc") %>
+							<%=LanguageUtil.get(pageContext, "booklist-sort-by-date-desc") %>
 						</option>
 						<option value="by-name-asc">
 							<%=LanguageUtil.get(pageContext, "booklist-sort-by-title-asc") %>

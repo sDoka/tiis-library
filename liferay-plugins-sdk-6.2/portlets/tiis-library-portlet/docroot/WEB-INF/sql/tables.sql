@@ -14,6 +14,16 @@ create table TIISBook (
 	bookLogo BLOB
 );
 
+create table TIISPromoCode (
+	promoCodeId LONG not null primary key,
+	promoType INTEGER,
+	promoCodeContent VARCHAR(75) null,
+	createTime DATE null,
+	isUsed BOOLEAN,
+	userId LONG,
+	usedTime DATE null
+);
+
 create table TIISTest (
 	testId LONG not null primary key,
 	createDate DATE null,

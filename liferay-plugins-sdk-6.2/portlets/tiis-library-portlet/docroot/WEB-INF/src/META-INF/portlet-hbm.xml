@@ -3,6 +3,7 @@
 
 <hibernate-mapping default-lazy="false" auto-import="false">
 	<import class="ru.tiis.srv.model.Book" />
+	<import class="ru.tiis.srv.model.PromoCode" />
 	<import class="ru.tiis.srv.model.Test" />
 	<import class="ru.tiis.srv.model.TestAttempt" />
 	<class name="ru.tiis.srv.model.impl.BookImpl" table="TIISBook">
@@ -30,6 +31,18 @@
 			</generator>
 		</id>
 		<property column="bookLogo" name="bookLogoBlob" type="blob" />
+	</class>
+	<class name="ru.tiis.srv.model.impl.PromoCodeImpl" table="TIISPromoCode">
+		<cache usage="read-write" />
+		<id name="promoCodeId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="promoType" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="promoCodeContent" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createTime" type="org.hibernate.type.TimestampType" />
+		<property name="isUsed" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="usedTime" type="org.hibernate.type.TimestampType" />
 	</class>
 	<class name="ru.tiis.srv.model.impl.TestImpl" table="TIISTest">
 		<cache usage="read-write" />
