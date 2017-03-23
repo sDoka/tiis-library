@@ -130,20 +130,20 @@ class GDriveService {
 			createPermissions(uploadedFile.getId());
 
 			String fileId = uploadedFile.getId();
-			File testFile = drive
+			File bookFile = drive
 					.files()
 					.get(fileId)
 					.setFields(
 							"id,name,webContentLink,shared,mimeType,webViewLink")
 					.execute();
-			log.info("File name : " + testFile.getName());
-			log.info("File mime type : " + testFile.getMimeType());
-			log.info("File web content link : " + testFile.getWebContentLink());
-			log.info("File web view link : " + testFile.getWebViewLink());
-			log.info("File is shared : " + testFile.getShared());
+			log.info("File name : " + bookFile.getName());
+			log.info("File mime type : " + bookFile.getMimeType());
+			log.info("File web content link : " + bookFile.getWebContentLink());
+			log.info("File web view link : " + bookFile.getWebViewLink());
+			log.info("File is shared : " + bookFile.getShared());
 
 			log.info("Success!");
-			return testFile.getWebViewLink();
+			return bookFile.getWebViewLink();
 		} catch (IOException e) {
 			log.error(e.getMessage());
 		} catch (Throwable t) {

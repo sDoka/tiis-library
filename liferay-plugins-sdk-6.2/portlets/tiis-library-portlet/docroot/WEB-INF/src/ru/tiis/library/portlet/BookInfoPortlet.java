@@ -69,4 +69,34 @@ public class BookInfoPortlet extends MVCPortlet {
 			// TODO Auto-generated catch block
 		}
 	}
+	
+	public void updateBookTitle(ActionRequest actionRequest,
+			ActionResponse actionResponse) throws IOException, PortletException {
+		// TODO Auto-generated method stub
+		super.processAction(actionRequest, actionResponse);
+	}
+	
+	public void updateBookLogo(ActionRequest actionRequest,
+			ActionResponse actionResponse) throws IOException, PortletException {
+		// TODO Auto-generated method stub
+		super.processAction(actionRequest, actionResponse);
+	}
+	
+	public void updateBookFile(ActionRequest actionRequest,
+			ActionResponse actionResponse) throws IOException, PortletException {
+		// TODO Auto-generated method stub
+		super.processAction(actionRequest, actionResponse);
+	}
+	
+	public void updateBookDescription(ActionRequest actionRequest,
+			ActionResponse actionResponse) throws IOException, PortletException {
+		// TODO Auto-generated method stub
+		super.processAction(actionRequest, actionResponse);
+	}
+	
+	public void updateBookCategories(ActionRequest actionRequest,
+			ActionResponse actionResponse) throws IOException, PortletException {
+		// TODO Auto-generated method stub
+		super.processAction(actionRequest, actionResponse);
+	}
 }
