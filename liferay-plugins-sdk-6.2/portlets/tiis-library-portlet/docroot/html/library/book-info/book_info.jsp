@@ -12,6 +12,11 @@
 </div>
  --%>
 
+<portlet:renderURL var = "editBookURL">
+	<portlet:param name="mode" value="edit"/>
+	<portlet:param name="bookId" value="${ book.bookId }"/>
+</portlet:renderURL>
+
 <div class="book-title-card">
 	<div class="book-title-caption" style="background-image: url(${book.logoUrl})">
 		<div class="caption book-title">
@@ -35,6 +40,11 @@
 					<div class="read-button">
 						<a href = "${ book.googleDriveLink }" target = _blank>
 							<button class="btn btn-success"><%=LanguageUtil.get(pageContext, "book-read") %></button>
+						</a>
+					</div>
+					<div class="read-button">
+						<a href = "${ editBookURL }" target = _blank>
+							<button class="btn btn-primary">Edit book</button>
 						</a>
 					</div>
 				</div>

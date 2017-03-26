@@ -45,7 +45,13 @@ public class LibraryManagmentPortlet extends MVCPortlet {
 		//if - "book" - render book menu
 		//if - "test" - render test menu
 		// TODO Auto-generated method stub
-		super.render(request, response);
+		//super.render(request, response);
+		/*String mode = request.getParameter("mode");
+		if ( mode == null || mode.isEmpty()) mode = "upload";
+		
+		if (mode.equals("edit")) include("/html/librarymanagment/edit.jsp", request, response);
+		else*/
+		include("/html/librarymanagment/create.jsp", request, response);
 	}
 	
 	public void createBook(ActionRequest request, ActionResponse response) {
@@ -68,5 +74,13 @@ public class LibraryManagmentPortlet extends MVCPortlet {
 			log.error("Can't add a book with title " + title + ": " + e.getMessage());
 		}
 		//TODO send AJAX Response
+	}
+	
+	public void updateBook(ActionRequest request, ActionResponse response) {
+		
+	}
+	
+	public void deleteBook(ActionRequest request, ActionResponse response) {
+		
 	}
 }

@@ -67,6 +67,10 @@ public class BookModel {
 		return this.bookLogoUrl;
 	}
 	
+	public Blob getLogo() {
+		return this.book.getBookLogo();
+	}
+	
 	public String getGoogleDriveLink() {
 		return book.getGoogleDriveLink();
 	}
@@ -103,6 +107,20 @@ public class BookModel {
 	public void setTagsList(List<String> tagsList) {
 		this.tagsList = tagsList;
 	}
+	
+	public void setTitle(String title) {
+		this.book.setTitle(title);
+	}
+	
+	public void setDescription(String description) {
+		this.book.setDescription(description);
+	}
+	
+	public void setLogo(Blob logo) {
+		this.book.setBookLogo(logo);
+	}
+	
+	
 	
 	@Override
 	public String toString() {

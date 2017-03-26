@@ -24,7 +24,7 @@ public interface BookService {
 	public BookModel addBook(String title, String description, File bookLogo, File bookPdfFile, 
 			ServiceContext serviceContext) throws PortalException, SystemException;
 	
-	public BookModel updateBook(BookModel book, ServiceContext serviceContext) throws PortalException;
+	public BookModel updateBook(BookModel book, ServiceContext serviceContext) throws PortalException, SystemException;
 
 	public BookModel getBook(long bookId) throws PortalException, SystemException;
 	
