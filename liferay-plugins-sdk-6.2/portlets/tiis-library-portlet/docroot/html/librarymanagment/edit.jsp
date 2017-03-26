@@ -39,9 +39,9 @@
 			<aui:col span="2">
 				<%=LanguageUtil.get(pageContext, "book-description") %>
 			</aui:col>
-			<aui:col span="4">
-				<textarea class="form-control"
-					name="<portlet:namespace/>bookDescription" rows="5">${ book.description }</textarea>
+			<aui:col span="6">
+				<liferay-ui:input-editor width="100%" />
+                <aui:input name="bookDescription" type="hidden" value = "${book.description }"/>
 			</aui:col>
 		</aui:row>
 
@@ -81,7 +81,7 @@
 		<input type = "text" name = "<portlet:namespace/>bookId" value = "${ book.bookId }" hidden = "true"/>
 		
 		<aui:button-row>
-			<input type="submit" class="btn btn-success" value="Update"/>
+			<input type="button" class="btn btn-success" value="Update" onclick = "updateBook()"/>
 		</aui:button-row>
 
 	</form>
@@ -106,10 +106,14 @@
 	 $("#createBookModal").dialog("close");
 	 }
 	 */
+	function <portlet:namespace />initEditor() {
+		return document.<portlet:namespace />fm.<portlet:namespace />bookDescription.value;
+	}
 
 	function updateBook() {
+		 document.<portlet:namespace />fm.<portlet:namespace />bookDescription.value = window.<portlet:namespace />editor.getHTML();
 		AUI().use('aui-io-request', function(A) {
-			A.io.request('${updateBookUrl}', {
+			A.io.request('${updateBookInfoURL}', {
 				method : 'POST',
 				dataType : 'json',
 				form : {
@@ -118,7 +122,7 @@
 				},
 				on : {
 					success : function() {
-						alert(this.get('responseData'));
+						//alert(this.get('responseData'));
 					}
 				}
 			});

@@ -49,10 +49,11 @@
 			<aui:col span="2">
 				<%=LanguageUtil.get(pageContext, "book-description") %>
 			</aui:col>
-			<aui:col span="4">
-				<textarea class="form-control"
-					name="<portlet:namespace/>bookDescription" rows="5"></textarea>
+			<aui:col span="6">
+				<liferay-ui:input-editor width="100%" />
+                <aui:input name="bookDescription" type="hidden" />
 			</aui:col>
+			
 		</aui:row>
 
 		<aui:row>
@@ -129,6 +130,7 @@
 	 */
 
 	function uploadBook() {
+		document.<portlet:namespace />fm.<portlet:namespace />bookDescription.value = window.<portlet:namespace />editor.getHTML();
 		AUI().use('aui-io-request', function(A) {
 			A.io.request('${createBookUrl}', {
 				method : 'POST',
