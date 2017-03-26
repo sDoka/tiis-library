@@ -1,0 +1,98 @@
+<style>
+.admin-list .admin-item-content {
+    background-color: #fff;
+    border: 1px solid #dcdcdc;
+    margin-bottom: 10px;
+    min-height: 120px;
+    padding: 10px;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+	cursor: pointer;
+}
+.admin-list .flex-box {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: box;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -moz-box-orient: horizontal;
+    -o-box-orient: horizontal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+}
+.admin-list img {
+    vertical-align: middle;
+}
+.admin-list h2 {
+    font-size: 20px;
+    line-height: 24px;
+    margin: 12px 0 8px 0;
+}
+.admin-list flex-1 {
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -o-box-flex: 1;
+    box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+.admin-list .admin-item-description  {
+	margin: 0 30px 0 30px;
+}
+.admin-list .admin-item-description  span {
+	display: inline-block;
+	color: #b3b3b3;
+}
+</style>
+
+<div>
+	<div class="admin-list">
+		<div>
+			<a href="/upload-book">
+				<div class="admin-item-content">
+					<div class="flex-box">
+						<div>
+							<img src="/tiis-library-portlet/images/icon/book-icon.png" alt="" style="max-width: 100px; max-height: 100px;">
+						</div>
+						<div class="admin-item-description flex-1">
+							<div class="flex-box">
+								<h2 class="flex-1">Загрузить книгу</h2>
+							</div>
+							<div>
+								<span>
+									Загрузка новой книги на Google Drive
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</a>
+		</div>
+		<div>
+			<a href="/promo-codes">
+				<div class="admin-item-content">
+					<div class="flex-box">
+						<div>
+							<img src="/tiis-library-portlet/images/icon/access-icon.png" alt="" style="max-width: 100px; max-height: 100px;">
+						</div>
+						<div class="admin-item-description flex-1">
+							<div class="flex-box">
+								<h2 class="flex-1">Промо коды</h2>
+							</div>
+							<div>
+								<span>
+									Управление промо кодами для доступа к сайту
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</a>
+		</div>
+	</div>
+</div>
