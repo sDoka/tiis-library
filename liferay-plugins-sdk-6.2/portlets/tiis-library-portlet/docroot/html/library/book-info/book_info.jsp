@@ -44,7 +44,7 @@
 					</div>
 					<div class="read-button">
 						<a href = "${ editBookURL }" target = _blank>
-							<button class="btn btn-primary">Edit book</button>
+							<button class="btn btn-primary"><%=LanguageUtil.get(pageContext, "book-edit") %></button>
 						</a>
 					</div>
 				</div>

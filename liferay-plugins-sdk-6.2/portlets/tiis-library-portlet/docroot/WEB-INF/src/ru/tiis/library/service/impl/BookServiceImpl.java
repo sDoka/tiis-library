@@ -79,7 +79,7 @@ public class BookServiceImpl implements BookService {
 		bookPersistence.setTitle(book.getTitle());
 		bookPersistence.setDescription(book.getDescription());
 		bookPersistence.setBookLogo(book.getLogo());
-		BookLocalServiceUtil.updateBook(bookPersistence);
+		BookLocalServiceUtil.updateBook(bookPersistence, serviceContext);
 		return getBook(bookPersistence);
 	}
 
