@@ -1,4 +1,4 @@
-$FontAwesomePath: "aui/alloy-font-awesome/font" !default;
+//$FontAwesomePath: "aui/alloy-font-awesome/font" !default;
 
 @import "aui/alloy-font-awesome/scss/variables";
 @import "aui/alloy-font-awesome/scss/mixins-alloy";
@@ -28,7 +28,10 @@ $FontAwesomePath: "aui/alloy-font-awesome/font" !default;
 	@import "aui/alloy-font-awesome/scss/icons-alloy-extra";
 	
 	@import "aui/tiis/style";
-
+	
+	@import "aui/fa/scss/font-awesome";
+	@import "aui/sa2/sweet-alert";
+	
 	background-color: $bodyBackground;
 	color: $textColor;
 	font-family: "Roboto", $baseFontFamily;

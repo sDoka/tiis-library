@@ -9,6 +9,8 @@
 	<meta content="initial-scale=1.0, width=device-width" name="viewport" />
 	
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:700,400&amp;subset=cyrillic,latin,greek,vietnamese">
+	<script src="$javascript_folder/jquery/jquery-3.2.0.min.js"></script>
+	<script src="$javascript_folder/sa2/sweetalert2.min.js"></script>
 	
 	$theme.include($top_head_include)
 	
