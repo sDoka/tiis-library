@@ -2,16 +2,10 @@ package ru.tiis.managment.portlet.util;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Blob;
-import java.sql.SQLException;
 import java.util.Date;
-import java.util.List;
 
 import javax.portlet.PortletRequest;
 
-import com.liferay.counter.service.CounterLocalService;
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
@@ -55,7 +49,8 @@ public class LibraryManagmentUtil {
 		String description = "Logo for book";
 		FileEntry fileEntry = DLAppServiceUtil.addFileEntry(repositoryId, folder.getFolderId(), title, mimeType, title,
 				description, "", file, serviceContext);
-
+		long companyId = themeDisplay.getCompanyId();
+		setFileEntryPermissions(companyId, fileEntry);
 		return DLFileEntryLocalServiceUtil.getDLFileEntry(fileEntry.getFileEntryId());
 	}
 
@@ -107,6 +102,15 @@ public class LibraryManagmentUtil {
 		Role userRole = RoleLocalServiceUtil.getRole(companyId, RoleConstants.USER);
 		ResourcePermissionLocalServiceUtil.setResourcePermissions(folder.getCompanyId(), DLFolder.class.getName(),
 				ResourceConstants.SCOPE_INDIVIDUAL, String.valueOf(folder.getPrimaryKey()), userRole.getRoleId(),
-				new String[] { ActionKeys.ADD_DOCUMENT, ActionKeys.VIEW, ActionKeys.UPDATE });
+				new String[] { ActionKeys.VIEW });
 	}
+
+	private static void setFileEntryPermissions(long companyId, FileEntry fileEntry) throws SystemException,
+			PortalException {
+		Role userRole = RoleLocalServiceUtil.getRole(companyId, RoleConstants.USER);
+		ResourcePermissionLocalServiceUtil.setResourcePermissions(fileEntry.getCompanyId(), DLFileEntry.class.getName(),
+				ResourceConstants.SCOPE_INDIVIDUAL, String.valueOf(fileEntry.getPrimaryKey()), userRole.getRoleId(),
+				new String[] { ActionKeys.VIEW });
+	}
+
 }
