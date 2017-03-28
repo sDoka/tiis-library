@@ -10,6 +10,8 @@ import java.util.List;
 
 import javax.persistence.PersistenceException;
 
+import org.apache.commons.lang.StringUtils;
+
 import ru.tiis.library.service.BookService;
 import ru.tiis.library.service.model.BookModel;
 import ru.tiis.srv.model.Book;
@@ -23,6 +25,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.service.ServiceContext;
 
 public class BookServiceImpl implements BookService {
@@ -43,7 +46,7 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public BookModel addBook(String title, String description, File bookLogo,
+	public BookModel addBook(String title, String description, long bookLogoFileEntryId,
 			File bookPdf, ServiceContext serviceContext)
 			throws PortalException, SystemException {
 
@@ -56,14 +59,7 @@ public class BookServiceImpl implements BookService {
 		book.setDescription(description);
 		book.setCreateDate(new Date());
 		book.setGoogleDriveLink(gdriveBookUrl);
-		try {
-			InputStream fis = new FileInputStream(bookLogo);
-			OutputBlob bookLogoBlob = new OutputBlob(fis, bookLogo.length());
-			book.setBookLogo(bookLogoBlob);
-		} catch (FileNotFoundException e) {
-			log.error("Failed to save image to the book " + title + " : "
-					+ e.getMessage());
-		}
+		
 
 		BookLocalServiceUtil.addBook(book, serviceContext);
 		return getBook(book);
@@ -72,15 +68,27 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public BookModel updateBook(BookModel book, ServiceContext serviceContext)
 			throws PortalException, SystemException {
-		Book bookPersistence = BookLocalServiceUtil.getBook(book.getBookId());
-		if (bookPersistence == null) {
+		Book persistedBook = BookLocalServiceUtil.getBook(book.getBookId());
+		if (persistedBook == null) {
 			throw new PersistenceException();
 		}
-		bookPersistence.setTitle(book.getTitle());
-		bookPersistence.setDescription(book.getDescription());
-		bookPersistence.setBookLogo(book.getLogo());
-		BookLocalServiceUtil.updateBook(bookPersistence, serviceContext);
-		return getBook(bookPersistence);
+		if (StringUtils.isEmpty(book.getTitle())) {
+			throw new PortalException("Book title can't be empty");
+		}
+		persistedBook.setTitle(book.getTitle());
+		
+		if (StringUtils.isEmpty(book.getDescription())) {
+			throw new PortalException("Book description can't be empty");
+		}
+		persistedBook.setDescription(book.getDescription());
+		//TODO alter table and remove blob column
+		persistedBook.setBookLogo(null);
+		if (book.getBookLogo() != null) {
+			persistedBook.setBookLogoDlId(book.getBookLogo().getFileEntryId());
+		}
+		
+		BookLocalServiceUtil.updateBook(persistedBook, serviceContext);
+		return getBook(persistedBook);
 	}
 
 	@Override

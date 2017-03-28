@@ -10,18 +10,19 @@ import com.liferay.portal.service.ServiceContext;
 import ru.tiis.library.service.model.BookModel;
 
 public interface BookService {
-	
+
 	/**
 	 * Adds file to the database and uploads it to the google drive of current user.
 	 * @param title
 	 * @param description
-	 * @param bookLogo
+	 * @param logoDlFileEntryId
 	 * @param bookPdfFile
-	 * @return - uploaded book
+	 * @param serviceContext
+	 * @return
 	 * @throws PortalException
 	 * @throws SystemException
 	 */
-	public BookModel addBook(String title, String description, File bookLogo, File bookPdfFile, 
+	public BookModel addBook(String title, String description, long logoDlFileEntryId, File bookPdfFile, 
 			ServiceContext serviceContext) throws PortalException, SystemException;
 	
 	public BookModel updateBook(BookModel book, ServiceContext serviceContext) throws PortalException, SystemException;

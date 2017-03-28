@@ -19,8 +19,6 @@
 
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/library/templates/book_grid_item.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/library/catalog.css">
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/library/catalog.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/lib/js/jquery-3.1.1.min.js"></script>
 
 <script type="text/html" id="tpl_books_grid">
 	<%@include file="templates/book_grid_item.html" %>
@@ -28,7 +26,6 @@
 
 <script type="text/javascript">
 var portalURL = '<%=PortalUtil.getPortalURL(themeDisplay)%>';
-
 AUI().ready(function () {
 	var userIsAdmin = '<%=permissionChecker.isOmniadmin()%>';
 	var userIsContentManager = true;

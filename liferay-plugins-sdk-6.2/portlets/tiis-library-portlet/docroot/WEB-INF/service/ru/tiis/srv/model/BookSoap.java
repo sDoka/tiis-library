@@ -45,6 +45,7 @@ public class BookSoap implements Serializable {
 		soapModel.setDescription(model.getDescription());
 		soapModel.setGoogleDriveLink(model.getGoogleDriveLink());
 		soapModel.setBookLogo(model.getBookLogo());
+		soapModel.setBookLogoDlId(model.getBookLogoDlId());
 
 		return soapModel;
 	}
@@ -201,6 +202,14 @@ public class BookSoap implements Serializable {
 		_bookLogo = bookLogo;
 	}
 
+	public long getBookLogoDlId() {
+		return _bookLogoDlId;
+	}
+
+	public void setBookLogoDlId(long bookLogoDlId) {
+		_bookLogoDlId = bookLogoDlId;
+	}
+
 	private String _uuid;
 	private long _bookId;
 	private long _companyId;
@@ -214,4 +223,5 @@ public class BookSoap implements Serializable {
 	private String _description;
 	private String _googleDriveLink;
 	private Blob _bookLogo;
+	private long _bookLogoDlId;
 }

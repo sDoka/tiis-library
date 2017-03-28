@@ -25,6 +25,7 @@
 		<column name="description" type="String" />
 		<column name="googleDriveLink" type="String" />
 		<column name="bookLogo" type="Blob" />
+		<column name="bookLogoDlId" type="long"></column>
 		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
 		<reference package-path="com.liferay.portlet.asset" entity="AssetLink" />
 	</entity>

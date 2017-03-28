@@ -90,6 +90,7 @@ public class BookClp extends BaseModelImpl<Book> implements Book {
 		attributes.put("description", getDescription());
 		attributes.put("googleDriveLink", getGoogleDriveLink());
 		attributes.put("bookLogo", getBookLogo());
+		attributes.put("bookLogoDlId", getBookLogoDlId());
 
 		return attributes;
 	}
@@ -172,6 +173,12 @@ public class BookClp extends BaseModelImpl<Book> implements Book {
 
 		if (bookLogo != null) {
 			setBookLogo(bookLogo);
+		}
+
+		Long bookLogoDlId = (Long)attributes.get("bookLogoDlId");
+
+		if (bookLogoDlId != null) {
+			setBookLogoDlId(bookLogoDlId);
 		}
 	}
 
@@ -486,6 +493,29 @@ public class BookClp extends BaseModelImpl<Book> implements Book {
 	}
 
 	@Override
+	public long getBookLogoDlId() {
+		return _bookLogoDlId;
+	}
+
+	@Override
+	public void setBookLogoDlId(long bookLogoDlId) {
+		_bookLogoDlId = bookLogoDlId;
+
+		if (_bookRemoteModel != null) {
+			try {
+				Class<?> clazz = _bookRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setBookLogoDlId", long.class);
+
+				method.invoke(_bookRemoteModel, bookLogoDlId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
 	public StagedModelType getStagedModelType() {
 		return new StagedModelType(PortalUtil.getClassNameId(
 				Book.class.getName()));
@@ -573,6 +603,7 @@ public class BookClp extends BaseModelImpl<Book> implements Book {
 		clone.setDescription(getDescription());
 		clone.setGoogleDriveLink(getGoogleDriveLink());
 		clone.setBookLogo(getBookLogo());
+		clone.setBookLogoDlId(getBookLogoDlId());
 
 		return clone;
 	}
@@ -625,7 +656,7 @@ public class BookClp extends BaseModelImpl<Book> implements Book {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(27);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -653,6 +684,8 @@ public class BookClp extends BaseModelImpl<Book> implements Book {
 		sb.append(getGoogleDriveLink());
 		sb.append(", bookLogo=");
 		sb.append(getBookLogo());
+		sb.append(", bookLogoDlId=");
+		sb.append(getBookLogoDlId());
 		sb.append("}");
 
 		return sb.toString();
@@ -660,7 +693,7 @@ public class BookClp extends BaseModelImpl<Book> implements Book {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(43);
+		StringBundler sb = new StringBundler(46);
 
 		sb.append("<model><model-name>");
 		sb.append("ru.tiis.srv.model.Book");
@@ -718,6 +751,10 @@ public class BookClp extends BaseModelImpl<Book> implements Book {
 			"<column><column-name>bookLogo</column-name><column-value><![CDATA[");
 		sb.append(getBookLogo());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>bookLogoDlId</column-name><column-value><![CDATA[");
+		sb.append(getBookLogoDlId());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -738,6 +775,7 @@ public class BookClp extends BaseModelImpl<Book> implements Book {
 	private String _description;
 	private String _googleDriveLink;
 	private Blob _bookLogo;
+	private long _bookLogoDlId;
 	private BaseModel<?> _bookRemoteModel;
 	private Class<?> _clpSerializerClass = ru.tiis.srv.service.ClpSerializer.class;
 }

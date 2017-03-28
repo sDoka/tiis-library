@@ -23,6 +23,7 @@
 		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="googleDriveLink" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<one-to-one name="bookLogoBlobModel" access="com.liferay.portal.dao.orm.hibernate.PrivatePropertyAccessor" class="ru.tiis.srv.model.BookBookLogoBlobModel" cascade="save-update" outer-join="false" constrained="true" />
+		<property name="bookLogoDlId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 	<class name="ru.tiis.srv.model.BookBookLogoBlobModel" table="TIISBook" lazy="true">
 		<id name="bookId" column="bookId">

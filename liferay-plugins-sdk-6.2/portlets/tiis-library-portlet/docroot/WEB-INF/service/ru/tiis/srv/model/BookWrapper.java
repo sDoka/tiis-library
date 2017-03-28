@@ -65,6 +65,7 @@ public class BookWrapper implements Book, ModelWrapper<Book> {
 		attributes.put("description", getDescription());
 		attributes.put("googleDriveLink", getGoogleDriveLink());
 		attributes.put("bookLogo", getBookLogo());
+		attributes.put("bookLogoDlId", getBookLogoDlId());
 
 		return attributes;
 	}
@@ -147,6 +148,12 @@ public class BookWrapper implements Book, ModelWrapper<Book> {
 
 		if (bookLogo != null) {
 			setBookLogo(bookLogo);
+		}
+
+		Long bookLogoDlId = (Long)attributes.get("bookLogoDlId");
+
+		if (bookLogoDlId != null) {
+			setBookLogoDlId(bookLogoDlId);
 		}
 	}
 
@@ -450,6 +457,26 @@ public class BookWrapper implements Book, ModelWrapper<Book> {
 	@Override
 	public void setBookLogo(java.sql.Blob bookLogo) {
 		_book.setBookLogo(bookLogo);
+	}
+
+	/**
+	* Returns the book logo dl ID of this book.
+	*
+	* @return the book logo dl ID of this book
+	*/
+	@Override
+	public long getBookLogoDlId() {
+		return _book.getBookLogoDlId();
+	}
+
+	/**
+	* Sets the book logo dl ID of this book.
+	*
+	* @param bookLogoDlId the book logo dl ID of this book
+	*/
+	@Override
+	public void setBookLogoDlId(long bookLogoDlId) {
+		_book.setBookLogoDlId(bookLogoDlId);
 	}
 
 	@Override

@@ -76,9 +76,10 @@ public class BookModelImpl extends BaseModelImpl<Book> implements BookModel {
 			{ "title", Types.VARCHAR },
 			{ "description", Types.VARCHAR },
 			{ "googleDriveLink", Types.VARCHAR },
-			{ "bookLogo", Types.BLOB }
+			{ "bookLogo", Types.BLOB },
+			{ "bookLogoDlId", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table TIISBook (uuid_ VARCHAR(75) null,bookId LONG not null primary key,companyId LONG,groupId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,gDriveId VARCHAR(75) null,title VARCHAR(75) null,description VARCHAR(750) null,googleDriveLink VARCHAR(750) null,bookLogo BLOB)";
+	public static final String TABLE_SQL_CREATE = "create table TIISBook (uuid_ VARCHAR(75) null,bookId LONG not null primary key,companyId LONG,groupId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,gDriveId VARCHAR(75) null,title VARCHAR(75) null,description VARCHAR(750) null,googleDriveLink VARCHAR(750) null,bookLogo BLOB,bookLogoDlId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table TIISBook";
 	public static final String ORDER_BY_JPQL = " ORDER BY book.bookId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY TIISBook.bookId ASC";
@@ -151,6 +152,7 @@ public class BookModelImpl extends BaseModelImpl<Book> implements BookModel {
 		attributes.put("description", getDescription());
 		attributes.put("googleDriveLink", getGoogleDriveLink());
 		attributes.put("bookLogo", getBookLogo());
+		attributes.put("bookLogoDlId", getBookLogoDlId());
 
 		return attributes;
 	}
@@ -233,6 +235,12 @@ public class BookModelImpl extends BaseModelImpl<Book> implements BookModel {
 
 		if (bookLogo != null) {
 			setBookLogo(bookLogo);
+		}
+
+		Long bookLogoDlId = (Long)attributes.get("bookLogoDlId");
+
+		if (bookLogoDlId != null) {
+			setBookLogoDlId(bookLogoDlId);
 		}
 	}
 
@@ -459,6 +467,16 @@ public class BookModelImpl extends BaseModelImpl<Book> implements BookModel {
 	}
 
 	@Override
+	public long getBookLogoDlId() {
+		return _bookLogoDlId;
+	}
+
+	@Override
+	public void setBookLogoDlId(long bookLogoDlId) {
+		_bookLogoDlId = bookLogoDlId;
+	}
+
+	@Override
 	public StagedModelType getStagedModelType() {
 		return new StagedModelType(PortalUtil.getClassNameId(
 				Book.class.getName()));
@@ -507,6 +525,7 @@ public class BookModelImpl extends BaseModelImpl<Book> implements BookModel {
 		bookImpl.setTitle(getTitle());
 		bookImpl.setDescription(getDescription());
 		bookImpl.setGoogleDriveLink(getGoogleDriveLink());
+		bookImpl.setBookLogoDlId(getBookLogoDlId());
 
 		bookImpl.resetOriginalValues();
 
@@ -652,12 +671,14 @@ public class BookModelImpl extends BaseModelImpl<Book> implements BookModel {
 			bookCacheModel.googleDriveLink = null;
 		}
 
+		bookCacheModel.bookLogoDlId = getBookLogoDlId();
+
 		return bookCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(27);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -683,13 +704,16 @@ public class BookModelImpl extends BaseModelImpl<Book> implements BookModel {
 		sb.append(getDescription());
 		sb.append(", googleDriveLink=");
 		sb.append(getGoogleDriveLink());
+		sb.append(", bookLogoDlId=");
+		sb.append(getBookLogoDlId());
+		sb.append("}");
 
 		return sb.toString();
 	}
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(43);
+		StringBundler sb = new StringBundler(46);
 
 		sb.append("<model><model-name>");
 		sb.append("ru.tiis.srv.model.Book");
@@ -743,6 +767,10 @@ public class BookModelImpl extends BaseModelImpl<Book> implements BookModel {
 			"<column><column-name>googleDriveLink</column-name><column-value><![CDATA[");
 		sb.append(getGoogleDriveLink());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>bookLogoDlId</column-name><column-value><![CDATA[");
+		sb.append(getBookLogoDlId());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -770,6 +798,7 @@ public class BookModelImpl extends BaseModelImpl<Book> implements BookModel {
 	private String _description;
 	private String _googleDriveLink;
 	private BookBookLogoBlobModel _bookLogoBlobModel;
+	private long _bookLogoDlId;
 	private long _columnBitmask;
 	private Book _escapedModel;
 }

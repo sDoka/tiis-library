@@ -28,6 +28,7 @@
 			<basic name="description" />
 			<basic name="googleDriveLink" />
 			<basic name="bookLogo" />
+			<basic name="bookLogoDlId" />
 			<transient name="GDriveId" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />

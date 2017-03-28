@@ -1,5 +1,7 @@
 package ru.tiis.library.portlet.views;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +16,7 @@ import ru.tiis.library.service.BookService;
 import ru.tiis.library.service.impl.BookServiceFactory;
 import ru.tiis.library.service.impl.BookServiceUtil;
 import ru.tiis.library.service.model.BookModel;
+import ru.tiis.managment.portlet.util.LibraryManagmentUtil;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -23,11 +26,14 @@ import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.PortletURLFactoryUtil;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 
 public class CatalogView extends View {
 	private static Log log = LogFactoryUtil.getLog(CatalogView.class);
@@ -68,10 +74,8 @@ public class CatalogView extends View {
 			PortletURL bookInfoUrl = PortletURLFactoryUtil.create(request,
 					BookInfoPortlet.PORTLET_ID, bookInfoPlid,
 					PortletRequest.RENDER_PHASE);
-			bookInfoUrl
-					.setParameter("bookId", String.valueOf(book.getBookId()));
+			bookInfoUrl.setParameter("bookId", String.valueOf(book.getBookId()));
 			String url = bookInfoUrl.toString();
-			// log.info("Url is : " + url);
 			book.setBookInfoUrl(url);
 			List<AssetCategory> assetCategories = BookServiceUtil
 					.getBookCategories(book.getBookId());

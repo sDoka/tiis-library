@@ -37,7 +37,7 @@ import java.util.Date;
 public class BookCacheModel implements CacheModel<Book>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(27);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -63,6 +63,9 @@ public class BookCacheModel implements CacheModel<Book>, Externalizable {
 		sb.append(description);
 		sb.append(", googleDriveLink=");
 		sb.append(googleDriveLink);
+		sb.append(", bookLogoDlId=");
+		sb.append(bookLogoDlId);
+		sb.append("}");
 
 		return sb.toString();
 	}
@@ -132,6 +135,8 @@ public class BookCacheModel implements CacheModel<Book>, Externalizable {
 			bookImpl.setGoogleDriveLink(googleDriveLink);
 		}
 
+		bookImpl.setBookLogoDlId(bookLogoDlId);
+
 		bookImpl.resetOriginalValues();
 
 		return bookImpl;
@@ -151,6 +156,7 @@ public class BookCacheModel implements CacheModel<Book>, Externalizable {
 		title = objectInput.readUTF();
 		description = objectInput.readUTF();
 		googleDriveLink = objectInput.readUTF();
+		bookLogoDlId = objectInput.readLong();
 	}
 
 	@Override
@@ -205,6 +211,8 @@ public class BookCacheModel implements CacheModel<Book>, Externalizable {
 		else {
 			objectOutput.writeUTF(googleDriveLink);
 		}
+
+		objectOutput.writeLong(bookLogoDlId);
 	}
 
 	public String uuid;
@@ -219,4 +227,5 @@ public class BookCacheModel implements CacheModel<Book>, Externalizable {
 	public String title;
 	public String description;
 	public String googleDriveLink;
+	public long bookLogoDlId;
 }

@@ -19,6 +19,7 @@
 			<hint name="max-length">750</hint>
 		</field>
 		<field name="bookLogo" type="Blob" />
+		<field name="bookLogoDlId" type="long" />
 	</model>
 	<model name="ru.tiis.srv.model.PromoCode">
 		<field name="promoCodeId" type="long" />

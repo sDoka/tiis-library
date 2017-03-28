@@ -307,7 +307,7 @@ function BooksList(_namespace, _booksNode, _booksJSON, _userIsContentManager, _d
 		//
 		// Resize rendered books' logo images
 
-		for (var i = 0; i < filteredBooks.length; i++) {
+		/*for (var i = 0; i < filteredBooks.length; i++) {
 			var book = filteredBooks[i];
 
 			var bookLogo = document.querySelector('img[bookId="' + book.bookId + '"]');
@@ -325,7 +325,7 @@ function BooksList(_namespace, _booksNode, _booksJSON, _userIsContentManager, _d
 				//crop image
 			}
 
-		}
+		}*/
 
 	}
 	

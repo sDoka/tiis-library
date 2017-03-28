@@ -11,7 +11,8 @@ create table TIISBook (
 	title VARCHAR(75) null,
 	description VARCHAR(750) null,
 	googleDriveLink VARCHAR(750) null,
-	bookLogo BLOB
+	bookLogo BLOB,
+	bookLogoDlId LONG
 );
 
 create table TIISPromoCode (
