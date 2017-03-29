@@ -92,8 +92,11 @@ $theme.include($bottom_include)
     
     <div class="container">
         <div class="footer row">
-            <div class="col-sm-12">
+            <div class="col-sm-8">
                 <p class="mbr-footer__copyright"></p><p>© $dateTool.getYear() ООО «Тюменский институт инженерных систем «Инновация»</p><p></p>
+            </div>
+            <div class="col-sm-4 text-right">
+                <p class="mbr-footer__copyright"></p><p>v 0.2</p><p></p>
             </div>
         </div>
     </div>
