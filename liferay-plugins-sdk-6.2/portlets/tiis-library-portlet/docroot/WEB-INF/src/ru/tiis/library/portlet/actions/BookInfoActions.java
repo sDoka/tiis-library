@@ -91,7 +91,11 @@ public class BookInfoActions {
 			ServiceContext serviceContext = ServiceContextFactory.getInstance(request);
 			BookModel book = bookService.getBook(bookId);
 			if (book.getBookLogo() != null) {
-				DLFileEntryLocalServiceUtil.deleteDLFileEntry(book.getBookLogo());
+				try {
+					DLFileEntryLocalServiceUtil.deleteDLFileEntry(book.getBookLogo());
+				} catch (SystemException e) {
+					log.warn(e.getMessage());
+				}
 			}
 			DLFileEntry bookLogoDl = LibraryManagmentUtil.storeBookImageToDocumentLibrary(request, bookLogo);
 			book.setBookLogo(bookLogoDl);

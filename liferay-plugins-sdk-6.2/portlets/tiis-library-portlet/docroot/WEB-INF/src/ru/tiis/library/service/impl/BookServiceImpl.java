@@ -106,7 +106,12 @@ public class BookServiceImpl implements BookService {
 			SystemException {
 		BookModel bookToRemove = getBook(book);
 		if(bookToRemove.getBookLogo() != null) {
-			DLFileEntryLocalServiceUtil.deleteDLFileEntry(bookToRemove.getBookLogo());
+			try {
+				DLFileEntryLocalServiceUtil.deleteDLFileEntry(bookToRemove.getBookLogo());
+			} catch (SystemException e) {
+				log.warn(e.getMessage());
+			}
+			
 		}
 		BookLocalServiceUtil.deleteBook(book);
 		return bookToRemove;
