@@ -33,6 +33,7 @@
 			<input type="button" class="btn btn-success" onclick="uploadBook()"
 				value=<%=LanguageUtil.get(pageContext, "authorize-in-google-drive") %> />
 		</a>
+		
 	</aui:button-row>
 
 		<aui:row>
@@ -111,24 +112,6 @@
 </div>
 
 <script>
-	/*
-	 $("#createBookModal").dialog({
-	 modal : true,
-	 title : "Create a new book",
-	 width : 400,
-	 height : 250,
-	 autoOpen : false
-	 });
-
-	 function openModal() {
-	 $("#createBookModal").dialog("open");
-	 }
-
-	 function closeModal() {
-	 $("#createBookModal").dialog("close");
-	 }
-	 */
-
 	function uploadBook() {
 		document.<portlet:namespace />fm.<portlet:namespace />bookDescription.value = window.<portlet:namespace />editor.getHTML();
 		AUI().use('aui-io-request', function(A) {

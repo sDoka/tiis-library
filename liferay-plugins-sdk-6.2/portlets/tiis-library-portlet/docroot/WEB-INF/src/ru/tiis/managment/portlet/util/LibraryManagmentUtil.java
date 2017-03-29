@@ -54,7 +54,7 @@ public class LibraryManagmentUtil {
 		return DLFileEntryLocalServiceUtil.getDLFileEntry(fileEntry.getFileEntryId());
 	}
 
-	public static Folder getLibraryUploadsFolder(ThemeDisplay themeDisplay, PortletRequest request) {
+	private static Folder getLibraryUploadsFolder(ThemeDisplay themeDisplay, PortletRequest request) {
 		Folder folder = null;
 		if (isFolderExist(themeDisplay)) {
 			try {

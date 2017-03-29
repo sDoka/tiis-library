@@ -21,6 +21,7 @@ import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 public class BookModel {
 	private static Log log = LogFactoryUtil.getLog(BookModel.class);
 	private static final String defaultLogoImagePath = "/tiis-library-portlet/images/book_logo.jpg";
+	private static final String loaderGifPath = "/tiis-library-portlet/images/loader.gif";
 
 	private Book book;
 	private DLFileEntry bookLogo;
@@ -122,7 +123,6 @@ public class BookModel {
 					+ StringPool.FORWARD_SLASH + bookLogo.getUuid();
 		} else {			return defaultLogoImagePath;
 		}
-
 	}
 
 	@Override
@@ -136,6 +136,7 @@ public class BookModel {
 		jsonObject.put("infoURL", getInfoURL());
 		jsonObject.put("stubLogoUrl", getStubLogoUrl());
 		jsonObject.put("date", book.getCreateDate());
+		jsonObject.put("loaderUrl", loaderGifPath);
 
 		try {
 			JSONArray courseCategoryIds = JSONFactoryUtil
