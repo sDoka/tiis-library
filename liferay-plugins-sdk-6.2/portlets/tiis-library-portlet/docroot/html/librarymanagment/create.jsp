@@ -28,8 +28,8 @@
 		<div class="alert alert-info">
 		  	<%=LanguageUtil.get(pageContext, "beta-version-auth") %>
 		</div>
-		<a href="https://accounts.google.com/o/oauth2/auth?client_id=1097637469091-gdshlvm5m4sub6l1m6hrtg83c07umaa4.apps.googleusercontent.com&redirect_uri=http://localhost:9002/Callback&response_type=code&scope=https://www.googleapis.com/auth/drive.file"
-			target = "blank">
+		<a href="${googleDriveAuthURL}"
+			>
 			<input type="button" class="btn btn-success" onclick="uploadBook()"
 				value=<%=LanguageUtil.get(pageContext, "authorize-in-google-drive") %> />
 		</a>
@@ -104,11 +104,41 @@
 
 		<aui:button-row>
 			<input type="button" class="btn btn-success" onclick="uploadBook()"
-				value="Upload" />
+				value=<%=LanguageUtil.get(pageContext, "book-upload") %> />
 		</aui:button-row>
 
 	</form>
 	
+	<liferay-ui:panel collapsible="true" defaultState="closed"
+			title="Google Drive configuration">
+		
+		<portlet:actionURL name="updateGDConfig" var="updateGDConfigUrl"></portlet:actionURL>
+		<aui:form action="<%=updateGDConfigUrl%>" method="POST"
+			id="googleDriveConfiguration" 
+			name="googleDriveConfiguration">
+	
+			<aui:row>
+				<%=LanguageUtil.get(pageContext, "Redirect URI") %>
+				<aui:input 
+						type="text"
+						name="googleDriveRedirectUri"
+						value="${googleDriveRedirectUri}"
+						label=""
+						title="<%=LanguageUtil.get(pageContext, \"E.g. 'http://lib.tiis.pro:9002/Callback'\") %>" />
+			</aui:row>
+			<aui:row>
+				<%=LanguageUtil.get(pageContext, "Client ID") %>
+				<aui:input 
+						type="text"
+						name="googleDriveClientId"
+						label=""
+						value="${googleDriveClientId}"/>
+			</aui:row>
+			<aui:button-row>
+				<aui:button type="submit" />
+			</aui:button-row>
+		</aui:form>
+	</liferay-ui:panel>
 </div>
 
 <script>

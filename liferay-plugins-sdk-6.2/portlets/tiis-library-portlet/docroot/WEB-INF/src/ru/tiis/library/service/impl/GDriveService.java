@@ -90,20 +90,26 @@ class GDriveService {
 			return null;
 		}
 		log.info("Google client secrets loaded");
+		
 		// set up authorization code flow
 		log.info("Building authorization code flow");
-		GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
+		GoogleAuthorizationCodeFlow.Builder flowBuilder = new GoogleAuthorizationCodeFlow.Builder(
 				httpTransport, JSON_FACTORY, clientSecrets,
-				Collections.singleton(DriveScopes.DRIVE_FILE))
-				.setDataStoreFactory(dataStoreFactory).build();
+				Collections.singleton(DriveScopes.DRIVE_FILE))		
+				.setDataStoreFactory(dataStoreFactory);
+		GoogleAuthorizationCodeFlow flow = flowBuilder.build();
 		log.info("Building authorization code flow - done");
+		
 		// authorize
 		Builder serverBuilder = new Builder();
-		serverBuilder.setPort(9001);
+		serverBuilder.setPort(9002);
 		LocalServerReceiver localhostResiever = serverBuilder.build();
 		
-		return new AuthorizationCodeInstalledApp(flow, localhostResiever)
-				.authorize("user");
+		AuthorizationCodeInstalledApp app = new AuthorizationCodeInstalledApp(flow, localhostResiever);
+		
+		Credential credential = app.authorize("user");
+		
+		return credential;
 	}
 
 	public static String uploadNewBook(java.io.File bookPdf) {
@@ -148,6 +154,8 @@ class GDriveService {
 			log.error(e.getMessage());
 		} catch (Throwable t) {
 			t.printStackTrace();
+		} finally {
+			
 		}
 
 		return StringPool.BLANK;
