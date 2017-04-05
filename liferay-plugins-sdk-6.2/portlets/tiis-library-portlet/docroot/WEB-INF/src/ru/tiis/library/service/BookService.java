@@ -23,7 +23,7 @@ public interface BookService {
 	 * @throws SystemException
 	 */
 	public BookModel addBook(String title, String description, long logoDlFileEntryId, File bookPdfFile, 
-			ServiceContext serviceContext) throws PortalException, SystemException;
+			ServiceContext serviceContext, String clientHost) throws PortalException, SystemException;
 	
 	public BookModel updateBook(BookModel book, ServiceContext serviceContext) throws PortalException, SystemException;
 

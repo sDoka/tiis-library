@@ -42,10 +42,10 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public BookModel addBook(String title, String description, long bookLogoFileEntryId,
-			File bookPdf, ServiceContext serviceContext)
+			File bookPdf, ServiceContext serviceContext, String clientHost)
 			throws PortalException, SystemException {
 
-		String gdriveBookUrl = GDriveService.uploadNewBook(bookPdf);
+		String gdriveBookUrl = GDriveService.uploadNewBook(bookPdf, clientHost);
 
 		long bookId = CounterLocalServiceUtil.increment(Book.class.getName());
 		Book book = BookLocalServiceUtil.createBook(bookId);

@@ -20,21 +20,45 @@
 
 <div id="createBookModal">
 
+	<liferay-ui:panel collapsible="true" defaultState="closed"
+			title="google-drive-authorization-heading">
+		
+		<portlet:actionURL name="updateGDConfig" var="updateGDConfigURL"></portlet:actionURL>				
+		<div style="display: none;"> 
+		<aui:form action="<%=updateGDConfigURL%>" method="POST"
+			id="googleDriveConfiguration" 
+			name="googleDriveConfiguration">
+	
+			<aui:row>
+				<%=LanguageUtil.get(pageContext, "Redirect URI host. For example: lib.tiis.pro") %>
+				<aui:input 
+						type="text"
+						name="googleDriveRedirectUri"
+						value="${googleDriveRedirectUri}"
+						label="" />
+			</aui:row>
+			<aui:button-row>
+				<aui:button type="submit" />
+			</aui:button-row>
+		</aui:form>
+		</div>
+		
+		<aui:button-row>
+			<div class="alert alert-info">
+			  	<%=LanguageUtil.get(pageContext, "beta-version-auth") %>
+			</div>
+			<button type="button" class="btn btn-success" onclick="TiisBookUploader.authorizeInGoogleDrive()">
+				<%=LanguageUtil.get(pageContext, "authorize-in-google-drive")%>
+			</button>
+			<button type="button" class="btn btn-danger" onclick="TiisBookUploader.revokeGoogleAPIToken()">
+				<%=LanguageUtil.get(pageContext, "revoke-authorization-token")%>
+			</button>
+		</aui:button-row>
+	</liferay-ui:panel>
+	
 	<form action="<%=createBookUrl%>" method="POST"
 		id="<portlet:namespace />fm" name="<portlet:namespace />fm"
 		enctype="multipart/form-data">
-		
-	<aui:button-row>
-		<div class="alert alert-info">
-		  	<%=LanguageUtil.get(pageContext, "beta-version-auth") %>
-		</div>
-		<a href="${googleDriveAuthURL}"
-			>
-			<input type="button" class="btn btn-success" onclick="uploadBook()"
-				value=<%=LanguageUtil.get(pageContext, "authorize-in-google-drive") %> />
-		</a>
-		
-	</aui:button-row>
 
 		<aui:row>
 			<aui:col span="2">
@@ -103,61 +127,147 @@
 		<br />
 
 		<aui:button-row>
-			<input type="button" class="btn btn-success" onclick="uploadBook()"
+			<input type="button" class="btn btn-success" onclick="TiisBookUploader.uploadBook()"
 				value=<%=LanguageUtil.get(pageContext, "book-upload") %> />
 		</aui:button-row>
 
 	</form>
 	
-	<liferay-ui:panel collapsible="true" defaultState="closed"
-			title="Google Drive configuration">
-		
-		<portlet:actionURL name="updateGDConfig" var="updateGDConfigUrl"></portlet:actionURL>
-		<aui:form action="<%=updateGDConfigUrl%>" method="POST"
-			id="googleDriveConfiguration" 
-			name="googleDriveConfiguration">
-	
-			<aui:row>
-				<%=LanguageUtil.get(pageContext, "Redirect URI") %>
-				<aui:input 
-						type="text"
-						name="googleDriveRedirectUri"
-						value="${googleDriveRedirectUri}"
-						label=""
-						title="<%=LanguageUtil.get(pageContext, \"E.g. 'http://lib.tiis.pro:9002/Callback'\") %>" />
-			</aui:row>
-			<aui:row>
-				<%=LanguageUtil.get(pageContext, "Client ID") %>
-				<aui:input 
-						type="text"
-						name="googleDriveClientId"
-						label=""
-						value="${googleDriveClientId}"/>
-			</aui:row>
-			<aui:button-row>
-				<aui:button type="submit" />
-			</aui:button-row>
-		</aui:form>
-	</liferay-ui:panel>
 </div>
 
+
+<portlet:actionURL name="requestGoogleAPIToken" var="requestGoogleAPITokenURL"></portlet:actionURL>
+<portlet:actionURL name="revokeGoogleAPIToken" var="revokeGoogleAPITokenURL"></portlet:actionURL>
+<portlet:actionURL name="getGoogleAPITokenStatus" var="getGoogleAPITokenStatusURL"></portlet:actionURL>
+		
 <script>
-	function uploadBook() {
-		document.<portlet:namespace />fm.<portlet:namespace />bookDescription.value = window.<portlet:namespace />editor.getHTML();
-		AUI().use('aui-io-request', function(A) {
-			A.io.request('${createBookUrl}', {
-				method : 'POST',
+
+AUI().use('aui-io-request', function(A) {
+	
+	TiisBookUploader = function(){
+		
+		var isCredentialValid;
+		
+		getGoogleAPITokenStatus();
+		
+		// if current credentials are valid, use them
+		function getGoogleAPITokenStatus(callback) {
+			A.io.request('${getGoogleAPITokenStatusURL}', {
+				method : 'GET',
 				dataType : 'json',
-				form : {
-					id : '<portlet:namespace />fm',
-					upload : true
-				},
 				on : {
 					success : function() {
-						//alert(this.get('responseData'));
+						var responseData = this.get('responseData');
+									
+						var isSuccessful = responseData["isSuccessful"];
+						if (isSuccessful) {
+							isCredentialValid = ("boolean" === typeof responseData.isCredentialValid) 
+												? responseData.isCredentialValid : false;
+							if ("function" === typeof callback) {
+								callback();
+							}
+						} else {
+							console.error("Failed to get status of Google Drive authorization token.");
+						}
+					},
+					fail : function() {
+						console.error("Failed to get status of Google Drive authorization token. Server error occurred.");
 					}
 				}
 			});
-		});
-	}
+		};
+		
+		var requestGoogleAPIToken = function(callback) {
+			window.open('${googleDriveAuthURL}', 'blank', 'width=600,height=400');
+			A.io.request('${requestGoogleAPITokenURL}', {
+				method : 'POST',
+				dataType : 'json',
+				on : {
+					success : function() {
+						var responseData = this.get('responseData');
+						
+						var isSuccessful = responseData["isSuccessful"];
+						if (isSuccessful) {
+							if ("function" === typeof callback) {
+								callback();
+							}
+						} else {
+							console.error("Authorization in Google Drive failed.");
+						}
+					},
+					fail : function() {
+						console.error("Authorization in Google Drive failed. Server error occurred.");
+					}
+				}
+			});
+		}
+		
+		return {
+			authorizeInGoogleDrive: function() {
+				if (isCredentialValid) {
+					alert("You current authorization token is still valid. You can upload books.");
+				} else {
+					requestGoogleAPIToken();
+				}
+			},
+			revokeGoogleAPIToken: function() {
+				A.io.request('${revokeGoogleAPITokenURL}', {
+					method : 'POST',
+					dataType : 'json',
+					on : {
+						success : function() {
+							var responseData = this.get('responseData');
+							
+							var isSuccessful = responseData["isSuccessful"];
+							if (isSuccessful) {
+								isCredentialValid = false;
+								alert("The token has been revoked. To upload books, you must now authorize in Googe Drive again.");
+							} else {
+								console.error("Failed to revoke Google Drive authorization token.");
+							}
+						},
+						fail : function() {
+							console.error("Failed to revoke Google Drive authorization token. Server error occurred.");
+						}
+					}
+				});
+			},
+			uploadBook: function() {
+				if (isCredentialValid) {
+					upload();
+				} else {
+					requestGoogleAPIToken(upload);
+				}
+				
+				function upload() {
+					document.<portlet:namespace />fm.<portlet:namespace />bookDescription.value = window.<portlet:namespace />editor.getHTML();
+					A.io.request('${createBookUrl}', {
+						method : 'POST',
+						dataType : 'json',
+						form : {
+							id : '<portlet:namespace />fm',
+							upload : true
+						},
+						on : {
+							success : function() {
+								var responseData = this.get('responseData');
+										
+								var isSuccessful = responseData["isSuccessful"];
+								if (isSuccessful) {
+									alert("The book has been uploaded.");
+								} else {
+									console.error("Failed to upload the book to Google Drive. ");
+								}
+								
+							},
+							fail : function() {
+								console.error("Failed to upload the book to Google Drive. Server error occurred.");
+							}
+						}
+					});
+				}
+			}
+		}
+	}();
+});
 </script>
