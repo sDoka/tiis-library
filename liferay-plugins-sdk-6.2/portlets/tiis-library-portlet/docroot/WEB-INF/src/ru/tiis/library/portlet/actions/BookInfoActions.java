@@ -63,8 +63,8 @@ public class BookInfoActions {
 		}
 	}
 
-	public static void updateBookLogo(ActionRequest request, ActionResponse response)
-			throws IOException, PortletException {
+	public static void updateBookLogo(ActionRequest request, ActionResponse response) throws IOException,
+			PortletException {
 		long bookId = ParamUtil.get(request, "bookId", 0);
 		if (bookId == 0) {
 			log.error("Failed to get bookId parameter from request");
@@ -151,6 +151,26 @@ public class BookInfoActions {
 			return;
 		}
 		successJsonResponse(actionRequest, actionResponse, "success", "");
+	}
+
+	public static void deleteBook(ActionRequest actionRequest, ActionResponse actionResponse) throws IOException {
+		long bookId = ParamUtil.get(actionRequest, "bookId", 0);
+		if (bookId == 0) {
+			String errorMessage = "Failed to get bookId parameter from request";
+			log.error(errorMessage);
+			errorJsonResponse(actionRequest, actionResponse, errorMessage, "");
+			return;
+		}
+		try {
+			bookService.getBook(bookId);
+			bookService.deleteBook(bookId);
+		} catch (PortalException | SystemException e) {
+			log.error(e.getMessage());
+			errorJsonResponse(actionRequest, actionResponse, e.getMessage(), "");
+			return;
+		}
+		successJsonResponse(actionRequest, actionResponse, "success", "");
+
 	}
 
 	// Responses

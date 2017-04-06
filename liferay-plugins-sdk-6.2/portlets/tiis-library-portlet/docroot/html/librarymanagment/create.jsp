@@ -188,6 +188,8 @@ AUI().use('aui-io-request', function(A) {
 						
 						var isSuccessful = responseData["isSuccessful"];
 						if (isSuccessful) {
+							isCredentialValid = true;
+							swal('<%=LanguageUtil.get(pageContext, "") %>', '<%=LanguageUtil.get(pageContext, "token-recieved") %>', 'success');
 							if ("function" === typeof callback) {
 								callback();
 							}
@@ -205,7 +207,8 @@ AUI().use('aui-io-request', function(A) {
 		return {
 			authorizeInGoogleDrive: function() {
 				if (isCredentialValid) {
-					alert("You current authorization token is still valid. You can upload books.");
+					swal('', '<%=LanguageUtil.get(pageContext, "token-is-stil-valid") %>', 'success');
+
 				} else {
 					requestGoogleAPIToken();
 				}
@@ -221,7 +224,8 @@ AUI().use('aui-io-request', function(A) {
 							var isSuccessful = responseData["isSuccessful"];
 							if (isSuccessful) {
 								isCredentialValid = false;
-								alert("The token has been revoked. To upload books, you must now authorize in Googe Drive again.");
+								swal('<%=LanguageUtil.get(pageContext, "") %>', '<%=LanguageUtil.get(pageContext, "token-revoked") %>', 'success');
+
 							} else {
 								console.error("Failed to revoke Google Drive authorization token.");
 							}
@@ -249,14 +253,23 @@ AUI().use('aui-io-request', function(A) {
 							upload : true
 						},
 						on : {
-							success : function() {
-								var responseData = this.get('responseData');
-										
+							complete : function(data, textStatus, jqXHR) {
+								var responseData = JSON.parse(jqXHR.responseText);
 								var isSuccessful = responseData["isSuccessful"];
 								if (isSuccessful) {
-									alert("The book has been uploaded.");
+									swal({
+										  title: '<%=LanguageUtil.get(pageContext, "done") %>',
+										  text: '<%=LanguageUtil.get(pageContext, "book-was-uploaded") %>',
+										  type: 'success',
+										  showCancelButton: false,
+										  confirmButtonColor: '#3085d6',
+										  cancelButtonColor: '#d33',
+										  confirmButtonText: 'Ok'
+										}).then(function () {
+										  window.location.reload(true);
+										})
 								} else {
-									console.error("Failed to upload the book to Google Drive. ");
+									swal('<%=LanguageUtil.get(pageContext, "error") %>', '<%=LanguageUtil.get(pageContext, "book-was-not-uploaded") %>', 'error');
 								}
 								
 							},

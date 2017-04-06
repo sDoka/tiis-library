@@ -49,54 +49,74 @@ public class LibraryManagmentPortlet extends MVCPortlet {
 	private final static String GOOGLE_DRIVE_REDIRECT_URI_NAME = "googleDriveRedirectUri";
 	private final static String GOOGLE_DRIVE_REDIRECT_URI_DEFAULT_VALUE = "http://localhost";
 	private final static String GOOGLE_DRIVE_AUTH_URL_NAME = "googleDriveAuthURL";
-	
+
 	@Override
 	public void render(RenderRequest request, RenderResponse response) throws PortletException, IOException {
-		
+
 		PortletPreferences portletPreferences = request.getPreferences();
-		String gdRedirectUriHost = portletPreferences.getValue(
-				GOOGLE_DRIVE_REDIRECT_URI_NAME, 
+		String gdRedirectUriHost = portletPreferences.getValue(GOOGLE_DRIVE_REDIRECT_URI_NAME,
 				GOOGLE_DRIVE_REDIRECT_URI_DEFAULT_VALUE);
 		request.setAttribute(GOOGLE_DRIVE_REDIRECT_URI_NAME, gdRedirectUriHost);
-		
-		String gdAuthUrl = "https://accounts.google.com/o/oauth2/auth"
-				+ "?client_id=" + GDriveService.CLIENT_APP_ID
-				+ "&redirect_uri=" + "http://" + gdRedirectUriHost + ":" + GDriveService.CLIENT_RECEIVER_PORT + GDriveService.CLIENT_RECEIVER_CALLBACK_PATH
-				+ "&response_type=code"
+
+		String gdAuthUrl = "https://accounts.google.com/o/oauth2/auth" + "?client_id=" + GDriveService.CLIENT_APP_ID
+				+ "&redirect_uri=" + "http://" + gdRedirectUriHost + ":" + GDriveService.CLIENT_RECEIVER_PORT
+				+ GDriveService.CLIENT_RECEIVER_CALLBACK_PATH + "&response_type=code"
 				+ "&scope=https://www.googleapis.com/auth/drive.file";
 		request.setAttribute(GOOGLE_DRIVE_AUTH_URL_NAME, gdAuthUrl);
-		
+
 		include(UPLOAD_NEW_BOOK_JSP_PATH, request, response);
 	}
 
 	public void createBook(ActionRequest request, ActionResponse response) throws PortalException {
 		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(request);
 
-		String title = ParamUtil.get(request, "bookTitle", StringPool.BLANK);
+		String title = ParamUtil.get(request, "bookTitle", StringPool.BLANK);	
+
 		String description = ParamUtil.get(request, "bookDescription", StringPool.BLANK);
-		File bookPdfFile = uploadRequest.getFile("bookPdfFile");
-		// TODO validate
 		Map<String, FileItem[]> files = uploadRequest.getMultipartParameterMap();
 		FileItem bookLogo = files.get("bookLogo")[0];
-		if (bookLogo == null) {
-			throw new PortalException("Can't get book logo from request.");
+		FileItem bookPdfFileItem = files.get("bookPdfFile")[0];
+
+		if (bookLogo.getSize() == 0) {
+			bookLogo = null;
 		}
-		
+
 		PortletPreferences portletPreferences = request.getPreferences();
-		String clientHost = portletPreferences.getValue(
-				GOOGLE_DRIVE_REDIRECT_URI_NAME, 
+		String clientHost = portletPreferences.getValue(GOOGLE_DRIVE_REDIRECT_URI_NAME,
 				GOOGLE_DRIVE_REDIRECT_URI_DEFAULT_VALUE);
-		
+
 		try {
-			DLFileEntry logoDlFile = LibraryManagmentUtil.storeBookImageToDocumentLibrary(request, bookLogo);
-
+			if (title.equals(StringPool.BLANK)) {
+				log.error("Book Title can't be empty");
+				JSONObject responseJSON = JSONFactoryUtil.createJSONObject();
+				responseJSON.put("isSuccessful", false);
+				responseJSON.put("reason", "Book Title can't be empty");
+				writeJSON(request, response, responseJSON);
+				return;
+			}
+			
+			if (bookPdfFileItem.getSize() == 0) {
+				log.error("Book pdf file wasn't uploaded");
+				JSONObject responseJSON = JSONFactoryUtil.createJSONObject();
+				responseJSON.put("isSuccessful", false);
+				responseJSON.put("reason", "Book pdf file wasn't uploaded");
+				writeJSON(request, response, responseJSON);
+				return;
+			}
+			
 			ServiceContext serviceContext = ServiceContextFactory.getInstance(request);
-			bookService.addBook(title, description, logoDlFile.getFileEntryId(), bookPdfFile, serviceContext, clientHost);
+			if (bookLogo == null) {
+				bookService.addBook(title, description, 0, bookPdfFileItem.getStoreLocation(), serviceContext,
+						clientHost);
+			} else {
+				DLFileEntry logoDlFile = LibraryManagmentUtil.storeBookImageToDocumentLibrary(request, bookLogo);
+				bookService.addBook(title, description, logoDlFile.getFileEntryId(),
+						bookPdfFileItem.getStoreLocation(), serviceContext, clientHost);
+			}
 
-			// TODO catch NonAuthorizedUserException and open in new tab
-			// https://accounts.google.com/o/oauth2/auth?client_id=1097637469091-gdshlvm5m4sub6l1m6hrtg83c07umaa4.apps.googleusercontent.com&redirect_uri=http://localhost:9001/Callback&response_type=code&scope=https://www.googleapis.com/auth/drive.file
-			// or i'll make utility method for gdrive auth check ->
-			// authorize -> add book
+			JSONObject responseJSON = JSONFactoryUtil.createJSONObject();
+			responseJSON.put("isSuccessful", true);
+			writeJSON(request, response, responseJSON);
 
 		} catch (PortalException | SystemException | IOException e) {
 			log.error("Can't add a book with title " + title + ": " + e.getMessage());
@@ -104,12 +124,12 @@ public class LibraryManagmentPortlet extends MVCPortlet {
 
 	}
 
-	public void getGoogleAPITokenStatus(ActionRequest request, ActionResponse response) throws PortletException, IOException {
+	public void getGoogleAPITokenStatus(ActionRequest request, ActionResponse response) throws PortletException,
+			IOException {
 		PortletPreferences portletPreferences = request.getPreferences();
-		String gdRedirectUriHost = portletPreferences.getValue(
-				GOOGLE_DRIVE_REDIRECT_URI_NAME, 
+		String gdRedirectUriHost = portletPreferences.getValue(GOOGLE_DRIVE_REDIRECT_URI_NAME,
 				GOOGLE_DRIVE_REDIRECT_URI_DEFAULT_VALUE);
-		
+
 		boolean isCredentialValid = GDriveService.isCredentialValid(gdRedirectUriHost);
 		JSONObject responseJSON = JSONFactoryUtil.createJSONObject();
 		responseJSON.put("isCredentialValid", isCredentialValid);
@@ -117,36 +137,36 @@ public class LibraryManagmentPortlet extends MVCPortlet {
 		writeJSON(request, response, responseJSON);
 	}
 
-	public void requestGoogleAPIToken(ActionRequest request, ActionResponse response) throws PortletException, IOException {
+	public void requestGoogleAPIToken(ActionRequest request, ActionResponse response) throws PortletException,
+			IOException {
 		PortletPreferences portletPreferences = request.getPreferences();
-		String gdRedirectUriHost = portletPreferences.getValue(
-				GOOGLE_DRIVE_REDIRECT_URI_NAME, 
+		String gdRedirectUriHost = portletPreferences.getValue(GOOGLE_DRIVE_REDIRECT_URI_NAME,
 				GOOGLE_DRIVE_REDIRECT_URI_DEFAULT_VALUE);
-		
+
 		boolean isSuccessful = GDriveService.requestToken(gdRedirectUriHost);
 		JSONObject responseJSON = JSONFactoryUtil.createJSONObject();
 		responseJSON.put("isSuccessful", isSuccessful);
 		writeJSON(request, response, responseJSON);
 	}
-	
-	public void revokeGoogleAPIToken(ActionRequest request, ActionResponse response) throws PortletException, IOException {
+
+	public void revokeGoogleAPIToken(ActionRequest request, ActionResponse response) throws PortletException,
+			IOException {
 		PortletPreferences portletPreferences = request.getPreferences();
-		String gdRedirectUriHost = portletPreferences.getValue(
-				GOOGLE_DRIVE_REDIRECT_URI_NAME, 
+		String gdRedirectUriHost = portletPreferences.getValue(GOOGLE_DRIVE_REDIRECT_URI_NAME,
 				GOOGLE_DRIVE_REDIRECT_URI_DEFAULT_VALUE);
-		
+
 		boolean isSuccessful = GDriveService.revokeToken(gdRedirectUriHost);
 		JSONObject responseJSON = JSONFactoryUtil.createJSONObject();
 		responseJSON.put("isSuccessful", isSuccessful);
 		writeJSON(request, response, responseJSON);
 	}
-	
+
 	public void updateGDConfig(ActionRequest request, ActionResponse response) throws PortletException, IOException {
 		PortletPreferences portletPreferences = request.getPreferences();
 
 		String gdRedirectUri = ParamUtil.getString(request, GOOGLE_DRIVE_REDIRECT_URI_NAME, StringUtils.EMPTY);
 		portletPreferences.setValue(GOOGLE_DRIVE_REDIRECT_URI_NAME, gdRedirectUri);
-		
+
 		portletPreferences.store();
 	}
 }

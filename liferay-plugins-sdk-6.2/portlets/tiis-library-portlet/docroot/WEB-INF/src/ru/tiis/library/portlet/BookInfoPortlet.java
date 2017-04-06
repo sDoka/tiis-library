@@ -83,8 +83,7 @@ public class BookInfoPortlet extends MVCPortlet {
 		BookInfoActions.updateBookTitle(actionRequest, actionResponse);
 	}
 
-	public void updateBookLogo(ActionRequest request, ActionResponse response) throws IOException,
-			PortletException {
+	public void updateBookLogo(ActionRequest request, ActionResponse response) throws IOException, PortletException {
 		BookInfoActions.updateBookLogo(request, response);
 	}
 
@@ -96,5 +95,10 @@ public class BookInfoPortlet extends MVCPortlet {
 	public void updateBookCategories(ActionRequest actionRequest, ActionResponse actionResponse) throws IOException,
 			PortletException {
 		BookInfoActions.updateBookCategories(actionRequest, actionResponse);
+	}
+
+	public void deleteBook(ActionRequest actionRequest, ActionResponse actionResponse) throws IOException,
+			PortletException {
+		BookInfoActions.deleteBook(actionRequest, actionResponse);
 	}
 }

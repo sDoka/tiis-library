@@ -113,7 +113,7 @@ public class BookServiceImpl implements BookService {
 			}
 			
 		}
-		BookLocalServiceUtil.deleteBook(book);
+		BookLocalServiceUtil.deleteBook(book.getBookId());
 		return bookToRemove;
 	}
 

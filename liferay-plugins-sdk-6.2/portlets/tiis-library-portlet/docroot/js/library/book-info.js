@@ -1,4 +1,4 @@
-function initBookInfo(_portletNamespace, _updateBookTitleURL, _updateBookDescriptionURL, _updateBookLogoURL, _updateBookCategoriesURL) {
+function initBookInfo(_portletNamespace, _updateBookTitleURL, _updateBookDescriptionURL, _updateBookLogoURL, _updateBookCategoriesURL, _deleteBookURL) {
 
     var $editBookDescriptionBtn = $('#edit-description-btn'),
         $bookDescriptionBlock = $('#bookDescription'),
@@ -13,7 +13,54 @@ function initBookInfo(_portletNamespace, _updateBookTitleURL, _updateBookDescrip
         $bookTitleHeader = $('#book-title-content'),
         $titleEditBtn = $('#edit-title-btn'),
         $logoEditBtn = $('#edit-logo-btn'),
+        $deleteBookBtn = $('#delete-book-btn'),
         $logoPlaceholder = $('#logo-placeholder');
+
+    //Delete book
+    $deleteBookBtn.on('click', function(e) {
+        swal({
+            title: Liferay.Language.get('are-you-sure'),
+            text: Liferay.Language.get('you-wont-be-able-to-revert-this'),
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: Liferay.Language.get('yes-delete-it')
+        }).then(function() {
+            var requestData = {};
+            AUI().use('aui-io-request', function(A) {
+                A.io.request(_deleteBookURL, {
+                    data: requestData,
+                    dataType: 'json',
+                    on: {
+                        complete: function(data, textStatus, jqXHR) {
+                        	 try {
+                        		 var responseText = jqXHR.responseText;
+                                 var responseData = JSON.parse(responseText);
+                                 if (responseData.status === 'ok') {
+                                     swal({
+                                         type: 'success',
+                                         title: Liferay.Language.get('book-deleted'),
+                                     }).then(function(){
+                                    	 window.location.href = "/web/guest/books";
+                                     });
+
+                                 } else {
+                                     swal({
+                                         type: 'error',
+                                         title: Liferay.Language.get('book-was-not-deleted'),
+                                     });
+                                 }
+                             } catch (e) {}
+                        },
+                        failure: function() {
+                            //TODO animate
+                        }
+                    }
+                });
+            });
+        })
+    });
 
     //Logo editor
     $logoEditBtn.on('click', function(e) {
@@ -21,7 +68,7 @@ function initBookInfo(_portletNamespace, _updateBookTitleURL, _updateBookDescrip
             title: Liferay.Language.get('please-add-logo-file'),
             input: 'file',
             inputAttributes: {
-            	accept: "image/jpeg,image/bmp,image/png"
+                accept: "image/jpeg,image/bmp,image/png"
             },
             showCancelButton: true,
             confirmButtonText: Liferay.Language.get('save'),
@@ -42,48 +89,41 @@ function initBookInfo(_portletNamespace, _updateBookTitleURL, _updateBookDescrip
         }).then(function(logo) {
             var formData = new FormData();
             formData.append(_portletNamespace + 'bookLogo', logo);
-            
+
             $.ajax({
-            	url: _updateBookLogoURL,
-    			type: "POST",
-    			data:  formData,
-    			mimeType: "multipart/form-data",
-    			contentType: false,
-        	    cache: false,
-    			processData: false,
-    			success: function(data, textStatus, jqXHR)
-    		    {
-    				try {
-    					var responseData = JSON.parse(data);
-    					if(responseData.status === 'ok') {
-    						$logoPlaceholder.css('background-image', 'url(' + responseData.message + ')');
-    						swal({
-    	                         type: 'success',
-    	                         title: Liferay.Language.get('book-logo-changed'),
-    	                     });
-    						
-    					} else {
-    						swal({
-   	                         type: 'error',
-   	                         title: Liferay.Language.get('book-logo-changed'),
-   	                     });
-    					}
-    				} catch (e) {}
-    				
-    				
-    				
-    				 
-    				 
-    		    },
-    		  	error: function(jqXHR, textStatus, errorThrown) 
-    	    	{
-    		  		//TODO add handler here
-    		  		
-    	    	}        
-    	   });
+                url: _updateBookLogoURL,
+                type: "POST",
+                data: formData,
+                mimeType: "multipart/form-data",
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function(data, textStatus, jqXHR) {
+                    try {
+                        var responseData = JSON.parse(data);
+                        if (responseData.status === 'ok') {
+                            $logoPlaceholder.css('background-image', 'url(' + responseData.message + ')');
+                            swal({
+                                type: 'success',
+                                title: Liferay.Language.get('book-logo-changed'),
+                            });
+
+                        } else {
+                            swal({
+                                type: 'error',
+                                title: Liferay.Language.get('book-logo-changed'),
+                            });
+                        }
+                    } catch (e) {}
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    //TODO add handler here
+
+                }
+            });
         })
     });
-    
+
     //Title editor
     $titleEditBtn.on('click', function(e) {
         swal({

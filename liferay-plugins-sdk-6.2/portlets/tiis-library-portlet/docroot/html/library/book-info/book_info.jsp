@@ -27,6 +27,10 @@
 		var="updateBookCategoriesURL">
 		<liferay-portlet:param name="bookId" value="${book.bookId }" />
 	</liferay-portlet:actionURL>
+	<liferay-portlet:actionURL name="deleteBook"
+		var="deleteBookURL">
+		<liferay-portlet:param name="bookId" value="${book.bookId }" />
+	</liferay-portlet:actionURL>
 </c:if>
 
 <div class="book-title-card">
@@ -76,6 +80,7 @@
 							<button id="edit-description-btn" class="btn btn-primary"><%=LanguageUtil.get(pageContext, "edit-description")%></button>
 							<button id="edit-title-btn" class="btn btn-primary"><%=LanguageUtil.get(pageContext, "edit-title")%></button>
 							<button id="edit-logo-btn" class="btn btn-primary"><%=LanguageUtil.get(pageContext, "edit-book-logo")%></button>
+							<button id="delete-book-btn" class="btn btn-danger"><%=LanguageUtil.get(pageContext, "delete-book")%></button>
 						</c:if>
 					</div>
 				</div>
@@ -146,7 +151,7 @@
 	}
 	var bookInfo = new initBookInfo('<portlet:namespace/>',
 			'${updateBookTitleURL}', '${updateBookDescriptionURL}',
-			'${updateBookLogoURL }', '${updateBookCategoriesURL}');
+			'${updateBookLogoURL }', '${updateBookCategoriesURL}', '${deleteBookURL}');
 
 	
 </aui:script>

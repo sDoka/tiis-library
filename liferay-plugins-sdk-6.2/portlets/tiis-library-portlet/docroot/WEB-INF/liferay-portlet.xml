@@ -64,8 +64,14 @@
 		<icon>/icon.png</icon>
 		<indexer-class>ru.tiis.srv.service.indexer.BookIndexer</indexer-class>
 		<header-portlet-css>/css/main.css</header-portlet-css>
+		<header-portlet-css>
+			/lib/sweetalert2/sweetalert2.css
+		</header-portlet-css>
 		<footer-portlet-javascript>
 			/js/main.js
+		</footer-portlet-javascript>
+		<footer-portlet-javascript>
+			/lib/sweetalert2/sweetalert2.js
 		</footer-portlet-javascript>
 		<css-class-wrapper>library-managment-portlet</css-class-wrapper>
 	</portlet>
@@ -76,6 +82,7 @@
 		<footer-portlet-javascript>
 			/js/main.js
 		</footer-portlet-javascript>
+
 		<css-class-wrapper>promo-code-generation</css-class-wrapper>
 	</portlet>
 	<role-mapper>
