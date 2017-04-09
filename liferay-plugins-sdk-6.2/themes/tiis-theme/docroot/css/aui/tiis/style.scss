@@ -73,8 +73,58 @@
     
 	min-height: 70px;
     border: none;
+    background: none;
     
 }
+
+.navbar > li > a {
+    line-height: 40px;
+}
+
+.navbar-brand, 
+.brand {
+    padding: 12px 15px;
+    height: 70px;
+}
+
+.navbar__brand-img {
+	max-width: 280px;
+}
+
+.navbar-default .navbar-toggle:hover, 
+.navbar .navbar-toggle:hover, 
+.navbar-default .navbar-toggle:focus, 
+.navbar .navbar-toggle:focus {
+    background: none;
+    border-color: transparent;
+}
+
+.navbar .navbar-nav > li > a, 
+.navbar .navbar-nav > li > a:hover,
+.navbar .navbar-nav > li > a:active,
+.navbar .navbar-nav > li > a:focus {
+    color:#fff;
+}
+
+.aui .navbar .navbar-toggle {
+    border-color: transparent;
+}
+
+@media all and (max-width:991px) {
+    .navbar-user {
+        min-height: 100vh;
+    }
+    
+    .navbar-brand, 
+    .brand {
+        padding: 0;
+        height: 70px;
+    }
+    
+}
+
+
+/* ---------- TODO clearing styles ---------- */
 
 .navbar--transparent {
   opacity: 0;
@@ -99,9 +149,6 @@
     margin-bottom: 0;
 }
 
-.navbar__brand-img {
-	max-width: 100%;
-}
 
 .navbar__wrapper {
     background-color: #2C3E50;
@@ -200,7 +247,7 @@
 }
 
 
-#topmenu:checked + nav {
+#topmenu:checked ~ nav {
 	visibility: visible;
 	height: 100vh;
 	
@@ -429,4 +476,29 @@ footer {
     }
 
 }
+
+/*Nav sandvich SECOND VERSION*/
+/*SECOND VERSION*/
+.spinner-master2 * {transition:all 0.3s;-webkit-transition:all 0.3s;box-sizing:border-box;}
+
+.spinner-master2 {
+    position: relative;
+    height: 40px;
+    border-color: transparent;
+    width: 42px;
+}
+
+.spinner-master2 input[type=checkbox] {display:none;}
+.spinner-master2 label {cursor:pointer;position:absolute;z-index:99;height:100%;width:100%;top:10px;left:0;}
+
+.spinner-master2 .spinner2 {position:absolute;height:5px;width:100%;background-color:#fff;}
+
+.spinner-master2 .diagonal.part-1 {position:relative;float:left;}
+.spinner-master2 .horizontal {position:relative;float:left;margin-top:7px;}
+.spinner-master2 .diagonal.part-2 {position:relative;float:left;margin-top:6px;}
+
+.spinner-master2 input[type=checkbox]:checked ~ .spinner-spin2 > .horizontal {opacity: 0;}
+.spinner-master2 input[type=checkbox]:checked ~ .spinner-spin2 > .diagonal.part-1 {transform:rotate(135deg);-webkit-transform:rotate(135deg);margin-top:10px;}
+.spinner-master2 input[type=checkbox]:checked ~ .spinner-spin2 > .diagonal.part-2 {transform:rotate(-135deg);-webkit-transform:rotate(-135deg);margin-top:-16px;}
+
 

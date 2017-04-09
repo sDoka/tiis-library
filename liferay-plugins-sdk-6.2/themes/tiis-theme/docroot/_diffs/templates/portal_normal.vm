@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:700,400&amp;subset=cyrillic,latin,greek,vietnamese">
 	
 	$theme.include($top_head_include)
-	
+
 
 </head>
  
@@ -27,44 +27,51 @@ $theme.include($body_top_include)
 
 <header class="navbar navbar--sticky " >
     <div class="navbar__wrapper">
-        <div class="container top-menu">
-               
-            <div class="col-md-3 navbar__column navbar__brand">
-            	<span class="brand__logo">
-	            	<a href="$site_default_url" title="#language_format ("go-to-x", [$site_name])">
+    	<div class="navbar navbar-default">
+            <div class="container">
+          		<div class="navbar-header">
+					<button type="button" class="navbar-toggle spinner-master2" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+						<input type="checkbox" id="spinner-form2" />
+						<label for="spinner-form2" class="spinner-spin2">
+							<div class="spinner2 diagonal part-1"></div>
+							<div class="spinner2 horizontal"></div>
+							<div class="spinner2 diagonal part-2"></div>
+					  	</label>
+					</button>
+	            	<a class="navbar-brand" href="$site_default_url" title="#language_format ("go-to-x", [$site_name])">
 						<img class="navbar__brand-img" alt="$logo_description" src="$site_logo" width="$site_logo_width" />
 					</a>
-            	</span>
-            </div>
+          		</div>
+          		<div class="navbar-collapse collapse navbar-responsive-collapse">
 
+					#if ($has_navigation || $is_signed_in)
+						#parse ("$full_templates_path/navigation.vm")
+					#end
 
-            <div class="col-md-9 navbar__column navbar__menu">
-               	<label for="topmenu" class="navbar__hamburger hamburger text-white"><span class="hamburger__line"></span></label>
-               	<input type="checkbox" id="topmenu">
-               		<nav class="navbar__menu-box">
-               			<div class="col-md-9 navbar__column">
-	                		#if ($has_navigation || $is_signed_in)
-								#parse ("$full_templates_path/navigation.vm")
+					<!-- user menu -->                
+    					<ul class="nav navbar-nav navbar-right navbar-user">
+							#if (!$is_signed_in)
+								<li class="navbar__item">							
+									<a class="buttons__btn btn btn-login text-white" href="$sign_in_url">#language ("login")</a>
+								</li>
+							#else
+								<li class="navbar__item navbar__item--logged">
+									<a class="btn btn-link text-white userprofile-link" href="/profile">$user.fullName</a>
+								</li>	
+								<li class="navbar__item navbar__item--logged">	 
+									<span>|</span>
+								</li>	
+								<li class="navbar__item navbar__item--logged">	 
+									<a class="btn btn-link text-white logout-link" href="$sign_out_url">#language ("sign-out")</a>
+								</li>
 							#end
-						</div>
-                    	<div class="col-md-3 navbar__column">
-							<ul class="navbar__items navbar__items--right navbar__items--login btn-inverse">
-								#if (!$is_signed_in)
-									<li class="navbar__item">							
-										<a class="buttons__btn btn btn-login text-white" href="$sign_in_url">#language ("login")</a>
-									</li>
-								#else
-									<li class="navbar__item navbar__item--logged">
-										<a class="userprofile-link" href="/profile">$user.fullName</a> <span>|</span>
-										<a class="logout-link" href="$sign_out_url">#language ("sign-out")</a>
-									</li>
-								#end
-							</ul>
-                    	</div>
-                	</nav>
-            </div>
-        </div>
-    </div>
+						</ul>
+					<!-- .user menu -->  
+							
+				</div>
+    		</div>
+  		</div>
+	</div>
 </header>
 
 <!-- CONTENT -->
@@ -87,7 +94,8 @@ $theme.include($body_bottom_include)
 
 $theme.include($bottom_include)
 
-
+	#js("${themeDisplay.getPathThemeJavaScript()}/bootstrap.min.js")
+	
 <footer class="section" >
     
     <div class="container">
@@ -95,7 +103,7 @@ $theme.include($bottom_include)
             <div class="col-sm-8">
                 <p class="mbr-footer__copyright"></p><p>© $dateTool.getYear() ООО «Тюменский институт инженерных систем «Инновация»</p><p></p>
             </div>
-            <div class="col-sm-4 text-right">
+            <div class="col-sm-4">
                 <p class="mbr-footer__copyright"></p><p>v 0.2</p><p></p>
             </div>
         </div>

@@ -1,4 +1,4 @@
-<ul class="navbar__items navbar__items--right btn-decorator" role="menubar">	
+<ul class="nav navbar-nav navbar__items navbar__items--right btn-decorator" role="menubar">	
     #foreach ($nav_item in $nav_items)
             #set ($nav_item_attr_selected="")
             #set ($nav_item_attr_has_popup="")
@@ -18,7 +18,7 @@
             #set ($nav_item_link_css_class="dropdown-toggle")
         #end
         <li class="navbar__item" id="layout_$nav_item.getLayoutId()">
-            <a class="buttons__link btn text-white" href="$nav_item.getURL()" $nav_item.getTarget() role="menuitem" >
+            <a class="buttons__link btn btn-link text-white" href="$nav_item.getURL()" $nav_item.getTarget() role="menuitem" >
                 <span>$nav_item.icon() $nav_item.getName() $nav_item_caret</span>
             </a>
             #if ($nav_item.hasChildren())
