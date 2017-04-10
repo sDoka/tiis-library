@@ -1,6 +1,5 @@
 /liferay-plugins-sdk-6.2/.ivy/cache
 /liferay-plugins-sdk-6.2/dist
-/liferay-plugins-sdk-6.2/build.*.properties
 /liferay-plugins-sdk-6.2/ivy.xml.MD5
 /liferay-plugins-sdk-6.2/portlets/tiis-library-portlet/target/classes
 /liferay-plugins-sdk-6.2/portlets/tiis-library-portlet/docroot/WEB-INF/classes
@@ -51,7 +50,6 @@ liferay-plugins-sdk-6.2/portlets/tiis-library-portlet/docroot/WEB-INF/src/ru/tii
 liferay-plugins-sdk-6.2/portlets/tiis-library-portlet/docroot/WEB-INF/src/ru/tiis/srv/service/base/TestAttemptLocalServiceClpInvoker.java
 liferay-plugins-sdk-6.2/portlets/tiis-library-portlet/docroot/WEB-INF/src/ru/tiis/srv/service/base/TestLocalServiceBaseImpl.java
 liferay-plugins-sdk-6.2/portlets/tiis-library-portlet/docroot/WEB-INF/src/ru/tiis/srv/service/base/TestLocalServiceClpInvoker.java
-/liferay-plugins-sdk-6.2/build.ДжеськоНя.propertiesа
 portal-data/data/document_library/0/0/21011.png/1.0
 portal-data/data/document_library/20155/0/document_thumbnail/24855/34/24866/24867.png/1.0
 portal-data/data/document_library/20155/0/document_thumbnail/24855/43/24875/24876.jpg/1.0
@@ -124,3 +122,4 @@ portal-data/data/osgi/state/org.eclipse.osgi/bundles/5/1/bundlefile
 portal-data/data/osgi/state/org.eclipse.osgi/bundles/6/1/bundlefile
 liferay-plugins-sdk-6.2/portlets/tiis-library-portlet/docroot/WEB-INF/src/ru/tiis/srv/service/persistence/BookPersistenceImpl.java
 liferay-plugins-sdk-6.2/portlets/tiis-library-portlet/docroot/WEB-INF/service/ru/tiis/srv/model/BookModel.java
+liferay-plugins-sdk-6.2/build.Michael.properties
