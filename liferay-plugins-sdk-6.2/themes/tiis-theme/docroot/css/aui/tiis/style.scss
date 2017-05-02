@@ -106,7 +106,7 @@
     color:#fff;
 }
 
-.aui .navbar .navbar-toggle {
+.navbar .navbar-toggle {
     border-color: transparent;
 }
 
@@ -123,6 +123,17 @@
     
 }
 
+.navbar-default .navbar-collapse, 
+.navbar .navbar-collapse {
+    border: none;
+    box-shadow: none;
+}
+
+
+
+.navbar__item--logged span {
+    display: none;
+}
 
 /* ---------- TODO clearing styles ---------- */
 
@@ -238,6 +249,9 @@
 .btn.btn-login {
     border: 2px solid #fff;
     text-transform: uppercase;
+    border-radius: 0;
+    margin-top: 13px;
+    padding: 10px 20px;  
     
     &:hover {
         border-color: #fff;
@@ -460,19 +474,27 @@ footer {
     .navbar__items {
         padding: 0;
     }
-    
-    .navbar__items--login li {
-        text-align: center;
-    }    
-    
     .navbar__items--login span {
         display: none;
     }
+    
+    
+    .navbar__items--login li {
+        text-align: center;
+    } 
+    
+    .navbar__items--login .logout-link:hover,
     .navbar__items--login .logout-link {
         border: 1px dashed #337ab7;
         padding: 5px;
         display: block;
         color: #337ab7;
+    }    
+    
+    .btn-link.logout-link {
+        border: 1px dashed white;
+        width: 50%;
+        margin: auto;
     }
 
 }
@@ -484,7 +506,7 @@ footer {
 .spinner-master2 {
     position: relative;
     height: 40px;
-    border-color: transparent;
+    border: none;
     width: 42px;
 }
 
